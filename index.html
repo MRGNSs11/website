@@ -1,0 +1,820 @@
+﻿<!DOCTYPE html>
+<html class="dark" lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Ã–MER GÃœNEÅ - KiÅŸisel Web Sitesi</title>
+
+  <!-- Google Fonts: Space Grotesk -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "secondary-fixed": "#e5e2e3",
+            "surface-tint": "#ffb59a",
+            "surface-bright": "#39393b",
+            "primary-fixed-dim": "#ffb59a",
+            "on-tertiary-fixed": "#1a1c1c",
+            "secondary": "#c8c6c7",
+            "surface-container-highest": "#353437",
+            "on-error": "#690005",
+            "on-primary": "#5a1b00",
+            "on-surface-variant": "#e4beb1",
+            "tertiary": "#c6c6c7",
+            "on-secondary-fixed": "#1c1b1c",
+            "tertiary-container": "#929393",
+            "outline": "#ab897d",
+            "on-background": "#e4e2e4",
+            "surface-container-low": "#1b1b1d",
+            "on-error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#c6c6c7",
+            "on-tertiary-fixed-variant": "#454747",
+            "surface": "#131315",
+            "primary": "#ffb59a",
+            "inverse-surface": "#e4e2e4",
+            "surface-container-high": "#2a2a2c",
+            "surface-dim": "#131315",
+            "on-surface": "#e4e2e4",
+            "on-tertiary-container": "#2a2c2c",
+            "outline-variant": "#5b4137",
+            "inverse-on-surface": "#303032",
+            "error": "#ffb4ab",
+            "on-primary-fixed-variant": "#802a00",
+            "secondary-fixed-dim": "#c8c6c7",
+            "primary-fixed": "#ffdbce",
+            "error-container": "#93000a",
+            "on-secondary-fixed-variant": "#474647",
+            "surface-variant": "#353437",
+            "inverse-primary": "#a73a00",
+            "on-primary-fixed": "#370e00",
+            "tertiary-fixed": "#e2e2e2",
+            "surface-container-lowest": "#0e0e10",
+            "on-secondary-container": "#bab8b9",
+            "on-tertiary": "#2f3131",
+            "background": "#131315",
+            "on-secondary": "#313031",
+            "on-primary-container": "#521800",
+            "secondary-container": "#4a494a",
+            "primary-container": "#ff5c00",
+            "surface-container": "#1f1f21"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "margin-desktop": "80px",
+            "unit": "8px",
+            "container-max": "1440px",
+            "gutter": "32px",
+            "margin-mobile": "24px"
+          },
+          fontFamily: {
+            "display-2xl": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"],
+            "label-caps": ["Space Grotesk"],
+            "body-md": ["Space Grotesk"],
+            "headline-lg-mobile": ["Space Grotesk"]
+          },
+          fontSize: {
+            "display-2xl": ["120px", { lineHeight: "110px", letterSpacing: "-0.04em", fontWeight: "700" }],
+            "headline-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "label-caps": ["14px", { lineHeight: "20px", letterSpacing: "0.15em", fontWeight: "500" }],
+            "body-md": ["18px", { lineHeight: "28px", letterSpacing: "0em", fontWeight: "400" }],
+            "headline-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .bloom-primary { box-shadow: 0 0 24px -4px rgba(255, 92, 0, 0.6); }
+    .text-bloom { text-shadow: 0 0 16px rgba(255, 181, 154, 0.4); }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px; /* sabit navbar yÃ¼ksekliÄŸi kadar boÅŸluk */
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #131315; }
+    ::-webkit-scrollbar-thumb { background: #353437; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #ab897d; }
+
+    /* BÃ¶lÃ¼m baÅŸlÄ±klarÄ± iÃ§in tutarlÄ± stil */
+    .section-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.15em;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #ffb59a;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #e4e2e4;
+    }
+
+    /* Mobil menÃ¼ animasyonu */
+    #mobile-menu {
+      transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    #mobile-menu.open {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    /* BÃ¶lÃ¼m ayraÃ§ Ã§izgisi */
+    .section-divider {
+      width: 48px;
+      height: 2px;
+      background: #ff5c00;
+      box-shadow: 0 0 12px rgba(255, 92, 0, 0.5);
+    }
+
+    /* Yetenek etiketi */
+    .skill-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border: 1px solid rgba(91, 65, 55, 0.6);
+      background: rgba(31, 31, 33, 0.8);
+      color: #e4beb1;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .skill-badge:hover {
+      border-color: #ffb59a;
+      color: #ffb59a;
+      box-shadow: 0 0 10px rgba(255, 92, 0, 0.3);
+    }
+
+    /* Proje kartÄ± stilleri */
+    .project-card:hover {
+      box-shadow: 0 0 32px -8px rgba(255, 92, 0, 0.15);
+    }
+    .project-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #e4e2e4;
+      letter-spacing: -0.01em;
+    }
+    .project-desc {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      line-height: 24px;
+      color: #e4beb1;
+      opacity: 0.85;
+    }
+    .tech-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: rgba(255, 92, 0, 0.1);
+      border: 1px solid rgba(255, 92, 0, 0.25);
+      color: #ffb59a;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ab897d;
+      transition: color 0.2s;
+    }
+    .project-link:hover { color: #ffb59a; }
+    .project-status-done {
+      flex-shrink: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ab897d;
+      border: 1px solid rgba(91,65,55,0.5);
+      padding: 3px 8px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinning-loader { animation: spin 1.5s linear infinite; }
+
+    /* Ä°letiÅŸim formu */
+    .contact-input {
+      width: 100%;
+      background: rgba(31, 31, 33, 0.8);
+      border: 1px solid rgba(91, 65, 55, 0.5);
+      color: #e4e2e4;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      border-radius: 2px;
+    }
+    .contact-input::placeholder { color: #5b4137; }
+    .contact-input:focus {
+      border-color: #ffb59a;
+      box-shadow: 0 0 0 2px rgba(255, 92, 0, 0.15);
+    }
+    .contact-social-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid rgba(91, 65, 55, 0.3);
+      background: rgba(31, 31, 33, 0.6);
+      transition: border-color 0.2s, background 0.2s;
+      border-radius: 2px;
+    }
+    .contact-social-link:hover {
+      border-color: rgba(255, 181, 154, 0.4);
+      background: rgba(31, 31, 33, 0.9);
+    }
+    .contact-social-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(91, 65, 55, 0.5);
+      color: #ffb59a;
+      flex-shrink: 0;
+      border-radius: 2px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .contact-social-link:hover .contact-social-icon {
+      border-color: #ffb59a;
+      box-shadow: 0 0 10px rgba(255, 92, 0, 0.3);
+    }
+    .contact-social-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ab897d;
+      margin-bottom: 2px;
+    }
+    .contact-social-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      color: #e4e2e4;
+    }
+
+    .project-status-wip {
+      flex-shrink: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ffb59a;
+      border: 1px solid rgba(255,92,0,0.35);
+      padding: 3px 8px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- ===== ARKA PLAN (Uzay) ===== -->
+  <div class="fixed inset-0 z-0 pointer-events-none w-full h-full bg-cover bg-center"
+       style="background-image: url('bg.jpg')">
+    <div class="absolute inset-0 bg-gradient-to-b from-background/90 via-background/40 to-background/90 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDM5LjV2MWg0MHYtMUgwek0zOS41IDB2NDBoMXYtNDBoLTF6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIi8+PC9zdmc+')] opacity-50"></div>
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="bg-surface/10 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant/10 transition-all duration-500 ease-out">
+    <div class="flex justify-between items-center px-6 md:px-20 py-2 w-full max-w-[1440px] mx-auto h-20">
+
+      <!-- Logo -->
+      <div class="font-display-2xl text-headline-lg tracking-tighter text-primary">
+        Ã–MER GÃœNEÅ
+      </div>
+
+      <!-- MasaÃ¼stÃ¼ Navigasyon -->
+      <nav class="hidden md:flex items-center space-x-8" style="font-size:14px;letter-spacing:0.15em;font-weight:500;">
+        <a href="#hero" class="text-on-surface-variant hover:text-primary transition-colors duration-300 tracking-widest uppercase relative group">
+          Ana Sayfa
+          <span class="absolute -bottom-[3px] left-0 w-full h-[2px] bg-primary bloom-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+        </a>
+        <a href="#hakkimda" class="text-on-surface-variant hover:text-primary transition-colors duration-300 tracking-widest uppercase relative group">
+          HakkÄ±mda
+          <span class="absolute -bottom-[3px] left-0 w-full h-[2px] bg-primary bloom-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+        </a>
+        <a href="#projelerim" class="text-on-surface-variant hover:text-primary transition-colors duration-300 tracking-widest uppercase relative group">
+          Projelerim
+          <span class="absolute -bottom-[3px] left-0 w-full h-[2px] bg-primary bloom-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+        </a>
+        <a href="#iletisim" class="text-on-surface-variant hover:text-primary transition-colors duration-300 tracking-widest uppercase relative group">
+          Ä°letiÅŸim
+          <span class="absolute -bottom-[3px] left-0 w-full h-[2px] bg-primary bloom-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+        </a>
+      </nav>
+
+      <!-- CTA Butonu (MasaÃ¼stÃ¼) -->
+      <div class="hidden md:block">
+        <a href="#iletisim" class="inline-flex items-center justify-center px-6 py-3 border border-inverse-surface text-inverse-surface uppercase hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all duration-300 bloom-primary hover:shadow-[0_0_24px_-4px_rgba(255,92,0,0.8)]"
+           style="font-size:14px;letter-spacing:0.15em;font-weight:500;">
+          Ä°letiÅŸime GeÃ§
+        </a>
+      </div>
+
+      <!-- Hamburger (Mobil) -->
+      <button id="hamburger-btn" class="md:hidden text-primary p-2" aria-label="MenÃ¼yÃ¼ aÃ§">
+        <span class="material-symbols-outlined" id="hamburger-icon" style="font-variation-settings:'FILL' 0;">menu</span>
+      </button>
+    </div>
+
+    <!-- Mobil MenÃ¼ -->
+    <div id="mobile-menu" class="md:hidden bg-surface/95 backdrop-blur-md border-t border-outline-variant/10">
+      <nav class="flex flex-col px-6 py-4 space-y-4" style="font-size:14px;letter-spacing:0.15em;font-weight:500;">
+        <a href="#hero"       class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()">Ana Sayfa</a>
+        <a href="#hakkimda"   class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()">HakkÄ±mda</a>
+        <a href="#projelerim" class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()">Projelerim</a>
+        <a href="#iletisim"   class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()">Ä°letiÅŸim</a>
+        <a href="#iletisim"   class="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary uppercase mt-2 hover:bg-primary-container hover:text-on-primary-container transition-all duration-300"
+           onclick="closeMobileMenu()">Ä°letiÅŸime GeÃ§</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== ANA Ä°Ã‡ERÄ°K ===== -->
+  <main class="flex-grow relative z-10">
+
+    <!-- â”€â”€ HERO BÃ–LÃœMÄ° â”€â”€ -->
+    <section id="hero" class="relative flex flex-col justify-end min-h-screen pt-32 pb-32 px-6 md:px-20 max-w-[1440px] mx-auto w-full">
+
+      <div class="max-w-3xl pl-4 md:pl-12">
+        <p class="text-2xl md:text-3xl text-on-surface tracking-widest uppercase opacity-90 text-bloom">
+          He is a computer scientist
+        </p>
+      </div>
+
+      <!-- HUD Dekoratif Elementler -->
+      <div class="absolute right-20 bottom-32 hidden lg:flex flex-col items-end space-y-2 opacity-50"
+           style="font-size:10px;letter-spacing:0.15em;font-weight:500;font-family:'Space Grotesk',sans-serif;color:#ffb59a;text-transform:uppercase;">
+        <p>TEMP: 5,778 K</p>
+        <p>RAD: ACTIVE</p>
+        <p>DIST: 1 AU</p>
+        <div class="w-24 h-px bg-primary mt-2"></div>
+      </div>
+
+    </section>
+
+    <!-- â”€â”€ HAKKIMDA BÃ–LÃœMÄ° â”€â”€ -->
+    <section id="hakkimda" class="relative py-24 px-6 md:px-20 max-w-[1440px] mx-auto w-full">
+      <div class="pl-0 md:pl-12">
+
+        <p class="section-label mb-3">01 â€” HakkÄ±mda</p>
+        <div class="section-divider mb-8"></div>
+        <h2 class="section-title text-4xl md:text-5xl mb-10">Merhaba, ben Ã–mer.</h2>
+
+        <!-- Biyografi -->
+        <p class="max-w-2xl mb-16"
+           style="font-family:'Space Grotesk',sans-serif;font-size:18px;line-height:28px;color:#e4beb1;">
+          Karadeniz Teknik Ãœniversitesi Ã¶ÄŸrencisiyim ve mobil uygulama geliÅŸtirme ile uÄŸraÅŸÄ±yorum. Dijital dÃ¼nyada fikirleri gerÃ§eÄŸe dÃ¶nÃ¼ÅŸtÃ¼rmeyi seviyorum. Web siteme hoÅŸ geldin!
+        </p>
+
+        <!-- Ä°ki sÃ¼tun: EÄŸitim/Deneyim | Yetenekler -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+          <!-- SOL: EÄŸitim & Deneyim -->
+          <div>
+            <p class="section-label mb-6">EÄŸitim & Deneyim</p>
+
+            <!-- KTÃœ -->
+            <div class="relative pl-6 pb-10 border-l border-outline-variant/40">
+              <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-primary-container"
+                   style="box-shadow:0 0 8px rgba(255,92,0,0.6);"></div>
+              <p class="section-label text-primary mb-1" style="font-size:12px;">2022 â€” Devam Ediyor</p>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;">
+                Karadeniz Teknik Ãœniversitesi
+              </h3>
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;">
+                Bilgisayar Bilimleri Â· 3. SÄ±nÄ±f
+              </p>
+            </div>
+
+            <!-- Staj -->
+            <div class="relative pl-6 pb-10 border-l border-outline-variant/40">
+              <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-surface-container-high border border-outline-variant"></div>
+              <p class="section-label mb-1" style="font-size:12px;color:#ab897d;">TamamlandÄ±</p>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;">
+                Staj â€” 1. Deneyim
+              </h3>
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;">
+                YazÄ±lÄ±m geliÅŸtirme stajÄ± tamamlandÄ±.
+              </p>
+            </div>
+
+            <!-- Aktif arama -->
+            <div class="relative pl-6 border-l border-outline-variant/20">
+              <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full border-2 border-primary animate-pulse"
+                   style="background:transparent;"></div>
+              <p class="section-label text-primary mb-1" style="font-size:12px;">Åu An</p>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;">
+                2. Staj ArayÄ±ÅŸÄ±
+              </h3>
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;">
+                Yeni fÄ±rsatlara aÃ§Ä±k, aktif olarak arÄ±yorum.
+              </p>
+            </div>
+          </div>
+
+          <!-- SAÄ: Teknik Yetenekler -->
+          <div>
+            <p class="section-label mb-6">Teknik Yetenekler</p>
+
+            <!-- Programlama Dilleri -->
+            <div class="mb-8">
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;">
+                Programlama Dilleri
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">C++</span>
+              </div>
+            </div>
+
+            <!-- Mobil -->
+            <div class="mb-8">
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;">
+                Mobil GeliÅŸtirme
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <span class="skill-badge">Flutter</span>
+                <span class="skill-badge">Dart</span>
+              </div>
+            </div>
+
+            <!-- Web -->
+            <div class="mb-8">
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;">
+                Web
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <span class="skill-badge">HTML</span>
+                <span class="skill-badge">CSS</span>
+              </div>
+            </div>
+
+            <!-- VeritabanÄ± -->
+            <div>
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;">
+                VeritabanÄ±
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <span class="skill-badge">SQL</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- â”€â”€ PROJELERÄ°M BÃ–LÃœMÄ° â”€â”€ -->
+    <section id="projelerim" class="relative py-24 px-6 md:px-20 max-w-[1440px] mx-auto w-full">
+      <div class="pl-0 md:pl-12">
+
+        <p class="section-label mb-3">02 â€” Projelerim</p>
+        <div class="section-divider mb-8"></div>
+        <h2 class="section-title text-4xl md:text-5xl mb-12">Ã‡alÄ±ÅŸmalarÄ±m</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <!-- Kart 1: Yurtsis -->
+          <div class="project-card group border border-outline-variant/30 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-outline-variant hover:bg-surface-container">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="project-title">Yurtsis</h3>
+              <span class="project-status-done">TamamlandÄ±</span>
+            </div>
+            <p class="project-desc">
+              KYK yurtlarÄ± iÃ§in terminal tabanlÄ± yÃ¶netim sistemi. Ä°stemci-sunucu mimarisi Ã¼zerine inÅŸa edilmiÅŸ; Ã¶ÄŸrenci kayÄ±tlarÄ±, oda takibi ve gerÃ§ek zamanlÄ± veri senkronizasyonu saÄŸlayan masaÃ¼stÃ¼ uygulamasÄ±.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="tech-badge">C++</span>
+              <span class="tech-badge">Qt</span>
+            </div>
+            <a href="https://github.com/MRGNSs11/yurtsis_sunucu" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              GitHub'da GÃ¶r
+            </a>
+          </div>
+
+          <!-- Kart 2: Market Stok Takip -->
+          <div class="project-card group border border-outline-variant/30 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-outline-variant hover:bg-surface-container">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="project-title">Market Stok Takip</h3>
+              <span class="project-status-done">TamamlandÄ±</span>
+            </div>
+            <p class="project-desc">
+              Market iÅŸletmeleri iÃ§in basit ve kullanÄ±ÅŸlÄ± bir stok yÃ¶netim sistemi. ÃœrÃ¼n ekleme, gÃ¼ncelleme ve stok durumu takibini web arayÃ¼zÃ¼ Ã¼zerinden gerÃ§ekleÅŸtirmeye olanak tanÄ±r.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+            </div>
+            <a href="https://github.com/MRGNSs11/market-stok-takip" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              GitHub'da GÃ¶r
+            </a>
+          </div>
+
+          <!-- Kart 3: Fiyat PusulasÄ± -->
+          <div class="project-card group border border-primary/20 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-primary/40 hover:bg-surface-container">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="project-title">Fiyat PusulasÄ±</h3>
+              <span class="project-status-wip">GeliÅŸtiriliyor</span>
+            </div>
+            <p class="project-desc">
+              FarklÄ± marketlerdeki Ã¼rÃ¼nleri karÅŸÄ±laÅŸtÄ±rarak en uygun fiyatÄ± bulan akÄ±llÄ± alÄ±ÅŸveriÅŸ asistanÄ±. Obilet'in uÃ§uÅŸ karÅŸÄ±laÅŸtÄ±rma mantÄ±ÄŸÄ±nÄ± market raflarÄ±na taÅŸÄ±yor.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Flutter</span>
+              <span class="tech-badge">Dart</span>
+            </div>
+            <a href="https://github.com/MRGNSs11/fiyat-pusulasi-uygulamasi" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              GitHub'da GÃ¶r
+            </a>
+          </div>
+
+          <!-- Kart 4: KÃ¼tÃ¼phane Sistemi -->
+          <div class="project-card group border border-outline-variant/30 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-outline-variant hover:bg-surface-container">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="project-title">KÃ¼tÃ¼phane Sistemi</h3>
+              <span class="project-status-done">TamamlandÄ±</span>
+            </div>
+            <p class="project-desc">
+              KÃ¼tÃ¼phane otomasyonu iÃ§in geliÅŸtirilmiÅŸ masaÃ¼stÃ¼ uygulamasÄ±. Kitap kayÄ±t, Ã¼ye yÃ¶netimi ve Ã¶dÃ¼nÃ§ alma/iade iÅŸlemlerini tek bir arayÃ¼zden yÃ¶netmeye olanak tanÄ±r.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="tech-badge">C++</span>
+            </div>
+            <a href="https://github.com/MRGNSs11/Kutuphane-sistemi" target="_blank" rel="noopener noreferrer" class="project-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              GitHub'da GÃ¶r
+            </a>
+          </div>
+
+          <!-- Kart 5: Mobil Futbol Oyunu (isim belirleniyor) -->
+          <div class="project-card group border border-primary/20 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-primary/40 hover:bg-surface-container md:col-span-2 lg:col-span-1">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="project-title">Mobil Futbol Oyunu</h3>
+                <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Ad belirleniyor...</p>
+              </div>
+              <span class="project-status-wip">GeliÅŸtiriliyor</span>
+            </div>
+            <p class="project-desc">
+              Futbolda rekor kÄ±rma temalÄ± bir mobil oyun. OyuncularÄ±n kendi rekorlarÄ±nÄ± aÅŸmayÄ± hedeflediÄŸi, yÃ¼ksek skor odaklÄ± bir mobil deneyim iÃ§in geliÅŸtirme sÃ¼reci devam ediyor.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="tech-badge">Flutter</span>
+              <span class="tech-badge">Dart</span>
+            </div>
+            <!-- GitHub linki henÃ¼z yok â€” yÃ¼kleniyor gÃ¶stergesi -->
+            <div class="inline-flex items-center gap-2 project-link opacity-50 cursor-default select-none">
+              <svg class="spinning-loader" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+              Ã‡ok YakÄ±nda
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- â”€â”€ Ä°LETÄ°ÅÄ°M BÃ–LÃœMÄ° â”€â”€ -->
+    <section id="iletisim" class="relative py-24 px-6 md:px-20 max-w-[1440px] mx-auto w-full">
+      <div class="pl-0 md:pl-12">
+
+        <p class="section-label mb-3">03 â€” Ä°letiÅŸim</p>
+        <div class="section-divider mb-8"></div>
+        <h2 class="section-title text-4xl md:text-5xl mb-4">Bana UlaÅŸ</h2>
+        <p class="mb-12" style="font-family:'Space Grotesk',sans-serif;font-size:18px;line-height:28px;color:#e4beb1;max-width:520px;">
+          Bir proje fikrin mi var, staj teklifi mi, yoksa sadece merhaba mÄ± demek istiyorsun? MesajÄ±nÄ± bekliyorum.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+          <!-- Sol: Form -->
+          <form id="contact-form" action="https://formspree.io/f/xqevdpjy" method="POST" class="flex flex-col gap-5">
+
+            <div class="flex flex-col gap-2">
+              <label class="section-label" style="font-size:12px;" for="name">Ä°sim</label>
+              <input id="name" name="name" type="text" required placeholder="AdÄ±n SoyadÄ±n"
+                     class="contact-input"/>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label class="section-label" style="font-size:12px;" for="email">E-posta</label>
+              <input id="email" name="email" type="email" required placeholder="ornek@mail.com"
+                     class="contact-input"/>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label class="section-label" style="font-size:12px;" for="message">Mesaj</label>
+              <textarea id="message" name="message" required rows="5" placeholder="MesajÄ±nÄ± buraya yaz..."
+                        class="contact-input resize-none"></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn"
+                    class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all duration-300 bloom-primary self-start"
+                    style="font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:0.15em;font-weight:500;text-transform:uppercase;">
+              <span id="btn-text">GÃ¶nder</span>
+              <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 0;">send</span>
+            </button>
+
+            <!-- BaÅŸarÄ± / Hata mesajÄ± -->
+            <div id="form-success" class="hidden p-4 border border-primary/40 bg-primary-container/10"
+                 style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:#ffb59a;">
+              MesajÄ±n iletildi, en kÄ±sa sÃ¼rede dÃ¶nÃ¼ÅŸ yapacaÄŸÄ±m.
+            </div>
+            <div id="form-error" class="hidden p-4 border border-red-500/40 bg-red-500/10"
+                 style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:#ffb4ab;">
+              Bir hata oluÅŸtu. LÃ¼tfen tekrar dene veya doÄŸrudan e-posta gÃ¶nder.
+            </div>
+
+          </form>
+
+          <!-- SaÄŸ: Sosyal medya & e-posta -->
+          <div class="flex flex-col gap-8 lg:pt-8">
+
+            <div>
+              <p class="section-label mb-6" style="font-size:12px;">DiÄŸer Kanallar</p>
+
+              <div class="flex flex-col gap-5">
+
+                <a href="mailto:omeromergunesgunes@gmail.com"
+                   class="contact-social-link group">
+                  <div class="contact-social-icon">
+                    <span class="material-symbols-outlined" style="font-size:20px;font-variation-settings:'FILL' 0;">mail</span>
+                  </div>
+                  <div>
+                    <p class="contact-social-label">E-posta</p>
+                    <p class="contact-social-value">omeromergunesgunes@gmail.com</p>
+                  </div>
+                </a>
+
+                <a href="https://github.com/MRGNSs11" target="_blank" rel="noopener noreferrer"
+                   class="contact-social-link group">
+                  <div class="contact-social-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="contact-social-label">GitHub</p>
+                    <p class="contact-social-value">github.com/MRGNSs11</p>
+                  </div>
+                </a>
+
+                <a href="https://www.linkedin.com/in/%C3%B6mer-g%C3%BCne%C5%9F-645662299" target="_blank" rel="noopener noreferrer"
+                   class="contact-social-link group">
+                  <div class="contact-social-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="contact-social-label">LinkedIn</p>
+                    <p class="contact-social-value">Ã–mer GÃ¼neÅŸ</p>
+                  </div>
+                </a>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-surface-container-lowest w-full py-8 relative z-20 border-t border-outline-variant/10">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 px-6 md:px-20 w-full max-w-[1440px] mx-auto">
+      <span style="font-size:12px;letter-spacing:0.15em;font-weight:500;font-family:'Space Grotesk',sans-serif;color:#e4beb1;text-transform:uppercase;">
+        Â© 2026 Ã–MER GÃœNEÅ. TÃœM HAKLARI SAKLIDIR.
+      </span>
+      <span style="font-size:12px;letter-spacing:0.15em;font-weight:500;font-family:'Space Grotesk',sans-serif;color:#5b4137;text-transform:uppercase;">
+        Computer Scientist
+      </span>
+    </div>
+  </footer>
+
+  <!-- ===== Ä°LETÄ°ÅÄ°M FORMU JS ===== -->
+  <script>
+    const form       = document.getElementById('contact-form');
+    const submitBtn  = document.getElementById('submit-btn');
+    const btnText    = document.getElementById('btn-text');
+    const successMsg = document.getElementById('form-success');
+    const errorMsg   = document.getElementById('form-error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      btnText.textContent = 'GÃ¶nderiliyor...';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+
+        if (res.ok) {
+          form.reset();
+          successMsg.classList.remove('hidden');
+          errorMsg.classList.add('hidden');
+          btnText.textContent = 'GÃ¶nderildi';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        errorMsg.classList.remove('hidden');
+        successMsg.classList.add('hidden');
+        submitBtn.disabled = false;
+        btnText.textContent = 'GÃ¶nder';
+      }
+    });
+  </script>
+
+  <!-- ===== HAMBURGER MENÃœ JS ===== -->
+  <script>
+    const hamburgerBtn  = document.getElementById('hamburger-btn');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const mobileMenu    = document.getElementById('mobile-menu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburgerIcon.textContent = isOpen ? 'close' : 'menu';
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburgerIcon.textContent = 'menu';
+    }
+
+    // DÄ±ÅŸarÄ± tÄ±klayÄ±nca menÃ¼yÃ¼ kapat
+    document.addEventListener('click', (e) => {
+      if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,7 @@
+# Arşivler / paketler
+*.zip
+
+# OS / editör dosyaları
+Thumbs.db
+.DS_Store
+.vscode/
