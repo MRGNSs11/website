@@ -521,112 +521,130 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-          <!-- Kart 1: Yurtsis -->
-          <div class="project-card group border border-outline-variant/30 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-outline-variant hover:bg-surface-container">
+          <!-- Kart 1: Record Draft -->
+          <div style="order:1" class="project-card group border border-primary/20 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-primary/40 hover:bg-surface-container">
             <div class="flex items-start justify-between gap-4">
-              <h3 class="project-title">Yurtsis</h3>
-              <span class="project-status-done">Tamamlandı</span>
+              <div class="flex items-center gap-4">
+                <img src="record-draft-logo.png" alt="Record Draft logosu"
+                     class="w-14 h-14 rounded-lg object-cover border border-outline-variant/40 flex-shrink-0" />
+                <div>
+                  <h3 class="project-title">Record Draft</h3>
+                  <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Mobil Oyun · Google Play</p>
+                </div>
+              </div>
+              <span class="project-status-wip">Yayın Aşamasında</span>
             </div>
             <p class="project-desc">
-              KYK yurtları için terminal tabanlı yönetim sistemi. İstemci-sunucu mimarisi üzerine inşa edilmiş; öğrenci kayıtları, oda takibi ve gerçek zamanlı veri senkronizasyonu sağlayan masaüstü uygulaması.
+              Futbolda takım rekorları kırma temalı mobil oyun. FUT Draft tarzı kadronu kurup gerçek Dünya Kupası takım rekorlarını aşmaya çalışıyorsun. 10 dil desteğiyle Google Play'de kapalı test aşamasında olan ilk mobil oyunum.
             </p>
             <div class="flex flex-wrap gap-2 mt-auto">
-              <span class="tech-badge">C++</span>
-              <span class="tech-badge">Qt</span>
-            </div>
-            <a href="https://github.com/MRGNSs11/yurtsis_sunucu" target="_blank" rel="noopener noreferrer" class="project-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              GitHub'da Gör
-            </a>
-          </div>
-
-          <!-- Kart 2: Market Stok Takip -->
-          <div class="project-card group border border-outline-variant/30 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-outline-variant hover:bg-surface-container">
-            <div class="flex items-start justify-between gap-4">
-              <h3 class="project-title">Market Stok Takip</h3>
-              <span class="project-status-done">Tamamlandı</span>
-            </div>
-            <p class="project-desc">
-              Market işletmeleri için basit ve kullanışlı bir stok yönetim sistemi. Ürün ekleme, güncelleme ve stok durumu takibini web arayüzü üzerinden gerçekleştirmeye olanak tanır.
-            </p>
-            <div class="flex flex-wrap gap-2 mt-auto">
-              <span class="tech-badge">HTML</span>
-              <span class="tech-badge">CSS</span>
-            </div>
-            <a href="https://github.com/MRGNSs11/market-stok-takip" target="_blank" rel="noopener noreferrer" class="project-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              GitHub'da Gör
-            </a>
-          </div>
-
-          <!-- Kart 3: Fiyat Pusulası -->
-          <div class="project-card group border border-primary/20 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-primary/40 hover:bg-surface-container">
-            <div class="flex items-start justify-between gap-4">
-              <h3 class="project-title">Fiyat Pusulası</h3>
-              <span class="project-status-wip">Geliştiriliyor</span>
-            </div>
-            <p class="project-desc">
-              Farklı marketlerdeki ürünleri karşılaştırarak en uygun fiyatı bulan akıllı alışveriş asistanı. Obilet'in uçuş karşılaştırma mantığını market raflarına taşıyor.
-            </p>
-            <div class="flex flex-wrap gap-2 mt-auto">
-              <span class="tech-badge">Python</span>
               <span class="tech-badge">Flutter</span>
               <span class="tech-badge">Dart</span>
             </div>
-            <a href="https://github.com/MRGNSs11/fiyat-pusulasi-uygulamasi" target="_blank" rel="noopener noreferrer" class="project-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              GitHub'da Gör
-            </a>
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <a href="record-draft.html" class="project-link">
+                <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">article</span>
+                Vaka İncelemesini Oku
+              </a>
+              <span class="inline-flex items-center gap-2 project-link opacity-70 cursor-default select-none">
+                <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">sports_soccer</span>
+                Google Play · Kapalı Test
+              </span>
+            </div>
           </div>
 
-          <!-- Kart 4: Kütüphane Sistemi -->
-          <div class="project-card group border border-outline-variant/30 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-outline-variant hover:bg-surface-container">
+          <!-- Kart 2: Ötüken -->
+          <div style="order:2" class="project-card group border border-primary/20 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-primary/40 hover:bg-surface-container">
             <div class="flex items-start justify-between gap-4">
-              <h3 class="project-title">Kütüphane Sistemi</h3>
-              <span class="project-status-done">Tamamlandı</span>
+              <div class="flex items-center gap-4">
+                <img src="otuken-wolf.svg" alt="Ötüken logosu"
+                     class="w-14 h-14 object-contain flex-shrink-0" />
+                <div>
+                  <h3 class="project-title">Ötüken</h3>
+                  <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Masaüstü · Sesli Yapay Zeka</p>
+                </div>
+              </div>
+              <span class="project-status-wip">Çalışıyor</span>
             </div>
             <p class="project-desc">
-              Kütüphane otomasyonu için geliştirilmiş masaüstü uygulaması. Kitap kayıt, üye yönetimi ve ödünç alma/iade işlemlerini tek bir arayüzden yönetmeye olanak tanır.
+              Sesle konuşulan kişisel yapay zeka asistanı. Google Gemini beyniyle doğal Türkçe konuşur; hava durumu, uygulama açma ve internette arama gibi işleri sesle yapar. Kalın, robotik bir yapay zeka sesiyle cevap veren masaüstü asistanı.
             </p>
             <div class="flex flex-wrap gap-2 mt-auto">
-              <span class="tech-badge">C++</span>
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Gemini</span>
+              <span class="tech-badge">Yapay Zeka</span>
             </div>
-            <a href="https://github.com/MRGNSs11/Kutuphane-sistemi" target="_blank" rel="noopener noreferrer" class="project-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              GitHub'da Gör
-            </a>
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <a href="otuken.html" class="project-link">
+                <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">article</span>
+                Vaka İncelemesini Oku
+              </a>
+              <span class="inline-flex items-center gap-2 project-link opacity-70 cursor-default select-none">
+                <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">smart_toy</span>
+                Kişisel Proje
+              </span>
+            </div>
           </div>
 
-          <!-- Kart 5: Mobil Futbol Oyunu (isim belirleniyor) -->
-          <div class="project-card group border border-primary/20 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-primary/40 hover:bg-surface-container md:col-span-2 lg:col-span-1">
+          <!-- Kart 3: Star Football Simulator -->
+          <div style="order:3" class="project-card group border border-primary/20 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-primary/40 hover:bg-surface-container">
             <div class="flex items-start justify-between gap-4">
               <div>
-                <h3 class="project-title">Mobil Futbol Oyunu</h3>
-                <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Ad belirleniyor...</p>
+                <h3 class="project-title">Star Football Simulator</h3>
+                <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Mobil Oyun · Kapalı Kaynak</p>
               </div>
               <span class="project-status-wip">Geliştiriliyor</span>
             </div>
             <p class="project-desc">
-              Futbolda rekor kırma temalı bir mobil oyun. Oyuncuların kendi rekorlarını aşmayı hedeflediği, yüksek skor odaklı bir mobil deneyim için geliştirme süreci devam ediyor.
+              Futbolcu kariyer simülasyonu — ikinci mobil oyunum. Simülasyonun kuralları koddan önce
+              belgeleniyor, sonra teste dönüştürülüyor: şu an <strong style="color:#ffb59a;">1.100'ün üzerinde
+              otomatik test</strong> geçiyor. Ticari proje olduğu için kaynak kodu kapalı.
             </p>
             <div class="flex flex-wrap gap-2 mt-auto">
               <span class="tech-badge">Flutter</span>
               <span class="tech-badge">Dart</span>
+              <span class="tech-badge">Test Öncelikli</span>
             </div>
-            <!-- GitHub linki henüz yok — yükleniyor göstergesi -->
-            <div class="inline-flex items-center gap-2 project-link opacity-50 cursor-default select-none">
-              <svg class="spinning-loader" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-              </svg>
-              Çok Yakında
+            <div class="inline-flex items-center gap-2 project-link opacity-70 cursor-default select-none">
+              <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">lock</span>
+              Geliştirme Sürüyor
+            </div>
+          </div>
+
+          <!-- Kart 4: Üniversite Projeleri (toplu) -->
+          <div style="order:4" class="project-card group border border-outline-variant/30 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-outline-variant hover:bg-surface-container">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="project-title">Üniversite Projeleri</h3>
+                <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Ders ve dönem çalışmaları</p>
+              </div>
+              <span class="project-status-done">Tamamlandı</span>
+            </div>
+            <p class="project-desc">
+              Bilgisayar Bilimleri eğitimim boyunca geliştirdiğim ders projeleri. Kaynak kodları GitHub'da açık.
+            </p>
+
+            <div class="flex flex-col gap-3 mt-auto" style="font-family:'Space Grotesk',sans-serif;">
+              <a href="https://github.com/MRGNSs11/fiyat-pusulasi-uygulamasi" target="_blank" rel="noopener noreferrer"
+                 style="display:block;padding:10px 0;border-top:1px solid rgba(171,137,125,0.18);text-decoration:none;">
+                <span style="font-size:15px;color:#e4e2e4;font-weight:600;">Fiyat Pusulası</span>
+                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;">Market fiyatlarını karşılaştıran alışveriş asistanı · Python, Flutter</span>
+              </a>
+              <a href="https://github.com/MRGNSs11/yurtsis_sunucu" target="_blank" rel="noopener noreferrer"
+                 style="display:block;padding:10px 0;border-top:1px solid rgba(171,137,125,0.18);text-decoration:none;">
+                <span style="font-size:15px;color:#e4e2e4;font-weight:600;">Yurtsis</span>
+                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;">İstemci-sunucu mimarili yurt yönetim sistemi · C++, Qt</span>
+              </a>
+              <a href="https://github.com/MRGNSs11/Kutuphane-sistemi" target="_blank" rel="noopener noreferrer"
+                 style="display:block;padding:10px 0;border-top:1px solid rgba(171,137,125,0.18);text-decoration:none;">
+                <span style="font-size:15px;color:#e4e2e4;font-weight:600;">Kütüphane Sistemi</span>
+                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;">Kitap, üye ve ödünç takibi yapan masaüstü uygulaması · C++</span>
+              </a>
+              <a href="https://github.com/MRGNSs11/market-stok-takip" target="_blank" rel="noopener noreferrer"
+                 style="display:block;padding:10px 0;border-top:1px solid rgba(171,137,125,0.18);text-decoration:none;">
+                <span style="font-size:15px;color:#e4e2e4;font-weight:600;">Market Stok Takip</span>
+                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;">Web arayüzlü stok yönetim sistemi · HTML, CSS</span>
+              </a>
             </div>
           </div>
 
@@ -719,7 +737,7 @@
                   </div>
                 </a>
 
-                <a href="https://www.linkedin.com/in/%C3%B6mer-g%C3%BCne%C5%9F-645662299" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.linkedin.com/in/omer-gunes-645662299" target="_blank" rel="noopener noreferrer"
                    class="contact-social-link group">
                   <div class="contact-social-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -732,6 +750,25 @@
                   </div>
                 </a>
 
+              </div>
+            </div>
+
+            <!-- CV indirme -->
+            <div>
+              <p class="section-label mb-6" style="font-size:12px;">Özgeçmiş</p>
+              <div class="flex flex-wrap gap-3">
+                <a href="cv/Omer-Gunes-CV-TR.pdf" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 px-5 py-3 border border-outline-variant/50 hover:border-primary hover:text-primary transition-colors"
+                   style="font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#e4beb1;">
+                  <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 0;">download</span>
+                  CV — Türkçe
+                </a>
+                <a href="cv/Omer-Gunes-Resume-EN.pdf" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 px-5 py-3 border border-outline-variant/50 hover:border-primary hover:text-primary transition-colors"
+                   style="font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#e4beb1;">
+                  <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 0;">download</span>
+                  Resume — English
+                </a>
               </div>
             </div>
           </div>

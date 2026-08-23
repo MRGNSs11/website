@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" width="200" height="210" fill="none">
+  <defs>
+    <linearGradient id="wolfFill" x1="100" y1="10" x2="100" y2="196" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3a0505"/>
+      <stop offset="1" stop-color="#0c0000"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Kurt kafasi silueti -->
+  <g filter="url(#glow)" stroke="#ff2a2a" stroke-width="3" stroke-linejoin="round">
+    <path d="M28,10 L70,72 L90,60 L100,68 L110,60 L130,72 L172,10
+             L150,98 L160,124 L134,144 L120,178 L100,196 L80,178
+             L66,144 L40,124 L50,98 Z" fill="url(#wolfFill)"/>
+
+    <!-- Yuz cizgileri (facet) -->
+    <path d="M100,68 L100,150" stroke-width="2" opacity="0.8"/>
+    <path d="M50,98 L74,106" stroke-width="1.6" opacity="0.7"/>
+    <path d="M150,98 L126,106" stroke-width="1.6" opacity="0.7"/>
+    <path d="M66,144 L88,120" stroke-width="1.4" opacity="0.55"/>
+    <path d="M134,144 L112,120" stroke-width="1.4" opacity="0.55"/>
+    <path d="M100,150 L84,162 M100,150 L116,162" stroke-width="1.6" opacity="0.7"/>
+  </g>
+
+  <!-- Parlayan gozler -->
+  <g filter="url(#glow)">
+    <path d="M72,104 L93,110 L86,121 L69,113 Z" fill="#ff3b3b"/>
+    <path d="M128,104 L107,110 L114,121 L131,113 Z" fill="#ff3b3b"/>
+    <path d="M77,109 L86,112 L83,116 L75,113 Z" fill="#ffd0c0"/>
+    <path d="M123,109 L114,112 L117,116 L125,113 Z" fill="#ffd0c0"/>
+  </g>
+
+  <!-- Burun -->
+  <path d="M100,150 L91,161 L100,167 L109,161 Z" fill="#ff2a2a" filter="url(#glow)"/>
+</svg>
