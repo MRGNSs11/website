@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Record Draft — Vaka İncelemesi · Ömer Güneş</title>
+<title id="page-title" data-en="Record Draft — Case Study · Ömer Güneş">Record Draft — Vaka İncelemesi · Ömer Güneş</title>
 <meta name="description" content="Flutter ile tek kişilik geliştirilen, Google Play'de yayında olan reklamsız futbol draft oyunu Record Draft'ın tasarım kararları, mimarisi ve yayın süreci.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,9 +40,26 @@
     padding-top:14px;padding-bottom:14px;gap:16px;flex-wrap:wrap}
   .topbar .home{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2)}
   .topbar .home:hover{color:var(--gold)}
-  .topbar nav{display:flex;gap:18px;flex-wrap:wrap}
+  .topbar nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
   .topbar nav a{font-size:12.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
   .topbar nav a:hover{color:var(--gold)}
+
+  /* ---------- dil seçici ---------- */
+  .hidden{display:none!important}
+  .lang-switch{position:relative}
+  .lang-btn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);font-family:Archivo,sans-serif;
+    font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;
+    border-radius:6px;cursor:pointer}
+  .lang-btn:hover{color:var(--gold);border-color:rgba(215,180,90,.45)}
+  .lang-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:130px;
+    background:var(--green-800);border:1px solid var(--line);border-radius:8px;
+    overflow:hidden;z-index:60;box-shadow:0 12px 28px rgba(0,0,0,.35)}
+  .lang-option{display:block;width:100%;text-align:left;background:transparent;border:none;
+    color:var(--muted);font-family:Archivo,sans-serif;font-size:13.5px;padding:11px 16px;
+    cursor:pointer;text-transform:none;letter-spacing:0}
+  .lang-option:hover{background:rgba(215,180,90,.1);color:var(--gold-soft)}
+  .lang-option.active{color:var(--gold);font-weight:700}
 
   /* ---------- kapak ---------- */
   .hero{
@@ -176,64 +193,73 @@
 <div class="topbar"><div class="wrap">
   <a class="home" href="index.html">← Ömer Güneş</a>
   <nav>
-    <a href="#urun">Ürün</a>
-    <a href="#mimari">Mimari</a>
-    <a href="#kimya">Kimya motoru</a>
-    <a href="#kararlar">Kararlar</a>
-    <a href="#test">Test</a>
-    <a href="#yayin">Yayın</a>
+    <a href="#urun" data-en="Product">Ürün</a>
+    <a href="#mimari" data-en="Architecture">Mimari</a>
+    <a href="#kimya" data-en="Chemistry Engine">Kimya motoru</a>
+    <a href="#kararlar" data-en="Decisions">Kararlar</a>
+    <a href="#test" data-en="Testing">Test</a>
+    <a href="#yayin" data-en="Release">Yayın</a>
+    <div class="lang-switch">
+      <button id="lang-btn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+        <span id="lang-btn-label">TR</span> ▾
+      </button>
+      <div id="lang-menu" class="lang-menu hidden">
+        <button type="button" class="lang-option" data-lang="tr">Türkçe</button>
+        <button type="button" class="lang-option" data-lang="en">English</button>
+      </div>
+    </div>
   </nav>
 </div></div>
 
 <!-- ============ 01 KAPAK ============ -->
 <header class="hero"><div class="wrap">
-  <div class="eyebrow">Vaka İncelemesi · Mobil Oyun</div>
+  <div class="eyebrow" data-en="Case Study · Mobile Game">Vaka İncelemesi · Mobil Oyun</div>
   <h1>Record <em>Draft</em></h1>
-  <p class="lede">Reklamsız bir futbol draft oyunu. Fikirden Google Play yayınına kadar tek kişilik
+  <p class="lede" data-en="An ad-free football draft game. Solo development from idea to Google Play release: data model, game mechanics, art and sound assets, translation, and the store process.">Reklamsız bir futbol draft oyunu. Fikirden Google Play yayınına kadar tek kişilik
   geliştirme: veri modeli, oyun mekaniği, görsel ve ses seti, çeviri ve mağaza süreci.</p>
   <div class="hero-meta">
     <span class="chip">Flutter · Dart</span>
-    <span class="chip">Dünya Kupası 2026 · 48 takım</span>
+    <span class="chip" data-en="World Cup 2026 · 48 teams">Dünya Kupası 2026 · 48 takım</span>
     <span class="chip">Android</span>
-    <span class="chip">Tamamen çevrimdışı</span>
-    <span class="chip">10 dil</span>
-    <span class="chip">Reklamsız</span>
+    <span class="chip" data-en="Fully offline">Tamamen çevrimdışı</span>
+    <span class="chip" data-en="10 languages">10 dil</span>
+    <span class="chip" data-en="Ad-free">Reklamsız</span>
   </div>
   <div class="cta-row">
-    <a class="cta" href="#PLAY-LINK">Google Play'de görüntüle →</a>
-    <a class="cta ghost" href="#kararlar">Verdiğim kararlara git</a>
+    <a class="cta" href="#PLAY-LINK" data-en="View on Google Play →">Google Play'de görüntüle →</a>
+    <a class="cta ghost" href="#kararlar" data-en="Jump to the decisions I made">Verdiğim kararlara git</a>
   </div>
 </div></header>
 
 <div class="wrap"><div class="facts">
-  <div class="fact"><u>Rol</u><b>Tek geliştirici</b></div>
-  <div class="fact"><u>Süre</u><b>2026 · yaklaşık 3 ay</b></div>
-  <div class="fact"><u>Platform</u><b>Android (Google Play)</b></div>
-  <div class="fact"><u>Durum</u><b>Yayında</b></div>
+  <div class="fact"><u data-en="Role">Rol</u><b data-en="Solo developer">Tek geliştirici</b></div>
+  <div class="fact"><u data-en="Duration">Süre</u><b data-en="2026 · about 3 months">2026 · yaklaşık 3 ay</b></div>
+  <div class="fact"><u data-en="Platform">Platform</u><b>Android (Google Play)</b></div>
+  <div class="fact"><u data-en="Status">Durum</u><b data-en="Live">Yayında</b></div>
 </div></div>
 
 <!-- ============ 02 NEDEN ============ -->
 <section id="neden"><div class="wrap">
-  <div class="sec-no">02 — Neden bu oyun</div>
-  <h2>Kadro kurmayı seven, ama bir simülasyona akşamını vermek istemeyen oyuncu</h2>
-  <p>Futbol oyunlarında en çok oynanan modlardan biri kadro kurma: sınırlı seçeneklerden en iyi
+  <div class="sec-no" data-en="02 — Why this game">02 — Neden bu oyun</div>
+  <h2 data-en="A player who loves building a squad, but doesn't want to give a simulation their whole evening">Kadro kurmayı seven, ama bir simülasyona akşamını vermek istemeyen oyuncu</h2>
+  <p data-en="One of the most-played modes in football games is squad building: picking the best eleven from a limited pool. But the games around this mode are either buried inside a massive management simulation, or free games that wedge an ad between every round.">Futbol oyunlarında en çok oynanan modlardan biri kadro kurma: sınırlı seçeneklerden en iyi
   on biri çıkarmak. Ama bu modun etrafındaki oyunlar ya devasa bir menajerlik simülasyonunun içine
   gömülü ya da her turun arasına reklam sıkıştıran ücretsiz oyunlar.</p>
-  <p>Record Draft bu boşluğa oturuyor: <strong>beş on dakikada bitirilebilen, reklam görmediğin,
+  <p data-en="Record Draft sits in that gap: <strong>a squad-building game you can finish in five to ten minutes, with no ads and no pay-to-progress.</strong>">Record Draft bu boşluğa oturuyor: <strong>beş on dakikada bitirilebilen, reklam görmediğin,
   ilerlemek için ödeme yapmadığın bir kadro kurma oyunu.</strong></p>
-  <h3>Hedef kitle</h3>
+  <h3 data-en="Target audience">Hedef kitle</h3>
   <ul>
-    <li>Futbolu düzenli takip eden, 16–30 yaş arası mobil oyuncu</li>
-    <li>Draft ve kadro kurma modlarını seven, uzun simülasyona vakti olmayan kullanıcı</li>
-    <li>2026 Dünya Kupası'nı takip eden, 48 takımlık turnuva formatını merak eden oyuncu</li>
-    <li>Oyun 10 dile çevrildiği için içerik küresel; Türkçe tam çeviri sayesinde öncelikli pazar Türkiye</li>
+    <li data-en="Mobile players aged 16–30 who follow football regularly">Futbolu düzenli takip eden, 16–30 yaş arası mobil oyuncu</li>
+    <li data-en="Users who love draft and squad-building modes but don't have time for a long simulation">Draft ve kadro kurma modlarını seven, uzun simülasyona vakti olmayan kullanıcı</li>
+    <li data-en="Players following the 2026 World Cup, curious about the 48-team tournament format">2026 Dünya Kupası'nı takip eden, 48 takımlık turnuva formatını merak eden oyuncu</li>
+    <li data-en="The game is translated into 10 languages so the content is global; full Turkish translation makes Turkey the priority market">Oyun 10 dile çevrildiği için içerik küresel; Türkçe tam çeviri sayesinde öncelikli pazar Türkiye</li>
   </ul>
 </div></section>
 
 <!-- ============ 03 ÜRÜN TURU ============ -->
 <section id="urun"><div class="wrap">
-  <div class="sec-no">03 — Ürün turu</div>
-  <h2>Bir oyun turu nasıl geçiyor</h2>
+  <div class="sec-no" data-en="03 — Product tour">03 — Ürün turu</div>
+  <h2 data-en="What a game round looks like">Bir oyun turu nasıl geçiyor</h2>
 
   <div class="shots">
     <div class="shot"><img src="img/record-draft/01.png" alt="Record Draft ana menü"></div>
@@ -242,214 +268,265 @@
     <div class="shot"><img src="img/record-draft/04.png" alt="Kadro özeti — puan ortalaması, kimya ve toplam güç"></div>
   </div>
   <div class="shot-caps">
-    <div>Ana menü</div><div>Mod seçimi</div><div>Kadro kurma</div><div>Kimya ve toplam güç</div>
+    <div data-en="Main menu">Ana menü</div><div data-en="Mode selection">Mod seçimi</div><div data-en="Squad building">Kadro kurma</div><div data-en="Chemistry and overall power">Kimya ve toplam güç</div>
   </div>
 
   <div class="flow">
-    <span class="node">Mod seçimi</span><span class="op">→</span>
-    <span class="node">Formasyon</span><span class="op">→</span>
-    <span class="node">Oyuncu kartı seçimi</span><span class="op">→</span>
-    <span class="node">Kadro özeti</span><span class="op">→</span>
-    <span class="node">Simülasyon</span><span class="op">→</span>
-    <span class="res">Sonuç &amp; rekor</span>
+    <span class="node" data-en="Mode selection">Mod seçimi</span><span class="op">→</span>
+    <span class="node" data-en="Formation">Formasyon</span><span class="op">→</span>
+    <span class="node" data-en="Player card selection">Oyuncu kartı seçimi</span><span class="op">→</span>
+    <span class="node" data-en="Squad summary">Kadro özeti</span><span class="op">→</span>
+    <span class="node" data-en="Simulation">Simülasyon</span><span class="op">→</span>
+    <span class="res" data-en="Result &amp; record">Sonuç &amp; rekor</span>
   </div>
-  <p class="caption">Bir tur, kesintisiz beş on dakika sürüyor. Reklam molası, bekleme sayacı ve
+  <p class="caption" data-en="A round takes an uninterrupted five to ten minutes. No ad breaks, no waiting timers, no energy system.">Bir tur, kesintisiz beş on dakika sürüyor. Reklam molası, bekleme sayacı ve
   enerji sistemi yok.</p>
 
-  <h3>Oyunun kapsadığı ekranlar</h3>
-  <p>Uygulama <strong>16 ayrı ekrandan</strong> oluşuyor: yükleme, ana menü, mod seçimi, formasyon
+  <h3 data-en="Screens the game covers">Oyunun kapsadığı ekranlar</h3>
+  <p data-en="The app consists of <strong>16 separate screens</strong>: loading, main menu, mode selection, formation selection, player selection, squad summary, group selection, tournament bracket, simulation, result, saved squads, achievements, profile, rules, settings, and a face-preview screen I used during development.">Uygulama <strong>16 ayrı ekrandan</strong> oluşuyor: yükleme, ana menü, mod seçimi, formasyon
   seçimi, oyuncu seçimi, kadro özeti, grup seçimi, turnuva ağacı, simülasyon, sonuç, kayıtlı kadrolar,
   başarımlar, profil, kurallar, ayarlar ve geliştirme sırasında kullandığım yüz önizleme ekranı.</p>
-  <p>Her ekranı koda geçmeden önce ayrı bir tasarım dokümanına yazdım — ekranın amacı, üzerindeki
+  <p data-en="I wrote a separate design document for every screen before touching code — the screen's purpose, the elements on it, where the user could go from there. Those documents are still in the repo, and I check them first whenever a screen needs to change.">Her ekranı koda geçmeden önce ayrı bir tasarım dokümanına yazdım — ekranın amacı, üzerindeki
   öğeler, kullanıcının oradan nereye gidebileceği. Bu dokümanlar hâlâ depoda duruyor ve bir ekranı
   değiştirmem gerektiğinde önce oraya bakıyorum.</p>
 </div></section>
 
 <!-- ============ 04 MİMARİ ============ -->
 <section id="mimari"><div class="wrap">
-  <div class="sec-no">04 — Mimari</div>
-  <h2>Sunucusuz, çevrimdışı, üç paketle</h2>
-  <p>Oyunun tamamı cihazda çalışıyor. Arka uç, hesap sistemi, ağ çağrısı yok. Bu bir kısıt değil,
+  <div class="sec-no" data-en="04 — Architecture">04 — Mimari</div>
+  <h2 data-en="No server, fully offline, three packages">Sunucusuz, çevrimdışı, üç paketle</h2>
+  <p data-en="The entire game runs on-device. No backend, no account system, no network calls. That's not a limitation — it was a deliberate choice: a server would have meant operating cost, privacy obligations, no offline play, and a surface that's hard to maintain alone.">Oyunun tamamı cihazda çalışıyor. Arka uç, hesap sistemi, ağ çağrısı yok. Bu bir kısıt değil,
   bilinçli bir seçimdi: sunucu demek işletme maliyeti, gizlilik yükümlülüğü, çevrimdışı çalışamama
   ve tek başına bakması zor bir yüzey demekti.</p>
 
   <table>
-    <tr><th>Katman</th><th>Seçim ve gerekçe</th></tr>
-    <tr><td>İstemci</td><td>Flutter / Dart — tek kod tabanı, tek kişilik ekiple sürdürülebilir</td></tr>
-    <tr><td>Oyuncu verisi</td><td>Uygulama paketine gömülü JSON — ağ çağrısı yok, ilk açılış anında hazır</td></tr>
-    <tr><td>Kalıcı kayıt</td><td>Cihaz üzerinde anahtar–değer saklama (kayıtlı kadrolar, rekorlar, başarımlar, ayarlar)</td></tr>
-    <tr><td>Ses</td><td>Menü müziği ve efektler için tek ses paketi; ayarlardan kapatılabiliyor</td></tr>
-    <tr><td>Çeviri</td><td>Flutter'ın resmî yerelleştirme altyapısı — 10 dile tam çeviri (Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Japonca, Korece, Arapça)</td></tr>
-    <tr><td>Dış bağımlılık</td><td>Yalnızca üç üçüncü parti paket — her bağımlılık gelecekteki bir bakım borcu</td></tr>
+    <tr><th data-en="Layer">Katman</th><th data-en="Choice and rationale">Seçim ve gerekçe</th></tr>
+    <tr><td data-en="Client">İstemci</td><td data-en="Flutter / Dart — single codebase, maintainable by a solo developer">Flutter / Dart — tek kod tabanı, tek kişilik ekiple sürdürülebilir</td></tr>
+    <tr><td data-en="Player data">Oyuncu verisi</td><td data-en="JSON bundled into the app package — no network calls, ready the moment it first opens">Uygulama paketine gömülü JSON — ağ çağrısı yok, ilk açılış anında hazır</td></tr>
+    <tr><td data-en="Persistent storage">Kalıcı kayıt</td><td data-en="On-device key-value storage (saved squads, records, achievements, settings)">Cihaz üzerinde anahtar–değer saklama (kayıtlı kadrolar, rekorlar, başarımlar, ayarlar)</td></tr>
+    <tr><td data-en="Audio">Ses</td><td data-en="A single sound pack for menu music and effects; can be turned off in settings">Menü müziği ve efektler için tek ses paketi; ayarlardan kapatılabiliyor</td></tr>
+    <tr><td data-en="Translation">Çeviri</td><td data-en="Flutter's official localization framework — full translation into 10 languages (Turkish, English, German, Spanish, French, Italian, Portuguese, Japanese, Korean, Arabic)">Flutter'ın resmî yerelleştirme altyapısı — 10 dile tam çeviri (Türkçe, İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Japonca, Korece, Arapça)</td></tr>
+    <tr><td data-en="External dependencies">Dış bağımlılık</td><td data-en="Only three third-party packages — every dependency is future maintenance debt">Yalnızca üç üçüncü parti paket — her bağımlılık gelecekteki bir bakım borcu</td></tr>
   </table>
 
   <div class="stats">
-    <div class="stat"><u>50</u><i>Dart dosyası</i></div>
-    <div class="stat"><u>~26.7K</u><i>Satır uygulama kodu</i></div>
-    <div class="stat"><u>180</u><i>Oyuncu portresi</i></div>
-    <div class="stat"><u>10</u><i>Desteklenen dil</i></div>
+    <div class="stat"><u>50</u><i data-en="Dart files">Dart dosyası</i></div>
+    <div class="stat"><u>~26.7K</u><i data-en="Lines of app code">Satır uygulama kodu</i></div>
+    <div class="stat"><u>180</u><i data-en="Player portraits">Oyuncu portresi</i></div>
+    <div class="stat"><u>10</u><i data-en="Languages supported">Desteklenen dil</i></div>
   </div>
 </div></section>
 
 <!-- ============ 05 KİMYA MOTORU ============ -->
 <section id="kimya"><div class="wrap">
-  <div class="sec-no">05 — Kimya motoru</div>
-  <h2>Oyunun kalbi: üç boyutlu kimya</h2>
-  <p>Kadro kurma oyunlarında en kolay tuzak, en yüksek puanlı oyuncuyu almanın her zaman doğru
+  <div class="sec-no" data-en="05 — Chemistry engine">05 — Kimya motoru</div>
+  <h2 data-en="The heart of the game: three-dimensional chemistry">Oyunun kalbi: üç boyutlu kimya</h2>
+  <p data-en="The easiest trap in squad-building games is that picking the highest-rated player is always the right move. When that's true, the game stops being a choice and becomes reading a leaderboard.">Kadro kurma oyunlarında en kolay tuzak, en yüksek puanlı oyuncuyu almanın her zaman doğru
   hamle olmasıdır. Öyle olduğunda oyun bir seçim değil, sıralama okumaya dönüşür.</p>
-  <p>Record Draft'ta bir oyuncunun kadroya katkısı tek başına reytingiyle değil,
+  <p data-en="In Record Draft, a player's contribution to the squad isn't determined by their rating alone, but by <strong>three separate relationships with the players around them</strong>:">Record Draft'ta bir oyuncunun kadroya katkısı tek başına reytingiyle değil,
   <strong>etrafındaki oyuncularla kurduğu üç ayrı ilişkiyle</strong> belirleniyor:</p>
 
   <div class="flow">
-    <span class="node">Aynı ülke</span><span class="op">+</span>
-    <span class="node">Aynı kulüp</span><span class="op">+</span>
-    <span class="node">Aynı lig</span><span class="op">=</span>
-    <span class="res">Kimya puanı</span>
+    <span class="node" data-en="Same country">Aynı ülke</span><span class="op">+</span>
+    <span class="node" data-en="Same club">Aynı kulüp</span><span class="op">+</span>
+    <span class="node" data-en="Same league">Aynı lig</span><span class="op">=</span>
+    <span class="res" data-en="Chemistry score">Kimya puanı</span>
   </div>
-  <p class="caption">Üç boyut birlikte değerlendiriliyor; biri güçlüyken diğerleri zayıf kalabiliyor.
+  <p class="caption" data-en="All three dimensions are evaluated together; one can be strong while the others stay weak. The squad summary screen shows the chemistry score alongside the bond feeding it most (e.g. &quot;11 × Brazil&quot;) — so the player can see where the score is coming from.">Üç boyut birlikte değerlendiriliyor; biri güçlüyken diğerleri zayıf kalabiliyor.
   Kadro özeti ekranı, kimya puanının yanında onu en çok besleyen bağı da gösteriyor
   (örneğin "11 × Brezilya") — böylece oyuncu puanın nereden geldiğini görüyor.</p>
 
-  <div class="pull">Yüksek reytingli bir yıldızı kadroya almak, üç kimya bağını da koparıyorsa
+  <div class="pull" data-en="Adding a highly-rated star to the squad can be a net loss if it breaks all three chemistry bonds. That's how decision cost became central to the game.">Yüksek reytingli bir yıldızı kadroya almak, üç kimya bağını da koparıyorsa
   net kayıp olabiliyor. Karar maliyeti oyunun merkezine böyle yerleşti.</div>
 
-  <p>Sistem üç sürüm geçirdi. İlk sürüm tek boyutluydu ve kapalı testte fark edildi ki oyuncular
+  <p data-en="The system went through three versions. The first was single-dimensional, and closed testing showed players didn't care about chemistry at all — they just collected the highest score, meaning the mechanic wasn't shaping the game. Once the third version started calculating all three dimensions together, the same player pool started producing much more varied squads.">Sistem üç sürüm geçirdi. İlk sürüm tek boyutluydu ve kapalı testte fark edildi ki oyuncular
   kimyayı hiç umursamıyor, sadece en yüksek puanı topluyorlardı — yani mekanik oyunu
   şekillendirmiyordu. Üçüncü sürümde üç boyut birlikte hesaplanmaya başlayınca aynı kadro
   havuzundan çok daha farklı kadrolar çıkmaya başladı.</p>
-  <p class="caption">Formül ve hesaplama ayrıntıları bu belgede paylaşılmıyor; oyunun ayırt edici
+  <p class="caption" data-en="Formula and calculation details aren't shared in this document; the source code stays closed since this is the game's signature mechanic.">Formül ve hesaplama ayrıntıları bu belgede paylaşılmıyor; oyunun ayırt edici
   mekaniği olduğu için kaynak kodu kapalı tutuluyor.</p>
 </div></section>
 
 <!-- ============ 06 KARARLAR ============ -->
 <section id="kararlar"><div class="wrap">
-  <div class="sec-no">06 — Verdiğim kararlar</div>
-  <h2>Kolay olanı değil, doğru olanı seçtiğim yerler</h2>
+  <div class="sec-no" data-en="06 — Decisions I made">06 — Verdiğim kararlar</div>
+  <h2 data-en="Where I picked the right thing over the easy thing">Kolay olanı değil, doğru olanı seçtiğim yerler</h2>
 
   <div class="dec">
-    <b>Reklam ve çark ekonomisini tamamen kaldırdım</b>
-    <p>Oyunda başlangıçta ödüllü video reklam, şans çarkı ve oyun içi para birimi vardı. Kapalı
+    <b data-en="I completely removed ads and the spin-wheel economy">Reklam ve çark ekonomisini tamamen kaldırdım</b>
+    <p data-en="The game originally had rewarded video ads, a spin-the-wheel feature, and an in-game currency. Closed testing showed that this structure broke up the flow of play and pushed the player toward waiting instead of playing. I ripped it all out: redistribution rights became free, packs unlock once, and achievements are given as badges instead of rewards.">Oyunda başlangıçta ödüllü video reklam, şans çarkı ve oyun içi para birimi vardı. Kapalı
     testte bu yapının oyun akışını böldüğünü, oyuncuyu oynamak yerine beklemeye ittiğini gördüm.
     Tamamını söktüm: yeniden dağıtım hakları ücretsiz oldu, paketler bir kez açılıyor, başarımlar
     ödül yerine rozet olarak veriliyor.</p>
-    <p class="why">Neden: kısa vadeli gelirden vazgeçmek, oyunun tek satış noktası olan
+    <p class="why" data-en="Why: giving up short-term revenue cost less than protecting &quot;uninterrupted play&quot; — the game's one real selling point.">Neden: kısa vadeli gelirden vazgeçmek, oyunun tek satış noktası olan
     "kesintisiz oynanış"ı korumaktan daha ucuza geldi.</p>
   </div>
 
   <div class="dec">
-    <b>Kimyayı tek boyuttan üç boyuta taşıdım</b>
-    <p>Ülke, kulüp ve lig ilişkileri artık birlikte hesaplanıyor. Bu, kadro kurmayı tek değişkenli
+    <b data-en="I moved chemistry from one dimension to three">Kimyayı tek boyuttan üç boyuta taşıdım</b>
+    <p data-en="Country, club, and league relationships are now calculated together. This turned squad building from a single-variable optimization into a multi-variable balancing problem.">Ülke, kulüp ve lig ilişkileri artık birlikte hesaplanıyor. Bu, kadro kurmayı tek değişkenli
     bir optimizasyondan çok değişkenli bir denge problemine çevirdi.</p>
-    <p class="why">Neden: mekanik oyuncunun kararını değiştirmiyorsa, o mekanik aslında yoktur.</p>
+    <p class="why" data-en="Why: if a mechanic doesn't change the player's decision, it doesn't actually exist.">Neden: mekanik oyuncunun kararını değiştirmiyorsa, o mekanik aslında yoktur.</p>
   </div>
 
   <div class="dec">
-    <b>Sunucu kurmadım</b>
-    <p>Tüm veri uygulamanın içinde; oyun çevrimdışı çalışıyor, hesap açmayı gerektirmiyor ve
+    <b data-en="I didn't set up a server">Sunucu kurmadım</b>
+    <p data-en="All data lives inside the app; the game runs offline, doesn't require an account, and doesn't collect data from the user.">Tüm veri uygulamanın içinde; oyun çevrimdışı çalışıyor, hesap açmayı gerektirmiyor ve
     kullanıcıdan veri toplamıyor.</p>
-    <p class="why">Neden: tek kişilik bir projede sunucu, aylık maliyet ve kalıcı bakım yükü
+    <p class="why" data-en="Why: on a solo project, a server means monthly cost and a permanent maintenance burden. No feature of the game required it.">Neden: tek kişilik bir projede sunucu, aylık maliyet ve kalıcı bakım yükü
     demekti. Oyunun hiçbir özelliği bunu zorunlu kılmıyordu.</p>
   </div>
 
   <div class="dec">
-    <b>Her ekranı yazmadan önce tasarladım</b>
-    <p>On bir ekran için ayrı tasarım dokümanı yazdım: ekranın amacı, üzerindeki öğeler, çıkışları.
+    <b data-en="I designed every screen before writing it">Her ekranı yazmadan önce tasarladım</b>
+    <p data-en="I wrote a separate design document for eleven screens: the screen's purpose, the elements on it, its exits. Code came after those documents.">On bir ekran için ayrı tasarım dokümanı yazdım: ekranın amacı, üzerindeki öğeler, çıkışları.
     Kod bu dokümanlardan sonra geldi.</p>
-    <p class="why">Neden: tek başına çalışırken en pahalı hata, yazdıktan sonra "aslında böyle
+    <p class="why" data-en="Why: working alone, the most expensive mistake is writing something and then realizing &quot;actually, this wasn't supposed to work this way.&quot;">Neden: tek başına çalışırken en pahalı hata, yazdıktan sonra "aslında böyle
     olmayacaktı" demek.</p>
   </div>
 
   <div class="dec">
-    <b>Monetizasyonu yayın sonrasına, bayrağın arkasına aldım</b>
-    <p>Gelir modeli koddan silinmedi, kapatılabilir bir anahtarın arkasına alındı. Oyun ücretsiz
+    <b data-en="I pushed monetization behind a flag, after launch">Monetizasyonu yayın sonrasına, bayrağın arkasına aldım</b>
+    <p data-en="The revenue model wasn't deleted from the code — it was put behind a switch that can be turned on or off. The game launched free and ad-free; it can be toggled on if a user base forms.">Gelir modeli koddan silinmedi, kapatılabilir bir anahtarın arkasına alındı. Oyun ücretsiz
     ve reklamsız yayınlandı; kullanıcı tabanı oluşursa açılıp kapanabilir.</p>
-    <p class="why">Neden: hiç kullanıcısı olmayan bir oyunu para kazanmak için bozmanın anlamı yok.</p>
+    <p class="why" data-en="Why: there's no point breaking a game to monetize it when it has no users yet.">Neden: hiç kullanıcısı olmayan bir oyunu para kazanmak için bozmanın anlamı yok.</p>
   </div>
 </div></section>
 
 <!-- ============ 07 TEST ============ -->
 <section id="test"><div class="wrap">
-  <div class="sec-no">07 — Test yaklaşımı</div>
-  <h2>Neyi test ettim, neden onu test ettim</h2>
-  <p>Tek kişilik bir projede her şeyi test etmek mümkün değil. Bu yüzden testleri
+  <div class="sec-no" data-en="07 — Testing approach">07 — Test yaklaşımı</div>
+  <h2 data-en="What I tested, and why I tested it">Neyi test ettim, neden onu test ettim</h2>
+  <p data-en="Testing everything isn't possible on a solo project. So I concentrated tests on <strong>places that could break silently</strong>: rule engines and layout geometry. If a color is wrong, I see it with my eyes; if the chemistry score is calculated wrong, I don't.">Tek kişilik bir projede her şeyi test etmek mümkün değil. Bu yüzden testleri
   <strong>sessizce bozulabilecek yerlere</strong> yoğunlaştırdım: kural motorları ve yerleşim
   geometrisi. Bir renk yanlış olursa gözle görürüm; kimya puanı yanlış hesaplanırsa görmem.</p>
   <table>
-    <tr><th>Test</th><th>Neyi koruyor</th></tr>
-    <tr><td>Kadro kimyası</td><td>Üç boyutlu hesabın doğruluğu — oyunun ana mekaniği</td></tr>
-    <tr><td>Başarım motoru</td><td>Başarımların doğru koşulda ve bir kez tetiklenmesi</td></tr>
-    <tr><td>Sürükle-bırak takas</td><td>İki oyuncu yer değiştirdiğinde kadronun tutarlı kalması</td></tr>
-    <tr><td>Formasyon yerleşimi</td><td>Farklı formasyonlarda oyuncuların doğru noktalara oturması</td></tr>
-    <tr><td>Kart yerleşimi</td><td>Küçük kartların taşmadan ve üst üste binmeden dizilmesi</td></tr>
-    <tr><td>Kayıtlı kadro</td><td>Kaydedilen kadronun aynı şekilde geri yüklenmesi</td></tr>
+    <tr><th data-en="Test">Test</th><th data-en="What it protects">Neyi koruyor</th></tr>
+    <tr><td data-en="Squad chemistry">Kadro kimyası</td><td data-en="Correctness of the three-dimensional calculation — the game's core mechanic">Üç boyutlu hesabın doğruluğu — oyunun ana mekaniği</td></tr>
+    <tr><td data-en="Achievement engine">Başarım motoru</td><td data-en="Achievements trigger under the right condition, exactly once">Başarımların doğru koşulda ve bir kez tetiklenmesi</td></tr>
+    <tr><td data-en="Drag-and-drop swap">Sürükle-bırak takas</td><td data-en="Squad stays consistent when two players swap places">İki oyuncu yer değiştirdiğinde kadronun tutarlı kalması</td></tr>
+    <tr><td data-en="Formation layout">Formasyon yerleşimi</td><td data-en="Players land in the correct spots across different formations">Farklı formasyonlarda oyuncuların doğru noktalara oturması</td></tr>
+    <tr><td data-en="Card layout">Kart yerleşimi</td><td data-en="Small cards line up without overflowing or overlapping">Küçük kartların taşmadan ve üst üste binmeden dizilmesi</td></tr>
+    <tr><td data-en="Saved squad">Kayıtlı kadro</td><td data-en="A saved squad is restored exactly as it was">Kaydedilen kadronun aynı şekilde geri yüklenmesi</td></tr>
   </table>
-  <p class="caption">Altı test dosyası, yaklaşık 570 satır test kodu.</p>
+  <p class="caption" data-en="Six test files, roughly 570 lines of test code.">Altı test dosyası, yaklaşık 570 satır test kodu.</p>
 </div></section>
 
 <!-- ============ 08 KAPALI TEST ============ -->
 <section id="kapali-test"><div class="wrap">
-  <div class="sec-no">08 — Kapalı test döngüsü</div>
-  <h2>Geri bildirimi dört öbekte işledim</h2>
-  <p>Test kullanıcılarını oyunun konusuyla gerçekten ilgilenecek kişilerden seçtim. Gelen geri
+  <div class="sec-no" data-en="08 — Closed testing cycle">08 — Kapalı test döngüsü</div>
+  <h2 data-en="I processed feedback in four batches">Geri bildirimi dört öbekte işledim</h2>
+  <p data-en="I picked test users who would genuinely care about the game's subject matter. Instead of patching feedback one item at a time, I grouped it into batches and closed each batch as its own round — so which change fixed what stayed traceable.">Test kullanıcılarını oyunun konusuyla gerçekten ilgilenecek kişilerden seçtim. Gelen geri
   bildirimi tek tek yamamak yerine öbeklere ayırdım ve her öbeği ayrı bir tur olarak kapattım —
   böylece hangi değişikliğin neyi düzelttiği izlenebilir kaldı.</p>
   <div class="tl">
-    <div class="item"><u>Tur A</u><b>Hatalar</b>
-      <span>Bildirilen çökme ve akış hataları önceliklendirildi ve kapatıldı.</span></div>
-    <div class="item"><u>Tur B</u><b>İçerik</b>
-      <span>Eksik ve güncelliğini yitirmiş kadro verileri tamamlandı, eksik görsel ve ses öğeleri giderildi.</span></div>
-    <div class="item"><u>Tur C</u><b>Kullanılabilirlik</b>
-      <span>En çok zorlanılan yer kadro dizmeydi. Oyuncu yerleştirme sürükle-bırak ile yeniden
+    <div class="item"><u data-en="Round A">Tur A</u><b data-en="Bugs">Hatalar</b>
+      <span data-en="Reported crashes and flow bugs were prioritized and closed.">Bildirilen çökme ve akış hataları önceliklendirildi ve kapatıldı.</span></div>
+    <div class="item"><u data-en="Round B">Tur B</u><b data-en="Content">İçerik</b>
+      <span data-en="Missing and outdated squad data was filled in; missing art and sound assets were fixed.">Eksik ve güncelliğini yitirmiş kadro verileri tamamlandı, eksik görsel ve ses öğeleri giderildi.</span></div>
+    <div class="item"><u data-en="Round C">Tur C</u><b data-en="Usability">Kullanılabilirlik</b>
+      <span data-en="The biggest friction point was arranging the squad. Player placement was rewritten with drag-and-drop, and player portraits were added to the cards; telling players apart got easier.">En çok zorlanılan yer kadro dizmeydi. Oyuncu yerleştirme sürükle-bırak ile yeniden
       yazıldı, kartlara oyuncu portreleri eklendi; oyuncuları ayırt etmek kolaylaştı.</span></div>
-    <div class="item"><u>Tur D</u><b>Denge ve ekonomi</b>
-      <span>Kimya sistemi üç boyutlu hâline taşındı. Reklam, çark ve oyun içi para birimi
+    <div class="item"><u data-en="Round D">Tur D</u><b data-en="Balance and economy">Denge ve ekonomi</b>
+      <span data-en="The chemistry system moved to its three-dimensional form. Ads, the spin wheel, and the in-game currency were removed entirely.">Kimya sistemi üç boyutlu hâline taşındı. Reklam, çark ve oyun içi para birimi
       tamamen kaldırıldı.</span></div>
   </div>
 </div></section>
 
 <!-- ============ 09 YAYIN ============ -->
 <section id="yayin"><div class="wrap">
-  <div class="sec-no">09 — Yayın süreci</div>
-  <h2>Kodun bittiği yerde biten bir iş değil</h2>
-  <p>Uygulamayı yayına taşımak, geliştirmeden ayrı bir öğrenme alanı oldu. Sırasıyla geçtiğim
+  <div class="sec-no" data-en="09 — Release process">09 — Yayın süreci</div>
+  <h2 data-en="The job doesn't end where the code ends">Kodun bittiği yerde biten bir iş değil</h2>
+  <p data-en="Getting the app into release turned out to be a learning curve separate from development. The steps I went through, in order:">Uygulamayı yayına taşımak, geliştirmeden ayrı bir öğrenme alanı oldu. Sırasıyla geçtiğim
   adımlar:</p>
   <ul>
-    <li>Yayın için imzalama anahtarı üretimi ve anahtarın güvenli saklanması</li>
-    <li>Sürüm derlemesinin imzalı paket (Android App Bundle) olarak üretilmesi</li>
-    <li>Mağaza kaydı: açıklama metinleri, ekran görüntüleri, içerik derecelendirme anketi</li>
-    <li>Gizlilik politikası yazımı — oyun veri toplamadığı için bunun açıkça beyan edilmesi</li>
-    <li>Kapalı test kanalının kurulması, test kullanıcılarının davet edilmesi ve süreç boyunca takibi</li>
-    <li>Sürüm notlarının ve mağaza metinlerinin, kaldırılan özelliklere göre güncellenmesi</li>
-    <li>Geliştirici doğrulaması kapsamında paket adının kaydı ve imza sertifikasının bildirimi</li>
+    <li data-en="Generating a signing key for release and storing it securely">Yayın için imzalama anahtarı üretimi ve anahtarın güvenli saklanması</li>
+    <li data-en="Producing the release build as a signed package (Android App Bundle)">Sürüm derlemesinin imzalı paket (Android App Bundle) olarak üretilmesi</li>
+    <li data-en="Store listing: description text, screenshots, content rating questionnaire">Mağaza kaydı: açıklama metinleri, ekran görüntüleri, içerik derecelendirme anketi</li>
+    <li data-en="Writing a privacy policy — clearly disclosing that the game collects no data">Gizlilik politikası yazımı — oyun veri toplamadığı için bunun açıkça beyan edilmesi</li>
+    <li data-en="Setting up the closed testing track, inviting test users, and tracking the process throughout">Kapalı test kanalının kurulması, test kullanıcılarının davet edilmesi ve süreç boyunca takibi</li>
+    <li data-en="Updating release notes and store copy to reflect the features that were removed">Sürüm notlarının ve mağaza metinlerinin, kaldırılan özelliklere göre güncellenmesi</li>
+    <li data-en="Registering the package name and declaring the signing certificate as part of developer verification">Geliştirici doğrulaması kapsamında paket adının kaydı ve imza sertifikasının bildirimi</li>
   </ul>
-  <p>Bu adımların hiçbiri kod yazmak değil, ama biri eksik kaldığında uygulama kullanıcıya
+  <p data-en="None of these steps are writing code, but if even one is missing, the app never reaches a user. This is where I saw the difference between &quot;finishing&quot; a product and &quot;releasing&quot; it.">Bu adımların hiçbiri kod yazmak değil, ama biri eksik kaldığında uygulama kullanıcıya
   ulaşmıyor. Bir ürünü "bitirmek" ile "yayınlamak" arasındaki farkı burada gördüm.</p>
 </div></section>
 
 <!-- ============ 10 SIRADAKİ ============ -->
 <section id="sirada"><div class="wrap">
-  <div class="sec-no">10 — Sıradaki adımlar</div>
-  <h2>Bundan sonra</h2>
+  <div class="sec-no" data-en="10 — Next steps">10 — Sıradaki adımlar</div>
+  <h2 data-en="From here on">Bundan sonra</h2>
   <ul>
-    <li><strong>Kullanıcı geri bildirimi:</strong> yayın sonrası mağaza yorumları ve çökme
+    <li data-en="<strong>User feedback:</strong> build a priority list from post-release store reviews and crash reports"><strong>Kullanıcı geri bildirimi:</strong> yayın sonrası mağaza yorumları ve çökme
     raporlarına göre öncelik listesi kurmak</li>
-    <li><strong>İçerik genişletme:</strong> kadro verisinin sezon geçişlerinde güncellenmesi</li>
-    <li><strong>Monetizasyon:</strong> anlamlı bir kullanıcı tabanı oluşursa, oyun akışını bölmeyen
+    <li data-en="<strong>Content expansion:</strong> updating squad data across season transitions"><strong>İçerik genişletme:</strong> kadro verisinin sezon geçişlerinde güncellenmesi</li>
+    <li data-en="<strong>Monetization:</strong> turning on a model that doesn't break up the flow of play behind a flag, if a meaningful user base forms"><strong>Monetizasyon:</strong> anlamlı bir kullanıcı tabanı oluşursa, oyun akışını bölmeyen
     bir modelin bayrağın arkasından açılması</li>
-    <li><strong>Sıradaki proje:</strong> aynı alanda daha kapsamlı bir oyun — bu kez tasarım
+    <li data-en="<strong>Next project:</strong> a more ambitious game in the same space — this time with design decisions documented from day one"><strong>Sıradaki proje:</strong> aynı alanda daha kapsamlı bir oyun — bu kez tasarım
     kararları en baştan belgeleniyor</li>
   </ul>
 </div></section>
 
 <footer><div class="wrap">
   <p class="name">Ömer Güneş</p>
-  <p>Flutter Developer · Record Draft'ın tasarımı, geliştirmesi ve yayını tek kişilik yapılmıştır.</p>
+  <p data-en="Flutter Developer · Record Draft's design, development, and release were done solo.">Flutter Developer · Record Draft'ın tasarımı, geliştirmesi ve yayını tek kişilik yapılmıştır.</p>
   <p style="margin-top:14px">
-    <a href="index.html">Portföy</a> &nbsp;·&nbsp;
+    <a href="index.html" data-en="Portfolio">Portföy</a> &nbsp;·&nbsp;
     <a href="#PLAY-LINK">Google Play</a> &nbsp;·&nbsp;
     <a href="#LINKEDIN">LinkedIn</a>
   </p>
 </div></footer>
+
+<script>
+(function () {
+  const i18nEls   = document.querySelectorAll('[data-en]');
+  const pageTitle = document.getElementById('page-title');
+  const langBtn      = document.getElementById('lang-btn');
+  const langBtnLabel = document.getElementById('lang-btn-label');
+  const langMenu      = document.getElementById('lang-menu');
+
+  i18nEls.forEach(el => { el.dataset.tr = el.innerHTML; });
+
+  function setLanguage(lang) {
+    window.currentLang = lang;
+    i18nEls.forEach(el => {
+      el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.tr;
+    });
+    if (pageTitle) document.title = lang === 'en' ? pageTitle.dataset.en : pageTitle.dataset.tr;
+    document.documentElement.lang = lang;
+    if (langBtnLabel) langBtnLabel.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lang-option').forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.lang === lang);
+    });
+    localStorage.setItem('site-lang', lang);
+  }
+
+  if (langBtn && langMenu) {
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !langMenu.classList.contains('hidden');
+      langMenu.classList.toggle('hidden', isOpen);
+      langBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  }
+
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      setLanguage(opt.dataset.lang);
+      langMenu.classList.add('hidden');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', () => {
+    if (langMenu) langMenu.classList.add('hidden');
+    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  const savedLang = localStorage.getItem('site-lang') === 'en' ? 'en' : 'tr';
+  setLanguage(savedLang);
+})();
+</script>
 
 </body>
 </html>

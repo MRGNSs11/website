@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>ÖMER GÜNEŞ - Kişisel Web Sitesi</title>
+  <title id="page-title" data-en="ÖMER GÜNEŞ - Personal Website">ÖMER GÜNEŞ - Kişisel Web Sitesi</title>
 
   <!-- Google Fonts: Space Grotesk -->
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -332,46 +332,74 @@
       <!-- Masaüstü Navigasyon -->
       <nav class="hidden md:flex items-center space-x-8" style="font-size:14px;letter-spacing:0.15em;font-weight:500;">
         <a href="#hero" class="text-on-surface-variant hover:text-primary transition-colors duration-300 tracking-widest uppercase relative group">
-          Ana Sayfa
+          <span data-en="Home">Ana Sayfa</span>
           <span class="absolute -bottom-[3px] left-0 w-full h-[2px] bg-primary bloom-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </a>
         <a href="#hakkimda" class="text-on-surface-variant hover:text-primary transition-colors duration-300 tracking-widest uppercase relative group">
-          Hakkımda
+          <span data-en="About">Hakkımda</span>
           <span class="absolute -bottom-[3px] left-0 w-full h-[2px] bg-primary bloom-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </a>
         <a href="#projelerim" class="text-on-surface-variant hover:text-primary transition-colors duration-300 tracking-widest uppercase relative group">
-          Projelerim
+          <span data-en="Projects">Projelerim</span>
           <span class="absolute -bottom-[3px] left-0 w-full h-[2px] bg-primary bloom-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </a>
         <a href="#iletisim" class="text-on-surface-variant hover:text-primary transition-colors duration-300 tracking-widest uppercase relative group">
-          İletişim
+          <span data-en="Contact">İletişim</span>
           <span class="absolute -bottom-[3px] left-0 w-full h-[2px] bg-primary bloom-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
         </a>
       </nav>
 
-      <!-- CTA Butonu (Masaüstü) -->
-      <div class="hidden md:block">
+      <!-- CTA Butonu (Masaüstü) + Dil Değiştirici -->
+      <div class="hidden md:flex items-center gap-4">
+        <div class="relative">
+          <button id="lang-btn" type="button" aria-haspopup="true" aria-expanded="false"
+                  class="inline-flex items-center gap-1 px-3 py-2 border border-outline-variant/50 text-on-surface-variant hover:text-primary hover:border-primary transition-colors duration-300"
+                  style="font-family:'Space Grotesk',sans-serif;font-size:13px;letter-spacing:0.1em;font-weight:600;">
+            <span id="lang-btn-label">TR</span>
+            <span class="material-symbols-outlined" style="font-size:18px;">expand_more</span>
+          </button>
+          <div id="lang-menu" class="hidden absolute right-0 mt-2 min-w-[140px] bg-surface-container border border-outline-variant/30 shadow-lg z-50">
+            <button type="button" class="lang-option w-full text-left px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" data-lang="tr"
+                    style="font-family:'Space Grotesk',sans-serif;font-size:14px;">Türkçe</button>
+            <button type="button" class="lang-option w-full text-left px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" data-lang="en"
+                    style="font-family:'Space Grotesk',sans-serif;font-size:14px;">English</button>
+          </div>
+        </div>
         <a href="#iletisim" class="inline-flex items-center justify-center px-6 py-3 border border-inverse-surface text-inverse-surface uppercase hover:bg-primary-container hover:text-on-primary-container hover:border-primary-container transition-all duration-300 bloom-primary hover:shadow-[0_0_24px_-4px_rgba(255,92,0,0.8)]"
            style="font-size:14px;letter-spacing:0.15em;font-weight:500;">
-          İletişime Geç
+          <span data-en="Get in Touch">İletişime Geç</span>
         </a>
       </div>
 
       <!-- Hamburger (Mobil) -->
-      <button id="hamburger-btn" class="md:hidden text-primary p-2" aria-label="Menüyü aç">
-        <span class="material-symbols-outlined" id="hamburger-icon" style="font-variation-settings:'FILL' 0;">menu</span>
-      </button>
+      <div class="md:hidden flex items-center gap-1">
+        <div class="relative">
+          <button id="lang-btn-mobile" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Dil seç"
+                  class="text-on-surface-variant hover:text-primary p-2">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0;">language</span>
+          </button>
+          <div id="lang-menu-mobile" class="hidden absolute right-0 mt-2 min-w-[140px] bg-surface-container border border-outline-variant/30 shadow-lg z-50">
+            <button type="button" class="lang-option w-full text-left px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" data-lang="tr"
+                    style="font-family:'Space Grotesk',sans-serif;font-size:14px;">Türkçe</button>
+            <button type="button" class="lang-option w-full text-left px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" data-lang="en"
+                    style="font-family:'Space Grotesk',sans-serif;font-size:14px;">English</button>
+          </div>
+        </div>
+        <button id="hamburger-btn" class="text-primary p-2" aria-label="Menüyü aç">
+          <span class="material-symbols-outlined" id="hamburger-icon" style="font-variation-settings:'FILL' 0;">menu</span>
+        </button>
+      </div>
     </div>
 
     <!-- Mobil Menü -->
     <div id="mobile-menu" class="md:hidden bg-surface/95 backdrop-blur-md border-t border-outline-variant/10">
       <nav class="flex flex-col px-6 py-4 space-y-4" style="font-size:14px;letter-spacing:0.15em;font-weight:500;">
-        <a href="#hero"       class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()">Ana Sayfa</a>
-        <a href="#hakkimda"   class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()">Hakkımda</a>
-        <a href="#projelerim" class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()">Projelerim</a>
-        <a href="#iletisim"   class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()">İletişim</a>
+        <a href="#hero"       class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()"><span data-en="Home">Ana Sayfa</span></a>
+        <a href="#hakkimda"   class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()"><span data-en="About">Hakkımda</span></a>
+        <a href="#projelerim" class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()"><span data-en="Projects">Projelerim</span></a>
+        <a href="#iletisim"   class="text-on-surface-variant hover:text-primary transition-colors uppercase py-2" onclick="closeMobileMenu()"><span data-en="Contact">İletişim</span></a>
         <a href="#iletisim"   class="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary uppercase mt-2 hover:bg-primary-container hover:text-on-primary-container transition-all duration-300"
-           onclick="closeMobileMenu()">İletişime Geç</a>
+           onclick="closeMobileMenu()"><span data-en="Get in Touch">İletişime Geç</span></a>
       </nav>
     </div>
   </header>
@@ -403,13 +431,14 @@
     <section id="hakkimda" class="relative py-24 px-6 md:px-20 max-w-[1440px] mx-auto w-full">
       <div class="pl-0 md:pl-12">
 
-        <p class="section-label mb-3">01 — Hakkımda</p>
+        <p class="section-label mb-3" data-en="01 — About Me">01 — Hakkımda</p>
         <div class="section-divider mb-8"></div>
-        <h2 class="section-title text-4xl md:text-5xl mb-10">Merhaba, ben Ömer.</h2>
+        <h2 class="section-title text-4xl md:text-5xl mb-10" data-en="Hi, I'm Ömer.">Merhaba, ben Ömer.</h2>
 
         <!-- Biyografi -->
         <p class="max-w-2xl mb-16"
-           style="font-family:'Space Grotesk',sans-serif;font-size:18px;line-height:28px;color:#e4beb1;">
+           style="font-family:'Space Grotesk',sans-serif;font-size:18px;line-height:28px;color:#e4beb1;"
+           data-en="I'm a student at Karadeniz Technical University working on mobile app development. I love turning ideas into reality in the digital world. Welcome to my website!">
           Karadeniz Teknik Üniversitesi öğrencisiyim ve mobil uygulama geliştirme ile uğraşıyorum. Dijital dünyada fikirleri gerçeğe dönüştürmeyi seviyorum. Web siteme hoş geldin!
         </p>
 
@@ -418,17 +447,17 @@
 
           <!-- SOL: Eğitim & Deneyim -->
           <div>
-            <p class="section-label mb-6">Eğitim & Deneyim</p>
+            <p class="section-label mb-6" data-en="Education & Experience">Eğitim & Deneyim</p>
 
             <!-- KTÜ -->
             <div class="relative pl-6 pb-10 border-l border-outline-variant/40">
               <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-primary-container"
                    style="box-shadow:0 0 8px rgba(255,92,0,0.6);"></div>
-              <p class="section-label text-primary mb-1" style="font-size:12px;">2022 — Devam Ediyor</p>
+              <p class="section-label text-primary mb-1" style="font-size:12px;" data-en="2022 — Present">2022 — Devam Ediyor</p>
               <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;">
                 Karadeniz Teknik Üniversitesi
               </h3>
-              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;">
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="Computer Science · 3rd Year">
                 Bilgisayar Bilimleri · 3. Sınıf
               </p>
             </div>
@@ -436,11 +465,11 @@
             <!-- Staj -->
             <div class="relative pl-6 pb-10 border-l border-outline-variant/40">
               <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-surface-container-high border border-outline-variant"></div>
-              <p class="section-label mb-1" style="font-size:12px;color:#ab897d;">Tamamlandı</p>
-              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;">
+              <p class="section-label mb-1" style="font-size:12px;color:#ab897d;" data-en="Completed">Tamamlandı</p>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;" data-en="Internship — 1st Experience">
                 Staj — 1. Deneyim
               </h3>
-              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;">
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="Completed a software development internship.">
                 Yazılım geliştirme stajı tamamlandı.
               </p>
             </div>
@@ -449,11 +478,11 @@
             <div class="relative pl-6 border-l border-outline-variant/20">
               <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full border-2 border-primary animate-pulse"
                    style="background:transparent;"></div>
-              <p class="section-label text-primary mb-1" style="font-size:12px;">Şu An</p>
-              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;">
+              <p class="section-label text-primary mb-1" style="font-size:12px;" data-en="Currently">Şu An</p>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;" data-en="Looking for 2nd Internship">
                 2. Staj Arayışı
               </h3>
-              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;">
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="Open to new opportunities, actively searching.">
                 Yeni fırsatlara açık, aktif olarak arıyorum.
               </p>
             </div>
@@ -461,11 +490,11 @@
 
           <!-- SAĞ: Teknik Yetenekler -->
           <div>
-            <p class="section-label mb-6">Teknik Yetenekler</p>
+            <p class="section-label mb-6" data-en="Technical Skills">Teknik Yetenekler</p>
 
             <!-- Programlama Dilleri -->
             <div class="mb-8">
-              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;">
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;" data-en="Programming Languages">
                 Programlama Dilleri
               </p>
               <div class="flex flex-wrap gap-3">
@@ -476,7 +505,7 @@
 
             <!-- Mobil -->
             <div class="mb-8">
-              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;">
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;" data-en="Mobile Development">
                 Mobil Geliştirme
               </p>
               <div class="flex flex-wrap gap-3">
@@ -498,7 +527,7 @@
 
             <!-- Veritabanı -->
             <div>
-              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;">
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;color:#ab897d;text-transform:uppercase;margin-bottom:12px;" data-en="Database">
                 Veritabanı
               </p>
               <div class="flex flex-wrap gap-3">
@@ -515,9 +544,9 @@
     <section id="projelerim" class="relative py-24 px-6 md:px-20 max-w-[1440px] mx-auto w-full">
       <div class="pl-0 md:pl-12">
 
-        <p class="section-label mb-3">02 — Projelerim</p>
+        <p class="section-label mb-3" data-en="02 — Projects">02 — Projelerim</p>
         <div class="section-divider mb-8"></div>
-        <h2 class="section-title text-4xl md:text-5xl mb-12">Çalışmalarım</h2>
+        <h2 class="section-title text-4xl md:text-5xl mb-12" data-en="My Work">Çalışmalarım</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -529,12 +558,12 @@
                      class="w-14 h-14 rounded-lg object-cover border border-outline-variant/40 flex-shrink-0" />
                 <div>
                   <h3 class="project-title">Record Draft</h3>
-                  <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Mobil Oyun · Google Play</p>
+                  <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;" data-en="Mobile Game · Google Play">Mobil Oyun · Google Play</p>
                 </div>
               </div>
-              <span class="project-status-wip">Yayın Aşamasında</span>
+              <span class="project-status-wip" data-en="In Release">Yayın Aşamasında</span>
             </div>
-            <p class="project-desc">
+            <p class="project-desc" data-en="A mobile game about breaking team records in football. You build your squad FUT Draft-style and try to beat real World Cup team records. My first mobile game, in closed testing on Google Play with support for 10 languages.">
               Futbolda takım rekorları kırma temalı mobil oyun. FUT Draft tarzı kadronu kurup gerçek Dünya Kupası takım rekorlarını aşmaya çalışıyorsun. 10 dil desteğiyle Google Play'de kapalı test aşamasında olan ilk mobil oyunum.
             </p>
             <div class="flex flex-wrap gap-2 mt-auto">
@@ -544,11 +573,11 @@
             <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
               <a href="record-draft.html" class="project-link">
                 <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">article</span>
-                Vaka İncelemesini Oku
+                <span data-en="Read Case Study">Vaka İncelemesini Oku</span>
               </a>
               <span class="inline-flex items-center gap-2 project-link opacity-70 cursor-default select-none">
                 <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">sports_soccer</span>
-                Google Play · Kapalı Test
+                <span data-en="Google Play · Closed Testing">Google Play · Kapalı Test</span>
               </span>
             </div>
           </div>
@@ -561,27 +590,27 @@
                      class="w-14 h-14 object-contain flex-shrink-0" />
                 <div>
                   <h3 class="project-title">Ötüken</h3>
-                  <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Masaüstü · Sesli Yapay Zeka</p>
+                  <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;" data-en="Desktop · Voice AI">Masaüstü · Sesli Yapay Zeka</p>
                 </div>
               </div>
-              <span class="project-status-wip">Çalışıyor</span>
+              <span class="project-status-wip" data-en="Working">Çalışıyor</span>
             </div>
-            <p class="project-desc">
+            <p class="project-desc" data-en="A personal voice AI assistant. Powered by Google Gemini's brain, it speaks natural Turkish and handles tasks like checking the weather, opening apps, and web searches by voice. A desktop assistant that answers with a deep, robotic AI voice.">
               Sesle konuşulan kişisel yapay zeka asistanı. Google Gemini beyniyle doğal Türkçe konuşur; hava durumu, uygulama açma ve internette arama gibi işleri sesle yapar. Kalın, robotik bir yapay zeka sesiyle cevap veren masaüstü asistanı.
             </p>
             <div class="flex flex-wrap gap-2 mt-auto">
               <span class="tech-badge">Python</span>
               <span class="tech-badge">Gemini</span>
-              <span class="tech-badge">Yapay Zeka</span>
+              <span class="tech-badge" data-en="AI">Yapay Zeka</span>
             </div>
             <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
               <a href="otuken.html" class="project-link">
                 <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">article</span>
-                Vaka İncelemesini Oku
+                <span data-en="Read Case Study">Vaka İncelemesini Oku</span>
               </a>
               <span class="inline-flex items-center gap-2 project-link opacity-70 cursor-default select-none">
                 <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">smart_toy</span>
-                Kişisel Proje
+                <span data-en="Personal Project">Kişisel Proje</span>
               </span>
             </div>
           </div>
@@ -591,11 +620,11 @@
             <div class="flex items-start justify-between gap-4">
               <div>
                 <h3 class="project-title">Star Football Simulator</h3>
-                <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Mobil Oyun · Kapalı Kaynak</p>
+                <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;" data-en="Mobile Game · Closed Source">Mobil Oyun · Kapalı Kaynak</p>
               </div>
-              <span class="project-status-wip">Geliştiriliyor</span>
+              <span class="project-status-wip" data-en="In Development">Geliştiriliyor</span>
             </div>
-            <p class="project-desc">
+            <p class="project-desc" data-en="A footballer career simulation — my second mobile game. The simulation's rules are documented before they're coded, then turned into tests: currently passing <strong style=&quot;color:#ffb59a;&quot;>1,100+ automated tests</strong>. Source code is closed since it's a commercial project.">
               Futbolcu kariyer simülasyonu — ikinci mobil oyunum. Simülasyonun kuralları koddan önce
               belgeleniyor, sonra teste dönüştürülüyor: şu an <strong style="color:#ffb59a;">1.100'ün üzerinde
               otomatik test</strong> geçiyor. Ticari proje olduğu için kaynak kodu kapalı.
@@ -603,11 +632,11 @@
             <div class="flex flex-wrap gap-2 mt-auto">
               <span class="tech-badge">Flutter</span>
               <span class="tech-badge">Dart</span>
-              <span class="tech-badge">Test Öncelikli</span>
+              <span class="tech-badge" data-en="Test-First">Test Öncelikli</span>
             </div>
             <div class="inline-flex items-center gap-2 project-link opacity-70 cursor-default select-none">
               <span class="material-symbols-outlined" style="font-size:16px;font-variation-settings:'FILL' 0;">lock</span>
-              Geliştirme Sürüyor
+              <span data-en="Development Ongoing">Geliştirme Sürüyor</span>
             </div>
           </div>
 
@@ -615,12 +644,12 @@
           <div style="order:4" class="project-card group border border-outline-variant/30 bg-surface-container/60 backdrop-blur-sm p-8 flex flex-col gap-5 transition-all duration-300 hover:border-outline-variant hover:bg-surface-container">
             <div class="flex items-start justify-between gap-4">
               <div>
-                <h3 class="project-title">Üniversite Projeleri</h3>
-                <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;">Ders ve dönem çalışmaları</p>
+                <h3 class="project-title" data-en="University Projects">Üniversite Projeleri</h3>
+                <p style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:#ab897d;letter-spacing:0.05em;margin-top:4px;" data-en="Coursework and term projects">Ders ve dönem çalışmaları</p>
               </div>
-              <span class="project-status-done">Tamamlandı</span>
+              <span class="project-status-done" data-en="Completed">Tamamlandı</span>
             </div>
-            <p class="project-desc">
+            <p class="project-desc" data-en="Coursework projects I built throughout my Computer Science education. Source code is open on GitHub.">
               Bilgisayar Bilimleri eğitimim boyunca geliştirdiğim ders projeleri. Kaynak kodları GitHub'da açık.
             </p>
 
@@ -628,21 +657,21 @@
               <a href="https://github.com/MRGNSs11/fiyat-pusulasi-uygulamasi" target="_blank" rel="noopener noreferrer"
                  style="display:block;padding:10px 0;border-top:1px solid rgba(171,137,125,0.18);text-decoration:none;">
                 <span style="font-size:15px;color:#e4e2e4;font-weight:600;">Fiyat Pusulası</span>
-                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;">Market fiyatlarını karşılaştıran alışveriş asistanı · Python, Flutter</span>
+                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;" data-en="Shopping assistant that compares grocery prices · Python, Flutter">Market fiyatlarını karşılaştıran alışveriş asistanı · Python, Flutter</span>
               </a>
               <div style="display:block;padding:10px 0;border-top:1px solid rgba(171,137,125,0.18);">
                 <span style="font-size:15px;color:#e4e2e4;font-weight:600;">Yurtsis</span>
-                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;">İstemci-sunucu mimarili yurt yönetim sistemi · C++, Qt · özel depo</span>
+                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;" data-en="Client-server dormitory management system · C++, Qt · private repo">İstemci-sunucu mimarili yurt yönetim sistemi · C++, Qt · özel depo</span>
               </div>
               <a href="https://github.com/MRGNSs11/Kutuphane-sistemi" target="_blank" rel="noopener noreferrer"
                  style="display:block;padding:10px 0;border-top:1px solid rgba(171,137,125,0.18);text-decoration:none;">
-                <span style="font-size:15px;color:#e4e2e4;font-weight:600;">Kütüphane Sistemi</span>
-                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;">Kitap, üye ve ödünç takibi yapan masaüstü uygulaması · C++</span>
+                <span style="font-size:15px;color:#e4e2e4;font-weight:600;" data-en="Library System">Kütüphane Sistemi</span>
+                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;" data-en="Desktop app that tracks books, members, and loans · C++">Kitap, üye ve ödünç takibi yapan masaüstü uygulaması · C++</span>
               </a>
               <a href="https://github.com/MRGNSs11/market-stok-takip" target="_blank" rel="noopener noreferrer"
                  style="display:block;padding:10px 0;border-top:1px solid rgba(171,137,125,0.18);text-decoration:none;">
-                <span style="font-size:15px;color:#e4e2e4;font-weight:600;">Market Stok Takip</span>
-                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;">Web arayüzlü stok yönetim sistemi · HTML, CSS</span>
+                <span style="font-size:15px;color:#e4e2e4;font-weight:600;" data-en="Store Stock Tracker">Market Stok Takip</span>
+                <span style="font-size:13px;color:#ab897d;display:block;margin-top:2px;" data-en="Web-based stock management system · HTML, CSS">Web arayüzlü stok yönetim sistemi · HTML, CSS</span>
               </a>
             </div>
           </div>
@@ -655,10 +684,11 @@
     <section id="iletisim" class="relative py-24 px-6 md:px-20 max-w-[1440px] mx-auto w-full">
       <div class="pl-0 md:pl-12">
 
-        <p class="section-label mb-3">03 — İletişim</p>
+        <p class="section-label mb-3" data-en="03 — Contact">03 — İletişim</p>
         <div class="section-divider mb-8"></div>
-        <h2 class="section-title text-4xl md:text-5xl mb-4">Bana Ulaş</h2>
-        <p class="mb-12" style="font-family:'Space Grotesk',sans-serif;font-size:18px;line-height:28px;color:#e4beb1;max-width:520px;">
+        <h2 class="section-title text-4xl md:text-5xl mb-4" data-en="Get in Touch">Bana Ulaş</h2>
+        <p class="mb-12" style="font-family:'Space Grotesk',sans-serif;font-size:18px;line-height:28px;color:#e4beb1;max-width:520px;"
+           data-en="Have a project idea, an internship offer, or just want to say hello? I'm looking forward to your message.">
           Bir proje fikrin mi var, staj teklifi mi, yoksa sadece merhaba mı demek istiyorsun? Mesajını bekliyorum.
         </p>
 
@@ -668,37 +698,39 @@
           <form id="contact-form" action="https://formspree.io/f/xqevdpjy" method="POST" class="flex flex-col gap-5">
 
             <div class="flex flex-col gap-2">
-              <label class="section-label" style="font-size:12px;" for="name">İsim</label>
-              <input id="name" name="name" type="text" required placeholder="Adın Soyadın"
+              <label class="section-label" style="font-size:12px;" for="name" data-en="Name">İsim</label>
+              <input id="name" name="name" type="text" required placeholder="Adın Soyadın" data-en-placeholder="Your full name"
                      class="contact-input"/>
             </div>
 
             <div class="flex flex-col gap-2">
-              <label class="section-label" style="font-size:12px;" for="email">E-posta</label>
+              <label class="section-label" style="font-size:12px;" for="email" data-en="Email">E-posta</label>
               <input id="email" name="email" type="email" required placeholder="ornek@mail.com"
                      class="contact-input"/>
             </div>
 
             <div class="flex flex-col gap-2">
-              <label class="section-label" style="font-size:12px;" for="message">Mesaj</label>
-              <textarea id="message" name="message" required rows="5" placeholder="Mesajını buraya yaz..."
+              <label class="section-label" style="font-size:12px;" for="message" data-en="Message">Mesaj</label>
+              <textarea id="message" name="message" required rows="5" placeholder="Mesajını buraya yaz..." data-en-placeholder="Write your message here..."
                         class="contact-input resize-none"></textarea>
             </div>
 
             <button type="submit" id="submit-btn"
                     class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all duration-300 bloom-primary self-start"
                     style="font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:0.15em;font-weight:500;text-transform:uppercase;">
-              <span id="btn-text">Gönder</span>
+              <span id="btn-text" data-en="Send">Gönder</span>
               <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 0;">send</span>
             </button>
 
             <!-- Başarı / Hata mesajı -->
             <div id="form-success" class="hidden p-4 border border-primary/40 bg-primary-container/10"
-                 style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:#ffb59a;">
+                 style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:#ffb59a;"
+                 data-en="Your message was sent, I'll get back to you as soon as possible.">
               Mesajın iletildi, en kısa sürede dönüş yapacağım.
             </div>
             <div id="form-error" class="hidden p-4 border border-red-500/40 bg-red-500/10"
-                 style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:#ffb4ab;">
+                 style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:#ffb4ab;"
+                 data-en="Something went wrong. Please try again or email me directly.">
               Bir hata oluştu. Lütfen tekrar dene veya doğrudan e-posta gönder.
             </div>
 
@@ -708,7 +740,7 @@
           <div class="flex flex-col gap-8 lg:pt-8">
 
             <div>
-              <p class="section-label mb-6" style="font-size:12px;">Diğer Kanallar</p>
+              <p class="section-label mb-6" style="font-size:12px;" data-en="Other Channels">Diğer Kanallar</p>
 
               <div class="flex flex-col gap-5">
 
@@ -718,7 +750,7 @@
                     <span class="material-symbols-outlined" style="font-size:20px;font-variation-settings:'FILL' 0;">mail</span>
                   </div>
                   <div>
-                    <p class="contact-social-label">E-posta</p>
+                    <p class="contact-social-label" data-en="Email">E-posta</p>
                     <p class="contact-social-value">omeromergunesgunes@gmail.com</p>
                   </div>
                 </a>
@@ -754,7 +786,7 @@
 
             <!-- CV indirme -->
             <div>
-              <p class="section-label mb-6" style="font-size:12px;">Özgeçmiş</p>
+              <p class="section-label mb-6" style="font-size:12px;" data-en="Resume">Özgeçmiş</p>
               <div class="flex flex-wrap gap-3">
                 <a href="cv/Omer-Gunes-CV-TR.pdf" target="_blank" rel="noopener noreferrer"
                    class="inline-flex items-center gap-2 px-5 py-3 border border-outline-variant/50 hover:border-primary hover:text-primary transition-colors"
@@ -781,7 +813,8 @@
   <!-- ===== FOOTER ===== -->
   <footer class="bg-surface-container-lowest w-full py-8 relative z-20 border-t border-outline-variant/10">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4 px-6 md:px-20 w-full max-w-[1440px] mx-auto">
-      <span style="font-size:12px;letter-spacing:0.15em;font-weight:500;font-family:'Space Grotesk',sans-serif;color:#e4beb1;text-transform:uppercase;">
+      <span style="font-size:12px;letter-spacing:0.15em;font-weight:500;font-family:'Space Grotesk',sans-serif;color:#e4beb1;text-transform:uppercase;"
+            data-en="© 2026 ÖMER GÜNEŞ. ALL RIGHTS RESERVED.">
         © 2026 ÖMER GÜNEŞ. TÜM HAKLARI SAKLIDIR.
       </span>
       <span style="font-size:12px;letter-spacing:0.15em;font-weight:500;font-family:'Space Grotesk',sans-serif;color:#5b4137;text-transform:uppercase;">
@@ -798,10 +831,15 @@
     const successMsg = document.getElementById('form-success');
     const errorMsg   = document.getElementById('form-error');
 
+    const formStrings = {
+      tr: { sending: 'Gönderiliyor...', sent: 'Gönderildi', idle: 'Gönder' },
+      en: { sending: 'Sending...',      sent: 'Sent',       idle: 'Send' }
+    };
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       submitBtn.disabled = true;
-      btnText.textContent = 'Gönderiliyor...';
+      btnText.textContent = formStrings[window.currentLang].sending;
 
       try {
         const res = await fetch(form.action, {
@@ -814,7 +852,7 @@
           form.reset();
           successMsg.classList.remove('hidden');
           errorMsg.classList.add('hidden');
-          btnText.textContent = 'Gönderildi';
+          btnText.textContent = formStrings[window.currentLang].sent;
         } else {
           throw new Error();
         }
@@ -822,7 +860,7 @@
         errorMsg.classList.remove('hidden');
         successMsg.classList.add('hidden');
         submitBtn.disabled = false;
-        btnText.textContent = 'Gönder';
+        btnText.textContent = formStrings[window.currentLang].idle;
       }
     });
   </script>
@@ -849,6 +887,80 @@
         closeMobileMenu();
       }
     });
+  </script>
+
+  <!-- ===== DİL SEÇİCİ (TR/EN) JS ===== -->
+  <script>
+    (function () {
+      const i18nEls         = document.querySelectorAll('[data-en]');
+      const placeholderEls  = document.querySelectorAll('[data-en-placeholder]');
+      const pageTitle       = document.getElementById('page-title');
+      const langBtnLabel    = document.getElementById('lang-btn-label');
+
+      const dropdowns = [
+        { btn: document.getElementById('lang-btn'),        menu: document.getElementById('lang-menu') },
+        { btn: document.getElementById('lang-btn-mobile'),  menu: document.getElementById('lang-menu-mobile') }
+      ];
+
+      // Sayfa yüklenirken orijinal Türkçe içeriği sakla
+      i18nEls.forEach(el => { el.dataset.tr = el.innerHTML; });
+      placeholderEls.forEach(el => { el.dataset.trPlaceholder = el.placeholder; });
+
+      function closeAllDropdowns() {
+        dropdowns.forEach(({ btn, menu }) => {
+          if (!menu) return;
+          menu.classList.add('hidden');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      function setLanguage(lang) {
+        window.currentLang = lang;
+
+        i18nEls.forEach(el => {
+          el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.tr;
+        });
+        placeholderEls.forEach(el => {
+          el.placeholder = lang === 'en' ? el.dataset.enPlaceholder : el.dataset.trPlaceholder;
+        });
+
+        if (pageTitle) document.title = lang === 'en' ? pageTitle.dataset.en : pageTitle.dataset.tr;
+
+        document.documentElement.lang = lang;
+        if (langBtnLabel) langBtnLabel.textContent = lang.toUpperCase();
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+          opt.classList.toggle('text-primary', opt.dataset.lang === lang);
+        });
+
+        localStorage.setItem('site-lang', lang);
+      }
+
+      dropdowns.forEach(({ btn, menu }) => {
+        if (!btn || !menu) return;
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = !menu.classList.contains('hidden');
+          closeAllDropdowns();
+          if (!isOpen) {
+            menu.classList.remove('hidden');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          setLanguage(opt.dataset.lang);
+          closeAllDropdowns();
+        });
+      });
+
+      document.addEventListener('click', closeAllDropdowns);
+
+      const savedLang = localStorage.getItem('site-lang') === 'en' ? 'en' : 'tr';
+      setLanguage(savedLang);
+    })();
   </script>
 
 </body>

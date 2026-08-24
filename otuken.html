@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ötüken — Vaka İncelemesi · Ömer Güneş</title>
+<title id="page-title" data-en="Ötüken — Case Study · Ömer Güneş">Ötüken — Vaka İncelemesi · Ömer Güneş</title>
 <meta name="description" content="Python ile geliştirilen kişisel sesli yapay zeka asistanı Ötüken: Gemini araç kullanımı, Türkçe konuşma tanıma, ffmpeg ile robotik ses üretimi ve masaüstü HUD.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,9 +41,26 @@
   .topbar .home{font-family:'Chakra Petch',sans-serif;font-size:13px;letter-spacing:.12em;
     text-transform:uppercase;color:var(--muted-2)}
   .topbar .home:hover{color:var(--red)}
-  .topbar nav{display:flex;gap:18px;flex-wrap:wrap}
+  .topbar nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
   .topbar nav a{font-size:12.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
   .topbar nav a:hover{color:var(--red)}
+
+  /* ---------- dil seçici ---------- */
+  .hidden{display:none!important}
+  .lang-switch{position:relative}
+  .lang-btn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);font-family:Inter,sans-serif;
+    font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;
+    border-radius:6px;cursor:pointer}
+  .lang-btn:hover{color:var(--red-soft);border-color:rgba(255,42,42,.4)}
+  .lang-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:130px;
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    overflow:hidden;z-index:60;box-shadow:0 12px 28px rgba(0,0,0,.5)}
+  .lang-option{display:block;width:100%;text-align:left;background:transparent;border:none;
+    color:var(--muted);font-family:Inter,sans-serif;font-size:13.5px;padding:11px 16px;
+    cursor:pointer;text-transform:none;letter-spacing:0}
+  .lang-option:hover{background:rgba(255,42,42,.08);color:var(--red-soft)}
+  .lang-option.active{color:var(--red);font-weight:600}
 
   /* ---------- kapak ---------- */
   .hero{
@@ -159,85 +176,94 @@
 <div class="topbar"><div class="wrap">
   <a class="home" href="index.html">← Ömer Güneş</a>
   <nav>
-    <a href="#nasil">Nasıl çalışıyor</a>
-    <a href="#mimari">Mimari</a>
-    <a href="#arac">Araç kullanımı</a>
-    <a href="#ses">Ses</a>
-    <a href="#kararlar">Kararlar</a>
-    <a href="#dayaniklilik">Dayanıklılık</a>
+    <a href="#nasil" data-en="How it works">Nasıl çalışıyor</a>
+    <a href="#mimari" data-en="Architecture">Mimari</a>
+    <a href="#arac" data-en="Tool use">Araç kullanımı</a>
+    <a href="#ses" data-en="Voice">Ses</a>
+    <a href="#kararlar" data-en="Decisions">Kararlar</a>
+    <a href="#dayaniklilik" data-en="Resilience">Dayanıklılık</a>
+    <div class="lang-switch">
+      <button id="lang-btn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+        <span id="lang-btn-label">TR</span> ▾
+      </button>
+      <div id="lang-menu" class="lang-menu hidden">
+        <button type="button" class="lang-option" data-lang="tr">Türkçe</button>
+        <button type="button" class="lang-option" data-lang="en">English</button>
+      </div>
+    </div>
   </nav>
 </div></div>
 
 <!-- ============ 01 KAPAK ============ -->
 <header class="hero"><div class="wrap">
-  <div class="eyebrow">Vaka İncelemesi · Masaüstü Yapay Zeka</div>
+  <div class="eyebrow" data-en="Case Study · Desktop AI">Vaka İncelemesi · Masaüstü Yapay Zeka</div>
   <h1>ÖTÜKEN</h1>
-  <p class="lede">Sesle konuşulan, bilgisayarı kullanabilen, kendi görsel arayüzü olan kişisel bir
+  <p class="lede" data-en="A personal voice AI assistant that talks, uses the computer, and has its own visual interface. Built in Python, running without paying a single cent in API fees.">Sesle konuşulan, bilgisayarı kullanabilen, kendi görsel arayüzü olan kişisel bir
   yapay zeka asistanı. Python ile geliştirildi, tek kuruş API ücreti ödemeden çalışıyor.</p>
   <div class="hero-meta">
     <span class="chip">Python</span>
-    <span class="chip">Google Gemini · araç kullanımı</span>
-    <span class="chip">Türkçe konuşma tanıma</span>
-    <span class="chip">Yerel ses üretimi</span>
-    <span class="chip">Sıfır maliyet</span>
+    <span class="chip" data-en="Google Gemini · tool use">Google Gemini · araç kullanımı</span>
+    <span class="chip" data-en="Turkish speech recognition">Türkçe konuşma tanıma</span>
+    <span class="chip" data-en="Local voice synthesis">Yerel ses üretimi</span>
+    <span class="chip" data-en="Zero cost">Sıfır maliyet</span>
   </div>
 
   <figure style="margin-top:34px">
     <video src="img/otuken/demo.mp4" controls preload="metadata" poster="img/otuken/hud.png"></video>
-    <figcaption>10 saniyelik canlı kayıt. <strong>Sesi açın</strong> — bu videonun asıl konusu
+    <figcaption data-en="A 10-second live recording. <strong>Turn your sound on</strong> — this video isn't really about the visuals, it's about Ötüken's voice.">10 saniyelik canlı kayıt. <strong>Sesi açın</strong> — bu videonun asıl konusu
     görüntü değil, Ötüken'in konuşma sesi.</figcaption>
   </figure>
 </div></header>
 
 <div class="wrap"><div class="facts">
-  <div class="fact"><u>Rol</u><b>Tek geliştirici</b></div>
-  <div class="fact"><u>Başlangıç</u><b>23 Temmuz 2026</b></div>
-  <div class="fact"><u>Platform</u><b>Windows masaüstü</b></div>
-  <div class="fact"><u>Çalışma maliyeti</u><b>0 ₺ / ay</b></div>
+  <div class="fact"><u data-en="Role">Rol</u><b data-en="Solo developer">Tek geliştirici</b></div>
+  <div class="fact"><u data-en="Started">Başlangıç</u><b data-en="July 23, 2026">23 Temmuz 2026</b></div>
+  <div class="fact"><u data-en="Platform">Platform</u><b data-en="Windows desktop">Windows masaüstü</b></div>
+  <div class="fact"><u data-en="Running cost">Çalışma maliyeti</u><b data-en="$0 / month">0 ₺ / ay</b></div>
 </div></div>
 
 <!-- ============ 02 NEDEN ============ -->
 <section id="neden"><div class="wrap">
-  <div class="sec-no">02 — Neden bu proje</div>
-  <h2>"Sesle konuştuğum bir asistan" fikrini gerçekten çalışır hale getirmek</h2>
-  <p>Filmlerdeki yapay zeka asistanı fikri herkesin hoşuna gider; internette de yüzlerce
+  <div class="sec-no" data-en="02 — Why this project">02 — Neden bu proje</div>
+  <h2 data-en="Actually making the &quot;an assistant I talk to&quot; idea work">"Sesle konuştuğum bir asistan" fikrini gerçekten çalışır hale getirmek</h2>
+  <p data-en="Everyone likes the movie idea of an AI assistant; there are hundreds of &quot;JARVIS clone&quot; repos online too. But most of them either speak English, depend on a paid API, or run on memorized patterns: hearing the word &quot;weather&quot; triggers the weather function, without ever actually understanding the sentence.">Filmlerdeki yapay zeka asistanı fikri herkesin hoşuna gider; internette de yüzlerce
   "JARVIS klonu" deposu vardır. Ama bunların çoğu ya İngilizce konuşur, ya ücretli bir API'ye
   bağlıdır, ya da ezberlenmiş kalıplarla çalışır: "hava durumu" kelimesini duyunca hava
   fonksiyonunu çağırır, cümleyi gerçekten anlamaz.</p>
-  <p>Ötüken'i bu üç sorunu çözmek için yazdım: <strong>Türkçe konuşur, hiçbir ücretli servise
+  <p data-en="I wrote Ötüken to solve these three problems: <strong>it speaks Turkish, isn't tied to any paid service, and runs commands through the language model's own judgment instead of pattern matching.</strong>">Ötüken'i bu üç sorunu çözmek için yazdım: <strong>Türkçe konuşur, hiçbir ücretli servise
   bağlı değildir ve komutları kalıp eşleştirmeyle değil dil modelinin kendi kararıyla
   çalıştırır.</strong></p>
-  <h3>Baştan koyduğum kısıtlar</h3>
+  <h3 data-en="Constraints I set from the start">Baştan koyduğum kısıtlar</h3>
   <ul>
-    <li><strong>Sıfır bütçe:</strong> hiçbir adım ücretli bir API'ye bağlı olmayacak</li>
-    <li><strong>Sıfırdan yazmak yok:</strong> olgun bir açık kaynak arayüz taban alınacak, emek
+    <li data-en="<strong>Zero budget:</strong> no step will depend on a paid API"><strong>Sıfır bütçe:</strong> hiçbir adım ücretli bir API'ye bağlı olmayacak</li>
+    <li data-en="<strong>No writing from scratch:</strong> start from a mature open-source interface base, and spend the effort on the assistant itself"><strong>Sıfırdan yazmak yok:</strong> olgun bir açık kaynak arayüz taban alınacak, emek
     asistanın kendisine harcanacak</li>
-    <li><strong>Türkçe birinci sınıf vatandaş:</strong> dinleme, cevap ve ses üretimi Türkçe olacak</li>
+    <li data-en="<strong>Turkish as a first-class citizen:</strong> listening, replies, and voice synthesis will all be in Turkish"><strong>Türkçe birinci sınıf vatandaş:</strong> dinleme, cevap ve ses üretimi Türkçe olacak</li>
   </ul>
 </div></section>
 
 <!-- ============ 03 NASIL ÇALIŞIYOR ============ -->
 <section id="nasil"><div class="wrap">
-  <div class="sec-no">03 — Nasıl çalışıyor</div>
-  <h2>Bir cümlenin izlediği yol</h2>
+  <div class="sec-no" data-en="03 — How it works">03 — Nasıl çalışıyor</div>
+  <h2 data-en="The path a sentence takes">Bir cümlenin izlediği yol</h2>
   <div class="flow">
-    <span class="node">Mikrofon</span><span class="op">→</span>
-    <span class="node">Türkçe STT</span><span class="op">→</span>
+    <span class="node" data-en="Microphone">Mikrofon</span><span class="op">→</span>
+    <span class="node" data-en="Turkish STT">Türkçe STT</span><span class="op">→</span>
     <span class="node">Gemini</span><span class="op">→</span>
-    <span class="node">Araç (gerekirse)</span><span class="op">→</span>
-    <span class="node">Ses üretimi</span><span class="op">→</span>
-    <span class="res">HUD + hoparlör</span>
+    <span class="node" data-en="Tool (if needed)">Araç (gerekirse)</span><span class="op">→</span>
+    <span class="node" data-en="Voice synthesis">Ses üretimi</span><span class="op">→</span>
+    <span class="res" data-en="HUD + speaker">HUD + hoparlör</span>
   </div>
-  <p class="caption">Ağır işlerin tamamı ayrı bir iş parçacığında çalışıyor; asistan düşünürken
+  <p class="caption" data-en="All heavy work runs on a separate thread; the interface doesn't freeze while the assistant is thinking.">Ağır işlerin tamamı ayrı bir iş parçacığında çalışıyor; asistan düşünürken
   arayüz donmuyor.</p>
 
   <figure>
     <img src="img/otuken/hud.png" alt="Ötüken masaüstü arayüzü">
-    <figcaption>Masaüstü arayüzü. Arayüz bir web sayfası; Python ile arasındaki köprüyü
+    <figcaption data-en="The desktop interface. The UI is a web page; <code>eel</code> builds the bridge to Python, so everything on screen can be designed with HTML/CSS.">Masaüstü arayüzü. Arayüz bir web sayfası; Python ile arasındaki köprüyü
     <code>eel</code> kuruyor, böylece ekrandaki her şey HTML/CSS ile tasarlanabiliyor.</figcaption>
   </figure>
 
-  <p>Kullanıcı ister mikrofona konuşuyor ister yazıyor. Konuşma metne çevrildikten sonra
+  <p data-en="The user either speaks into the microphone or types. Once speech is converted to text, it goes to Gemini; the model produces the reply directly if it can, or calls the relevant tool first if it needs real information or an action. The reply that comes back is both shown on screen and read aloud.">Kullanıcı ister mikrofona konuşuyor ister yazıyor. Konuşma metne çevrildikten sonra
   Gemini'ye gidiyor; model cevabı doğrudan üretebiliyorsa üretiyor, gerçek bir bilgi ya da
   eylem gerekiyorsa önce ilgili aracı çağırıyor. Dönen cevap hem ekrana yazılıyor hem sesli
   okunuyor.</p>
@@ -245,28 +271,28 @@
 
 <!-- ============ 04 MİMARİ ============ -->
 <section id="mimari"><div class="wrap">
-  <div class="sec-no">04 — Mimari</div>
-  <h2>Beş parça, hepsi ücretsiz</h2>
-  <p>Her parçayı seçerken tek soru vardı: bunun ücretsiz ve kalıcı bir karşılığı var mı?
+  <div class="sec-no" data-en="04 — Architecture">04 — Mimari</div>
+  <h2 data-en="Five pieces, all free">Beş parça, hepsi ücretsiz</h2>
+  <p data-en="There was one question when choosing every piece: does this have a free, durable equivalent? Any piece tied to a paid service meant the project would stop working someday.">Her parçayı seçerken tek soru vardı: bunun ücretsiz ve kalıcı bir karşılığı var mı?
   Ücretli bir servise bağlanan her parça, projenin bir gün duracağı anlamına geliyordu.</p>
   <table>
-    <tr><th>Parça</th><th>Seçim ve gerekçe</th></tr>
-    <tr><td>Beyin</td><td>Google Gemini ücretsiz katmanı — kredi kartı istemiyor, Türkçesi iyi ve araç kullanımını destekliyor</td></tr>
-    <tr><td>Dinleme</td><td>Türkçe konuşma tanıma; ortam gürültüsüne göre kendini ayarlıyor, konuşma bitince otomatik kesiyor</td></tr>
-    <tr><td>Konuşma</td><td>Ücretsiz doğal Türkçe ses + kendi yazdığım ses efekti zinciri</td></tr>
-    <tr><td>Arayüz</td><td>Açık kaynak bir HUD tabanı; Python–JavaScript köprüsüyle bağlandı</td></tr>
-    <tr><td>Bilgi kaynağı</td><td>Hava durumu için anahtar gerektirmeyen açık bir servis — kayıt, kota, ücret yok</td></tr>
+    <tr><th data-en="Piece">Parça</th><th data-en="Choice and rationale">Seçim ve gerekçe</th></tr>
+    <tr><td data-en="Brain">Beyin</td><td data-en="Google Gemini's free tier — no credit card required, good Turkish, and supports tool use">Google Gemini ücretsiz katmanı — kredi kartı istemiyor, Türkçesi iyi ve araç kullanımını destekliyor</td></tr>
+    <tr><td data-en="Listening">Dinleme</td><td data-en="Turkish speech recognition; adjusts to ambient noise and cuts off automatically when speech ends">Türkçe konuşma tanıma; ortam gürültüsüne göre kendini ayarlıyor, konuşma bitince otomatik kesiyor</td></tr>
+    <tr><td data-en="Speech">Konuşma</td><td data-en="Free natural Turkish voice + a sound-effect chain I wrote myself">Ücretsiz doğal Türkçe ses + kendi yazdığım ses efekti zinciri</td></tr>
+    <tr><td data-en="Interface">Arayüz</td><td data-en="An open-source HUD base; connected via a Python–JavaScript bridge">Açık kaynak bir HUD tabanı; Python–JavaScript köprüsüyle bağlandı</td></tr>
+    <tr><td data-en="Data source">Bilgi kaynağı</td><td data-en="A key-free open service for weather — no signup, no quota, no fee">Hava durumu için anahtar gerektirmeyen açık bir servis — kayıt, kota, ücret yok</td></tr>
   </table>
 
   <div class="stats">
-    <div class="stat"><u>5</u><i>Python modülü</i></div>
-    <div class="stat"><u>~650</u><i>Satır kendi kodum</i></div>
-    <div class="stat"><u>5</u><i>Asistan aracı</i></div>
-    <div class="stat"><u>12</u><i>Açılabilen uygulama</i></div>
+    <div class="stat"><u>5</u><i data-en="Python modules">Python modülü</i></div>
+    <div class="stat"><u>~650</u><i data-en="Lines of my own code">Satır kendi kodum</i></div>
+    <div class="stat"><u>5</u><i data-en="Assistant tools">Asistan aracı</i></div>
+    <div class="stat"><u>12</u><i data-en="Apps it can open">Açılabilen uygulama</i></div>
   </div>
 
-  <h3>Taban repodan neyi attım</h3>
-  <p>Taban aldığım proje yüz tanıma, uyandırma kelimesi ve mesajlaşma entegrasyonu gibi
+  <h3 data-en="What I stripped from the base repo">Taban repodan neyi attım</h3>
+  <p data-en="The project I started from came with extras like face recognition, a wake word, and messaging integrations. I removed all of them and wrote my own clean brain behind it. The hardest part of taking over a project isn't adding code, it's <strong>having the courage to delete what I don't need</strong> — because every deleted line is a line I won't have to look after later.">Taban aldığım proje yüz tanıma, uyandırma kelimesi ve mesajlaşma entegrasyonu gibi
   eklerle geliyordu. Hepsini çıkardım; arkasına kendi temiz beynimi yazdım. Bir projeyi
   devralmanın en zor kısmı kod eklemek değil, <strong>ihtiyacım olmayanı silmeye cesaret
   etmek</strong>ti — çünkü silinen her satır, sonra bakmam gerekmeyecek bir satır.</p>
@@ -274,34 +300,34 @@
 
 <!-- ============ 05 ARAÇ KULLANIMI ============ -->
 <section id="arac"><div class="wrap">
-  <div class="sec-no">05 — Araç kullanımı</div>
-  <h2>Kalıp ezberinden model kararına</h2>
-  <p>İlk sürüm klasik yöntemle çalışıyordu: cümlede "hava" geçiyorsa hava fonksiyonunu çağır,
+  <div class="sec-no" data-en="05 — Tool use">05 — Araç kullanımı</div>
+  <h2 data-en="From memorized patterns to model judgment">Kalıp ezberinden model kararına</h2>
+  <p data-en="The first version worked the classic way: if the sentence contains &quot;weather&quot;, call the weather function; if it contains &quot;time&quot;, say the time. This looks good in demo videos and breaks in real use. The sentence &quot;Will I be cold if I go outside?&quot; never contains the word &quot;weather&quot;.">İlk sürüm klasik yöntemle çalışıyordu: cümlede "hava" geçiyorsa hava fonksiyonunu çağır,
   "saat" geçiyorsa saati söyle. Bu yöntem demo videolarında iyi görünür, gerçek kullanımda kırılır.
   "Dışarı çıksam üşür müyüm?" cümlesinde "hava" kelimesi geçmez.</p>
 
-  <div class="pull">Kalıp eşleştirme, kullanıcıyı programın anladığı dili konuşmaya zorlar.
+  <div class="pull" data-en="Pattern matching forces the user to speak the language the program understands. The right approach was the opposite.">Kalıp eşleştirme, kullanıcıyı programın anladığı dili konuşmaya zorlar.
   Doğru olan tersiydi.</div>
 
-  <p>Bu yüzden mimariyi değiştirdim: asistanın yetenekleri artık dil modeline
+  <p data-en="So I changed the architecture: the assistant's abilities are now exposed to the language model as <strong>tools</strong>. The model is given &quot;weather&quot;, &quot;time&quot;, &quot;date&quot;, &quot;open app&quot;, and &quot;search the web&quot; tools; it decides for itself, from understanding the sentence, which one to call and which city or app is meant.">Bu yüzden mimariyi değiştirdim: asistanın yetenekleri artık dil modeline
   <strong>araç</strong> olarak tanıtılıyor. Modelin eline "hava durumu", "saat", "tarih",
   "uygulama aç" ve "internette ara" araçları veriliyor; cümleyi anlayıp hangisini
   çağıracağına, hangi şehir ya da hangi uygulama olduğuna model kendisi karar veriyor.</p>
 
-  <div class="mono">
+  <div class="mono" data-en="user: <b>&quot;will I be cold if I go outside?&quot;</b><br>&nbsp;&nbsp;↳ model decision: get_weather(city=&quot;Istanbul&quot;)<br>&nbsp;&nbsp;↳ tool response: partly cloudy, 14°C, wind 11 km/h<br>assistant: <b>&quot;It's 14 degrees and windy, Chief — grab something light.&quot;</b>">
     kullanıcı: <b>"dışarı çıksam üşür müyüm?"</b><br>
     &nbsp;&nbsp;↳ model kararı: hava_durumu(sehir="İstanbul")<br>
     &nbsp;&nbsp;↳ araç yanıtı: parçalı bulutlu, 14°C, rüzgar 11 km/s<br>
     asistan: <b>"14 derece ve rüzgarlı Başkan, ince bir şey al."</b>
   </div>
 
-  <p>Bu geçişin bedeli de vardı: araç kullanan her soru, tek soruya göre yaklaşık iki kat
+  <p data-en="This switch had a cost too: every question that uses a tool spends roughly twice the requests of a plain question. Since the free tier has a per-minute limit, I moved the model to a lighter version with a higher limit. <strong>Paying for the right architecture was cheaper than living with the wrong one.</strong>">Bu geçişin bedeli de vardı: araç kullanan her soru, tek soruya göre yaklaşık iki kat
   istek harcıyor. Ücretsiz katmanın dakika başına sınırı olduğu için modeli daha yüksek
   limitli hafif sürüme çektim. <strong>Doğru mimarinin maliyetini ödemek, yanlış mimariyle
   yaşamaktan ucuzdu.</strong></p>
 
-  <h3>Araçları modele anlatmak</h3>
-  <p>Araçlar modele ayrı bir tarif dosyasıyla değil, doğrudan Python fonksiyonları olarak
+  <h3 data-en="Describing the tools to the model">Araçları modele anlatmak</h3>
+  <p data-en="Tools aren't given to the model through a separate spec file — they're plain Python functions. The function's description and parameter types are the single source that determines when and how the model calls that tool. So here, <strong>documentation isn't decoration, it's working code</strong>; write a weak description and the model calls the tool at the wrong time.">Araçlar modele ayrı bir tarif dosyasıyla değil, doğrudan Python fonksiyonları olarak
   veriliyor. Fonksiyonun açıklaması ve parametre tipleri, modelin o aracı ne zaman ve nasıl
   çağıracağını belirleyen tek kaynak. Yani burada <strong>dokümantasyon süs değil, çalışan
   koddur</strong>; açıklamayı zayıf yazarsanız model aracı yanlış zamanda çağırır.</p>
@@ -309,122 +335,173 @@
 
 <!-- ============ 06 SES ============ -->
 <section id="ses"><div class="wrap">
-  <div class="sec-no">06 — Ses</div>
-  <h2>Doğal bir sesi yapay zekaya benzetmek</h2>
-  <p>Asistanın sesi projenin karakteriydi; robot gibi cızırtılı bir ses her şeyi ucuzlatırdı.
+  <div class="sec-no" data-en="06 — Voice">06 — Ses</div>
+  <h2 data-en="Making a natural voice sound like AI">Doğal bir sesi yapay zekaya benzetmek</h2>
+  <p data-en="The assistant's voice was the project's personality; a crackly robot voice would have cheapened everything. I started with a free, natural Turkish male voice, then ran it through an effect chain:">Asistanın sesi projenin karakteriydi; robot gibi cızırtılı bir ses her şeyi ucuzlatırdı.
   Ücretsiz doğal Türkçe bir erkek sesiyle başladım, sonra o sesi bir efekt zincirinden
   geçirdim:</p>
   <table>
-    <tr><th>Adım</th><th>Ne yapıyor</th></tr>
-    <tr><td>Tonu düşürme</td><td>Sesi kalınlaştırıyor; ardından hız düzeltmesiyle konuşma süresi eski hâline getiriliyor</td></tr>
-    <tr><td>Yankı</td><td>Kapalı bir mekândan konuşuyormuş hissi — "makine gövdesi" etkisi</td></tr>
-    <tr><td>Titreşim</td><td>Çok hafif bir metalik vızıltı; abartıldığında ses komikleşiyor</td></tr>
-    <tr><td>Ses seviyesi eşitleme</td><td>Her cümlenin aynı yükseklikte duyulması</td></tr>
+    <tr><th data-en="Step">Adım</th><th data-en="What it does">Ne yapıyor</th></tr>
+    <tr><td data-en="Pitch down">Tonu düşürme</td><td data-en="Deepens the voice; speed correction then restores the original speech duration">Sesi kalınlaştırıyor; ardından hız düzeltmesiyle konuşma süresi eski hâline getiriliyor</td></tr>
+    <tr><td data-en="Reverb">Yankı</td><td data-en="The feeling of speaking from an enclosed space — a &quot;machine body&quot; effect">Kapalı bir mekândan konuşuyormuş hissi — "makine gövdesi" etkisi</td></tr>
+    <tr><td data-en="Tremor">Titreşim</td><td data-en="A very light metallic buzz; overdo it and the voice turns comical">Çok hafif bir metalik vızıltı; abartıldığında ses komikleşiyor</td></tr>
+    <tr><td data-en="Loudness normalization">Ses seviyesi eşitleme</td><td data-en="Every sentence heard at the same loudness">Her cümlenin aynı yükseklikte duyulması</td></tr>
   </table>
-  <p>Sonuç, kapaktaki videoda duyulan ses: doğal bir konuşmanın anlaşılırlığı, makinenin tonu.
+  <p data-en="The result is the voice heard in the video at the top: the clarity of natural speech, the tone of a machine. The advantage isn't just aesthetic — it's fully controllable. Deepening the voice, dialing back the reverb, or turning off the buzz is a one-line setting.">Sonuç, kapaktaki videoda duyulan ses: doğal bir konuşmanın anlaşılırlığı, makinenin tonu.
   Bunun avantajı sadece estetik değil — tamamen kontrol edilebilir. Sesi kalınlaştırmak,
   yankıyı azaltmak ya da vızıltıyı kapatmak tek satırlık bir ayar.</p>
 </div></section>
 
 <!-- ============ 07 KARARLAR ============ -->
 <section id="kararlar"><div class="wrap">
-  <div class="sec-no">07 — Verdiğim kararlar</div>
-  <h2>Yol ayrımları</h2>
+  <div class="sec-no" data-en="07 — Decisions I made">07 — Verdiğim kararlar</div>
+  <h2 data-en="Forks in the road">Yol ayrımları</h2>
 
   <div class="dec">
-    <b>Sıfırdan yazmadım, olgun bir tabanı devraldım</b>
-    <p>Arayüzü baştan yazmak haftalar alırdı ve öğrenme getirisi düşüktü. Açık kaynak bir HUD
+    <b data-en="I didn't write from scratch — I took over a mature base">Sıfırdan yazmadım, olgun bir tabanı devraldım</b>
+    <p data-en="Writing the interface from scratch would have taken weeks with a low learning payoff. I took an open-source HUD base, stripped its unnecessary weight, and wrote my own brain behind it.">Arayüzü baştan yazmak haftalar alırdı ve öğrenme getirisi düşüktü. Açık kaynak bir HUD
     tabanı aldım, gereksiz yüklerini attım, arkasına kendi beynimi yazdım.</p>
-    <p class="why">Neden: zamanı, projeyi benzersiz yapan yere harcamak istedim — arayüz o yer değildi.</p>
+    <p class="why" data-en="Why: I wanted to spend time on what made the project unique — the interface wasn't that place.">Neden: zamanı, projeyi benzersiz yapan yere harcamak istedim — arayüz o yer değildi.</p>
   </div>
 
   <div class="dec">
-    <b>Kalıp eşleştirmeyi silip araç kullanımına geçtim</b>
-    <p>Çalışan bir sistemi bozup yeniden kurmak anlamına geliyordu. Ama kalıp yöntemi her yeni
+    <b data-en="I deleted pattern matching and moved to tool use">Kalıp eşleştirmeyi silip araç kullanımına geçtim</b>
+    <p data-en="This meant breaking a working system and rebuilding it. But the pattern-matching approach kept getting a little more fragile with every new capability.">Çalışan bir sistemi bozup yeniden kurmak anlamına geliyordu. Ama kalıp yöntemi her yeni
     yetenekte biraz daha kırılganlaşıyordu.</p>
-    <p class="why">Neden: her yeni özellikte katlanarak artan bir bakım borcunu erken ödedim.</p>
+    <p class="why" data-en="Why: I paid off a maintenance debt early that would have compounded with every new feature.">Neden: her yeni özellikte katlanarak artan bir bakım borcunu erken ödedim.</p>
   </div>
 
   <div class="dec">
-    <b>Ücretsiz katmanın sınırını mimarinin parçası saydım</b>
-    <p>Araç kullanımı istek sayısını artırınca kota duvara dayandı. Modeli daha yüksek limitli
+    <b data-en="I treated the free tier's limit as part of the architecture">Ücretsiz katmanın sınırını mimarinin parçası saydım</b>
+    <p data-en="Tool use increased the request count until the quota hit a wall. I moved the model to a lighter version with a higher limit, and made it give the user an understandable reply when the quota runs out.">Araç kullanımı istek sayısını artırınca kota duvara dayandı. Modeli daha yüksek limitli
     hafif sürüme çektim ve kota dolduğunda kullanıcının anlayacağı bir cevap verdirdim.</p>
-    <p class="why">Neden: ücretsiz olmak bir kısıt değil, projenin şartıydı; mimari ona uymalıydı.</p>
+    <p class="why" data-en="Why: being free wasn't a constraint, it was the project's condition; the architecture had to fit it.">Neden: ücretsiz olmak bir kısıt değil, projenin şartıydı; mimari ona uymalıydı.</p>
   </div>
 
   <div class="dec">
-    <b>Beğenmediğim bir sonucu yayınlamak yerine yönü değiştirdim</b>
-    <p>Hedeflediğim ses klonlaması istediğim kaliteye ulaşmadı (bir sonraki bölüm). Vasat bir
+    <b data-en="I changed direction instead of shipping a result I didn't like">Beğenmediğim bir sonucu yayınlamak yerine yönü değiştirdim</b>
+    <p data-en="The voice cloning I was aiming for never reached the quality I wanted (next section). Instead of calling a mediocre result &quot;good enough,&quot; I changed the approach entirely.">Hedeflediğim ses klonlaması istediğim kaliteye ulaşmadı (bir sonraki bölüm). Vasat bir
     sonucu "olmuş sayıp" geçmek yerine yaklaşımı tamamen değiştirdim.</p>
-    <p class="why">Neden: kullanıcı olarak her gün duyacağım bir sesti; "idare eder" yetmezdi.</p>
+    <p class="why" data-en="Why: as the user, this was a voice I'd hear every day; &quot;it'll do&quot; wasn't enough.">Neden: kullanıcı olarak her gün duyacağım bir sesti; "idare eder" yetmezdi.</p>
   </div>
 </div></section>
 
 <!-- ============ 08 DAYANIKLILIK ============ -->
 <section id="dayaniklilik"><div class="wrap">
-  <div class="sec-no">08 — Dayanıklılık</div>
-  <h2>Bu asistanın bozulabileceği beş yer</h2>
-  <p>Kişisel bir projede en kolay ihmal edilen şey hata durumlarıdır — çünkü kendi
+  <div class="sec-no" data-en="08 — Resilience">08 — Dayanıklılık</div>
+  <h2 data-en="Five places this assistant can break">Bu asistanın bozulabileceği beş yer</h2>
+  <p data-en="The easiest thing to neglect in a personal project is error handling — because on your own computer, things usually go fine. In Ötüken, every external dependency has a fallback plan:">Kişisel bir projede en kolay ihmal edilen şey hata durumlarıdır — çünkü kendi
   bilgisayarınızda genelde her şey yolunda gider. Ötüken'de her dış bağımlılığın bir
   düşme planı var:</p>
   <table>
-    <tr><th>Ne bozulursa</th><th>Ne oluyor</th></tr>
-    <tr><td>Kota dolarsa</td><td>Hata mesajı yerine sakin bir cevap: biraz bekleyip tekrar sorması söyleniyor</td></tr>
-    <tr><td>İnternet kesilirse</td><td>İstek arayla üç kez yeniden deneniyor; olmazsa bağlantıyı kontrol etmesi söyleniyor</td></tr>
-    <tr><td>Ses efekti üretilemezse</td><td>Efektsiz düz ses çalınıyor — asistan susmuyor</td></tr>
-    <tr><td>Ses servisi çalışmazsa</td><td>Tamamen çevrimdışı yedek ses devreye giriyor</td></tr>
-    <tr><td>Mikrofon yoksa</td><td>Sessizce çökmek yerine durumu sesli bildiriyor, yazarak devam edilebiliyor</td></tr>
+    <tr><th data-en="If this breaks">Ne bozulursa</th><th data-en="What happens">Ne oluyor</th></tr>
+    <tr><td data-en="Quota runs out">Kota dolarsa</td><td data-en="A calm reply instead of an error message: it's told to wait a bit and ask again">Hata mesajı yerine sakin bir cevap: biraz bekleyip tekrar sorması söyleniyor</td></tr>
+    <tr><td data-en="Internet drops">İnternet kesilirse</td><td data-en="The request is retried three times with a delay; if it still fails, it's told to check the connection">İstek arayla üç kez yeniden deneniyor; olmazsa bağlantıyı kontrol etmesi söyleniyor</td></tr>
+    <tr><td data-en="Sound effect fails to generate">Ses efekti üretilemezse</td><td data-en="Plain voice plays without the effect — the assistant doesn't go silent">Efektsiz düz ses çalınıyor — asistan susmuyor</td></tr>
+    <tr><td data-en="Voice service is down">Ses servisi çalışmazsa</td><td data-en="A fully offline backup voice takes over">Tamamen çevrimdışı yedek ses devreye giriyor</td></tr>
+    <tr><td data-en="No microphone">Mikrofon yoksa</td><td data-en="Instead of failing silently, it announces the situation out loud and can continue by typing">Sessizce çökmek yerine durumu sesli bildiriyor, yazarak devam edilebiliyor</td></tr>
   </table>
-  <p>Ortak ilke şu: <strong>asistan hiçbir durumda sessizce ölmüyor.</strong> Sesli bir asistanda
+  <p data-en="The shared principle: <strong>the assistant never dies silently, under any condition.</strong> In a voice assistant, no response is worse than an error message — the user can't tell whether the system is working at all.">Ortak ilke şu: <strong>asistan hiçbir durumda sessizce ölmüyor.</strong> Sesli bir asistanda
   cevapsızlık, hata mesajından daha kötüdür — kullanıcı sistemin çalışıp çalışmadığını bilemez.</p>
 </div></section>
 
 <!-- ============ 09 BAŞARAMADIĞIM ============ -->
 <section id="basarisiz"><div class="wrap">
-  <div class="sec-no">09 — Başaramadığım şey</div>
-  <h2>Ses klonlaması ve gerçek bir tavan</h2>
-  <p>Asistanın, ilham aldığım karakterin sesiyle konuşmasını istiyordum. Bunun için yerel
+  <div class="sec-no" data-en="09 — What I didn't pull off">09 — Başaramadığım şey</div>
+  <h2 data-en="Voice cloning, and a real ceiling">Ses klonlaması ve gerçek bir tavan</h2>
+  <p data-en="I wanted the assistant to speak with the voice of the character that inspired it. For this I set up a locally-running voice cloning model, and even set up a separate music-separation model to strip the music out of the source recordings.">Asistanın, ilham aldığım karakterin sesiyle konuşmasını istiyordum. Bunun için yerel
   çalışan bir ses klonlama modeli kurdum, hatta kaynak kayıtlardaki müziği sesten ayırmak için
   ayrı bir müzik ayırma modeli daha kurdum.</p>
-  <p>Sonuç kabul edilebilir değildi. Elimdeki kaynak kayıtların neredeyse tamamında arkada
+  <p data-en="The result wasn't acceptable. Almost all of the source recordings I had contained background music; the traces left in the voice after separation capped the clone's quality. Some words came out stretched, the tone wavered. Working at it more wasn't going to remove that ceiling: <strong>the problem wasn't the method, it was the data</strong>.">Sonuç kabul edilebilir değildi. Elimdeki kaynak kayıtların neredeyse tamamında arkada
   müzik vardı; müzik ayrıldıktan sonra seste kalan izler klonun kalitesini sınırladı. Bazı
   kelimelerde uzamalar, tonda dalgalanmalar kaldı. Daha fazla uğraşmak bu tavanı
   kaldırmayacaktı: <strong>sorun yöntemde değil, veride</strong>ydi.</p>
-  <p>Bunun üzerine hedefi değiştirdim. Asistan zaten bir yapay zeka olduğuna göre, birini
+  <p data-en="So I changed the target. Since the assistant is already an AI, a clean voice that <em>deliberately</em> sounds like a machine was more honest than a flawed voice imitating someone. The effect chain in the previous section is the result of that decision.">Bunun üzerine hedefi değiştirdim. Asistan zaten bir yapay zeka olduğuna göre, birini
   taklit eden kusurlu bir ses yerine <em>bilerek makine gibi konuşan</em> temiz bir ses daha
   doğruydu. Önceki bölümdeki efekt zinciri bu kararın sonucu.</p>
-  <p class="caption">Bu bölümü kitapçıkta tuttum, çünkü projenin en çok şey öğrendiğim kısmı
+  <p class="caption" data-en="I kept this section in the write-up because it's where I learned the most on this project: recognizing when an approach needs to be abandoned.">Bu bölümü kitapçıkta tuttum, çünkü projenin en çok şey öğrendiğim kısmı
   burasıydı: bir yaklaşımın ne zaman terk edilmesi gerektiğini anlamak.</p>
 </div></section>
 
 <!-- ============ 10 SIRADAKİ ============ -->
 <section id="sirada"><div class="wrap">
-  <div class="sec-no">10 — Sıradaki adımlar</div>
-  <h2>Bundan sonra</h2>
+  <div class="sec-no" data-en="10 — Next steps">10 — Sıradaki adımlar</div>
+  <h2 data-en="From here on">Bundan sonra</h2>
   <ul>
-    <li><strong>Yeni araçlar:</strong> ekran görüntüsü alma, ses ve parlaklık kontrolü,
+    <li data-en="<strong>New tools:</strong> taking screenshots, volume and brightness control, setting reminders, playing music"><strong>Yeni araçlar:</strong> ekran görüntüsü alma, ses ve parlaklık kontrolü,
     hatırlatıcı kurma, müzik çalma</li>
-    <li><strong>Uyandırma kelimesi:</strong> düğmeye basmadan, adıyla çağrılınca dinlemeye
+    <li data-en="<strong>Wake word:</strong> starting to listen when called by name, without pressing a button"><strong>Uyandırma kelimesi:</strong> düğmeye basmadan, adıyla çağrılınca dinlemeye
     geçmesi</li>
-    <li><strong>Kalıcı hafıza:</strong> sohbet geçmişi şu an uygulama kapanınca siliniyor;
+    <li data-en="<strong>Persistent memory:</strong> chat history currently clears when the app closes; remembering personal preferences across sessions"><strong>Kalıcı hafıza:</strong> sohbet geçmişi şu an uygulama kapanınca siliniyor;
     kişisel tercihlerin oturumlar arası hatırlanması</li>
-    <li><strong>Ses klonlaması:</strong> müziksiz ve temiz bir kaynak kayıt bulunursa yeniden
+    <li data-en="<strong>Voice cloning:</strong> worth retrying if a clean, music-free source recording turns up"><strong>Ses klonlaması:</strong> müziksiz ve temiz bir kaynak kayıt bulunursa yeniden
     denenebilir</li>
   </ul>
 </div></section>
 
 <footer><div class="wrap">
   <p class="name">ÖMER GÜNEŞ</p>
-  <p>Ötüken kişisel bir projedir; ticari olarak dağıtılmamakta ve satılmamaktadır.</p>
+  <p data-en="Ötüken is a personal project; it is not commercially distributed or sold.">Ötüken kişisel bir projedir; ticari olarak dağıtılmamakta ve satılmamaktadır.</p>
   <p style="margin-top:14px">
-    <a href="index.html">Portföy</a> &nbsp;·&nbsp;
-    <a href="record-draft.html">Record Draft vaka incelemesi</a> &nbsp;·&nbsp;
+    <a href="index.html" data-en="Portfolio">Portföy</a> &nbsp;·&nbsp;
+    <a href="record-draft.html" data-en="Record Draft case study">Record Draft vaka incelemesi</a> &nbsp;·&nbsp;
     <a href="#LINKEDIN">LinkedIn</a>
   </p>
-  <p class="legal">Arayüzdeki kurt görseli ve "Sakin ol ve plana güven" ifadesi Börü 2039
+  <p class="legal" data-en="The wolf visual in the interface and the phrase &quot;Stay calm and trust the plan&quot; are inspired by the film Börü 2039; the related rights belong to its producers. This page is a technical write-up of a fan project built for personal use.">Arayüzdeki kurt görseli ve "Sakin ol ve plana güven" ifadesi Börü 2039
   filminden esinlenilmiştir; ilgili haklar yapımcılarına aittir. Bu sayfa, kişisel kullanım
   için geliştirilen bir hayran projesinin teknik anlatımıdır.</p>
 </div></footer>
+
+<script>
+(function () {
+  const i18nEls   = document.querySelectorAll('[data-en]');
+  const pageTitle = document.getElementById('page-title');
+  const langBtn      = document.getElementById('lang-btn');
+  const langBtnLabel = document.getElementById('lang-btn-label');
+  const langMenu      = document.getElementById('lang-menu');
+
+  i18nEls.forEach(el => { el.dataset.tr = el.innerHTML; });
+
+  function setLanguage(lang) {
+    window.currentLang = lang;
+    i18nEls.forEach(el => {
+      el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.tr;
+    });
+    if (pageTitle) document.title = lang === 'en' ? pageTitle.dataset.en : pageTitle.dataset.tr;
+    document.documentElement.lang = lang;
+    if (langBtnLabel) langBtnLabel.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lang-option').forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.lang === lang);
+    });
+    localStorage.setItem('site-lang', lang);
+  }
+
+  if (langBtn && langMenu) {
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !langMenu.classList.contains('hidden');
+      langMenu.classList.toggle('hidden', isOpen);
+      langBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  }
+
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      setLanguage(opt.dataset.lang);
+      langMenu.classList.add('hidden');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', () => {
+    if (langMenu) langMenu.classList.add('hidden');
+    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  const savedLang = localStorage.getItem('site-lang') === 'en' ? 'en' : 'tr';
+  setLanguage(savedLang);
+})();
+</script>
 
 </body>
 </html>
