@@ -174,6 +174,81 @@
       box-shadow: 0 0 10px rgba(255, 92, 0, 0.3);
     }
 
+    /* Staj belgesi önizleme kartı */
+    .belge-list {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .belge {
+      display: block;
+      width: 150px;
+      text-decoration: none;
+    }
+    .belge .belge-img {
+      height: 100px;
+      border: 1px solid rgba(91, 65, 55, 0.6);
+      border-radius: 4px;
+      overflow: hidden;
+      background: #0e0e10;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .belge .belge-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      filter: saturate(0.9);
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .belge:hover .belge-img {
+      border-color: #ffb59a;
+      box-shadow: 0 0 12px rgba(255, 92, 0, 0.25);
+    }
+    .belge:hover .belge-img img {
+      filter: none;
+      transform: scale(1.03);
+    }
+    .belge span {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: #ab897d;
+      margin-top: 8px;
+      transition: color 0.2s;
+    }
+    .belge:hover span { color: #ffb59a; }
+
+    /* "İşe açığım" rozeti */
+    .acik-rozet {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(255, 92, 0, 0.45);
+      background: rgba(255, 92, 0, 0.08);
+      border-radius: 9999px;
+      padding: 7px 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: #ffb59a;
+    }
+    .acik-rozet .led {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff5c00;
+      box-shadow: 0 0 8px rgba(255, 92, 0, 0.9);
+      animation: rozet-nabiz 2s ease-in-out infinite;
+    }
+    @keyframes rozet-nabiz {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
     /* Proje kartı stilleri */
     .project-card:hover {
       box-shadow: 0 0 32px -8px rgba(255, 92, 0, 0.15);
@@ -414,6 +489,9 @@
         <p class="text-2xl md:text-3xl text-on-surface tracking-widest uppercase opacity-90 text-bloom">
           He is a computer scientist
         </p>
+        <a href="#iletisim" class="acik-rozet mt-6">
+          <span class="led"></span><span data-en="Open to new opportunities">Yeni fırsatlara açığım</span>
+        </a>
       </div>
 
       <!-- HUD Dekoratif Elementler -->
@@ -457,33 +535,65 @@
               <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;">
                 Karadeniz Teknik Üniversitesi
               </h3>
-              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="Computer Science · 3rd Year">
-                Bilgisayar Bilimleri · 3. Sınıf
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="Computer Science · 4th Year">
+                Bilgisayar Bilimleri · 4. Sınıf
               </p>
             </div>
 
-            <!-- Staj -->
+            <!-- Staj 1 -->
             <div class="relative pl-6 pb-10 border-l border-outline-variant/40">
               <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-surface-container-high border border-outline-variant"></div>
-              <p class="section-label mb-1" style="font-size:12px;color:#ab897d;" data-en="Completed">Tamamlandı</p>
-              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;" data-en="Internship — 1st Experience">
-                Staj — 1. Deneyim
+              <p class="section-label mb-1" style="font-size:12px;color:#ab897d;" data-en="Apr — May 2026">Nis — May 2026</p>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;" data-en="Software Development Internship">
+                Yazılım Geliştirme Stajı
               </h3>
-              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="Completed a software development internship.">
-                Yazılım geliştirme stajı tamamlandı.
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="TNC Group — Software Persona · Hands-on program covering databases, JavaScript, UI/UX and mobile development.">
+                TNC Group — Software Persona · Veri tabanı, JavaScript, UI/UX ve mobil geliştirme üzerine uygulamalı program.
               </p>
+              <div class="belge-list">
+                <a class="belge" href="belgeler/staj1-sertifika.pdf" target="_blank" rel="noopener noreferrer">
+                  <div class="belge-img"><img src="img/belgeler/staj1-sertifika.jpg" alt="Staj 1 katılım sertifikası" loading="lazy"></div>
+                  <span data-en="Certificate">Sertifika</span>
+                </a>
+                <a class="belge" href="belgeler/staj1-referans.pdf" target="_blank" rel="noopener noreferrer">
+                  <div class="belge-img"><img src="img/belgeler/staj1-referans.jpg" alt="Staj 1 referans mektubu" loading="lazy"></div>
+                  <span data-en="Reference letter">Referans mektubu</span>
+                </a>
+              </div>
             </div>
 
-            <!-- Aktif arama -->
+            <!-- Staj 2 -->
+            <div class="relative pl-6 pb-10 border-l border-outline-variant/40">
+              <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-surface-container-high border border-outline-variant"></div>
+              <p class="section-label mb-1" style="font-size:12px;color:#ab897d;" data-en="Jul — Aug 2026">Tem — Ağu 2026</p>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;" data-en="Software Development Internship — 2">
+                Yazılım Geliştirme Stajı — 2
+              </h3>
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="TNC Group — Software Persona · 40-hour program covering databases, JavaScript, backend and mobile app development.">
+                TNC Group — Software Persona · 40 saatlik program; veri tabanı, JavaScript, backend ve mobil uygulama geliştirme.
+              </p>
+              <div class="belge-list">
+                <a class="belge" href="belgeler/staj2-sertifika.pdf" target="_blank" rel="noopener noreferrer">
+                  <div class="belge-img"><img src="img/belgeler/staj2-sertifika.jpg" alt="Staj 2 katılım sertifikası" loading="lazy"></div>
+                  <span data-en="Certificate">Sertifika</span>
+                </a>
+                <a class="belge" href="belgeler/staj2-referans.pdf" target="_blank" rel="noopener noreferrer">
+                  <div class="belge-img"><img src="img/belgeler/staj2-referans.jpg" alt="Staj 2 referans mektubu" loading="lazy"></div>
+                  <span data-en="Reference letter">Referans mektubu</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- İş arayışı -->
             <div class="relative pl-6 border-l border-outline-variant/20">
               <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full border-2 border-primary animate-pulse"
                    style="background:transparent;"></div>
               <p class="section-label text-primary mb-1" style="font-size:12px;" data-en="Currently">Şu An</p>
-              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;" data-en="Looking for 2nd Internship">
-                2. Staj Arayışı
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:#e4e2e4;margin-bottom:4px;" data-en="Looking for a Job">
+                İş Arıyorum
               </h3>
-              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="Open to new opportunities, actively searching.">
-                Yeni fırsatlara açık, aktif olarak arıyorum.
+              <p style="font-family:'Space Grotesk',sans-serif;font-size:15px;color:#e4beb1;" data-en="Open to Flutter / mobile development roles. Considering new opportunities.">
+                Flutter / mobil geliştirme pozisyonlarına açığım. Yeni fırsatları değerlendiriyorum.
               </p>
             </div>
           </div>
@@ -723,8 +833,8 @@
         <div class="section-divider mb-8"></div>
         <h2 class="section-title text-4xl md:text-5xl mb-4" data-en="Get in Touch">Bana Ulaş</h2>
         <p class="mb-12" style="font-family:'Space Grotesk',sans-serif;font-size:18px;line-height:28px;color:#e4beb1;max-width:520px;"
-           data-en="Have a project idea, an internship offer, or just want to say hello? I'm looking forward to your message.">
-          Bir proje fikrin mi var, staj teklifi mi, yoksa sadece merhaba mı demek istiyorsun? Mesajını bekliyorum.
+           data-en="Have a project idea, a job offer, or just want to say hello? I'm looking forward to your message.">
+          Bir proje fikrin mi var, iş teklifi mi, yoksa sadece merhaba mı demek istiyorsun? Mesajını bekliyorum.
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
