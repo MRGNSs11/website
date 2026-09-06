@@ -159,6 +159,8 @@
                    line-height:1;transition:transform .2s;flex:none}
   .akordeon details[open] .ak-pl{transform:rotate(45deg)}
   .akordeon .ak-ic{padding:0 0 42px 142px}
+  .akordeon .ak-ic.genis{padding-left:0}   /* uygulama ızgarası tam genişlik kullansın */
+  .akordeon .ak-ic h2{margin-top:0}
 
   /* ---------- uygulama ızgarası ---------- */
   .grid-app{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px}
@@ -296,8 +298,8 @@
   <div class="fact"><u data-en="Published so far">Şu ana kadar</u><b data-en="2 apps">2 uygulama</b></div>
 </div></div>
 
-<!-- ============ NEDEN + KURALLAR (akordeon) ============ -->
-<section id="neden"><div class="wrap"><div class="akordeon">
+<!-- ============ BÖLÜMLER (akordeon) ============ -->
+<section id="neden"><div class="wide"><div class="akordeon">
 
   <details>
     <summary>
@@ -376,12 +378,14 @@
     </div>
   </details>
 
-</div></div></section>
-
-<!-- ============ UYGULAMALAR ============ -->
-<section id="uygulamalar"><div class="wide">
-  <p class="sec-no" data-en="03 — The apps">03 — Uygulamalar</p>
-  <h2 data-en="What has shipped so far">Şu ana kadar çıkanlar</h2>
+  <details id="uygulamalar" open>
+    <summary>
+      <span class="ak-no">03</span>
+      <span class="ak-bas" data-en="The apps">Uygulamalar</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic genis">
+      <h2 data-en="What has shipped so far">Şu ana kadar çıkanlar</h2>
 
   <div class="grid-app">
 
@@ -414,21 +418,31 @@
     </span>
 
   </div>
-</div></section>
-<section id="kapanis"><div class="wrap">
-  <p class="sec-no" data-en="04 — Inspect it">04 — İncele</p>
-  <h2 data-en="The code is the point">Asıl mesele kodun kendisi</h2>
+    </div>
+  </details>
 
-  <p data-en="Each app folder carries a short case study: what was built, what was deliberately left out, the one technical decision behind it, and how it was verified. Everything else is in the source.">
-    Her uygulama klasöründe kısa bir vaka incelemesi var: ne yapıldı, ne bilerek dışarıda
-    bırakıldı, arkasındaki tek teknik karar ne, nasıl doğrulandı. Gerisi kaynak kodda.
-  </p>
+  <details id="kapanis">
+    <summary>
+      <span class="ak-no">04</span>
+      <span class="ak-bas" data-en="Inspect it">İncele</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+      <h2 data-en="The code is the point">Asıl mesele kodun kendisi</h2>
 
-  <div class="cta-row">
-    <a class="cta" href="https://github.com/MRGNSs11/weekly-flutter-apps-1" target="_blank" rel="noopener noreferrer" data-en="Browse the repository →">Depoyu incele →</a>
-    <a class="cta ghost" href="index.html" data-en="Back to portfolio">Portföye dön</a>
-  </div>
-</div></section>
+      <p data-en="Each app folder carries a short case study: what was built, what was deliberately left out, the one technical decision behind it, and how it was verified. Everything else is in the source.">
+        Her uygulama klasöründe kısa bir vaka incelemesi var: ne yapıldı, ne bilerek dışarıda
+        bırakıldı, arkasındaki tek teknik karar ne, nasıl doğrulandı. Gerisi kaynak kodda.
+      </p>
+
+      <div class="cta-row">
+        <a class="cta" href="https://github.com/MRGNSs11/weekly-flutter-apps-1" target="_blank" rel="noopener noreferrer" data-en="Browse the repository →">Depoyu incele →</a>
+        <a class="cta ghost" href="index.html" data-en="Back to portfolio">Portföye dön</a>
+      </div>
+    </div>
+  </details>
+
+</div></div></section>
 
 <footer><div class="wrap">
   <p class="name">Ömer Güneş</p>
@@ -487,6 +501,16 @@
 
   const savedLang = localStorage.getItem('site-lang') === 'en' ? 'en' : 'tr';
   setLanguage(savedLang);
+
+  // Menüden veya adres çubuğundan bir bölüme gidilince o bölüm kapalıysa açılsın
+  function bolumuAc(hedef) {
+    const el = document.querySelector(hedef);
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', () => bolumuAc(a.getAttribute('href')));
+  });
+  if (location.hash) bolumuAc(location.hash);
 })();
 </script>
 
