@@ -169,6 +169,29 @@
     .topbar{display:none}
     section{page-break-inside:avoid;border-bottom:none;padding:28px 0}
   }
+
+  /* ---------- akordeon bolumler ---------- */
+  .akordeon details{border-bottom:1px solid var(--line)}
+  .akordeon details:first-of-type{border-top:1px solid var(--line)}
+  .akordeon summary{list-style:none;cursor:pointer;padding:30px 0;display:flex;
+                    align-items:center;gap:32px}
+  .akordeon summary::-webkit-details-marker{display:none}
+  .akordeon .ak-no{font-size:64px;font-weight:900;letter-spacing:-.05em;color:#26262d;
+                   line-height:.8;flex:none;width:110px;transition:color .2s}
+  .akordeon details[open] .ak-no,.akordeon summary:hover .ak-no{color:#ff2a2a}
+  .akordeon .ak-bas{font-size:26px;font-weight:800;letter-spacing:-.025em;color:var(--ink);
+                    line-height:1.2;max-width:56ch}
+  .akordeon .ak-pl{margin-left:auto;color:#ff2a2a;font-size:26px;font-weight:300;
+                   line-height:1;transition:transform .2s;flex:none}
+  .akordeon details[open] .ak-pl{transform:rotate(45deg)}
+  .akordeon .ak-ic{padding:0 0 40px 142px}
+  .akordeon .ak-ic > *:first-child{margin-top:0}
+  @media(max-width:820px){
+    .akordeon summary{gap:18px;padding:22px 0}
+    .akordeon .ak-no{font-size:44px;width:62px}
+    .akordeon .ak-bas{font-size:21px}
+    .akordeon .ak-ic{padding-left:0;padding-bottom:30px}
+  }
 </style>
 </head>
 <body>
@@ -223,9 +246,17 @@
 </div></div>
 
 <!-- ============ 02 NEDEN ============ -->
-<section id="neden"><div class="wrap">
-  <div class="sec-no" data-en="02 — Why this project">02 — Neden bu proje</div>
-  <h2 data-en="Actually making the &quot;an assistant I talk to&quot; idea work">"Sesle konuştuğum bir asistan" fikrini gerçekten çalışır hale getirmek</h2>
+<!-- ============ BOLUMLER (akordeon) ============ -->
+<section id="bolumler"><div class="wrap"><div class="akordeon">
+
+  <details id="neden" open>
+    <summary>
+      <span class="ak-no">02</span>
+      <span class="ak-bas" data-en="Why this project">Neden bu proje</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="Actually making the &quot;an assistant I talk to&quot; idea work">"Sesle konuştuğum bir asistan" fikrini gerçekten çalışır hale getirmek</h2>
   <p data-en="Everyone likes the movie idea of an AI assistant; there are hundreds of &quot;JARVIS clone&quot; repos online too. But most of them either speak English, depend on a paid API, or run on memorized patterns: hearing the word &quot;weather&quot; triggers the weather function, without ever actually understanding the sentence.">Filmlerdeki yapay zeka asistanı fikri herkesin hoşuna gider; internette de yüzlerce
   "JARVIS klonu" deposu vardır. Ama bunların çoğu ya İngilizce konuşur, ya ücretli bir API'ye
   bağlıdır, ya da ezberlenmiş kalıplarla çalışır: "hava durumu" kelimesini duyunca hava
@@ -240,12 +271,17 @@
     asistanın kendisine harcanacak</li>
     <li data-en="<strong>Turkish as a first-class citizen:</strong> listening, replies, and voice synthesis will all be in Turkish"><strong>Türkçe birinci sınıf vatandaş:</strong> dinleme, cevap ve ses üretimi Türkçe olacak</li>
   </ul>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 03 NASIL ÇALIŞIYOR ============ -->
-<section id="nasil"><div class="wrap">
-  <div class="sec-no" data-en="03 — How it works">03 — Nasıl çalışıyor</div>
-  <h2 data-en="The path a sentence takes">Bir cümlenin izlediği yol</h2>
+  <details id="nasil" open>
+    <summary>
+      <span class="ak-no">03</span>
+      <span class="ak-bas" data-en="How it works">Nasıl çalışıyor</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="The path a sentence takes">Bir cümlenin izlediği yol</h2>
   <div class="flow">
     <span class="node" data-en="Microphone">Mikrofon</span><span class="op">→</span>
     <span class="node" data-en="Turkish STT">Türkçe STT</span><span class="op">→</span>
@@ -267,12 +303,17 @@
   Gemini'ye gidiyor; model cevabı doğrudan üretebiliyorsa üretiyor, gerçek bir bilgi ya da
   eylem gerekiyorsa önce ilgili aracı çağırıyor. Dönen cevap hem ekrana yazılıyor hem sesli
   okunuyor.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 04 MİMARİ ============ -->
-<section id="mimari"><div class="wrap">
-  <div class="sec-no" data-en="04 — Architecture">04 — Mimari</div>
-  <h2 data-en="Five pieces, all free">Beş parça, hepsi ücretsiz</h2>
+  <details id="mimari">
+    <summary>
+      <span class="ak-no">04</span>
+      <span class="ak-bas" data-en="Architecture">Mimari</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="Five pieces, all free">Beş parça, hepsi ücretsiz</h2>
   <p data-en="There was one question when choosing every piece: does this have a free, durable equivalent? Any piece tied to a paid service meant the project would stop working someday.">Her parçayı seçerken tek soru vardı: bunun ücretsiz ve kalıcı bir karşılığı var mı?
   Ücretli bir servise bağlanan her parça, projenin bir gün duracağı anlamına geliyordu.</p>
   <table>
@@ -296,12 +337,17 @@
   eklerle geliyordu. Hepsini çıkardım; arkasına kendi temiz beynimi yazdım. Bir projeyi
   devralmanın en zor kısmı kod eklemek değil, <strong>ihtiyacım olmayanı silmeye cesaret
   etmek</strong>ti — çünkü silinen her satır, sonra bakmam gerekmeyecek bir satır.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 05 ARAÇ KULLANIMI ============ -->
-<section id="arac"><div class="wrap">
-  <div class="sec-no" data-en="05 — Tool use">05 — Araç kullanımı</div>
-  <h2 data-en="From memorized patterns to model judgment">Kalıp ezberinden model kararına</h2>
+  <details id="arac">
+    <summary>
+      <span class="ak-no">05</span>
+      <span class="ak-bas" data-en="Tool use">Araç kullanımı</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="From memorized patterns to model judgment">Kalıp ezberinden model kararına</h2>
   <p data-en="The first version worked the classic way: if the sentence contains &quot;weather&quot;, call the weather function; if it contains &quot;time&quot;, say the time. This looks good in demo videos and breaks in real use. The sentence &quot;Will I be cold if I go outside?&quot; never contains the word &quot;weather&quot;.">İlk sürüm klasik yöntemle çalışıyordu: cümlede "hava" geçiyorsa hava fonksiyonunu çağır,
   "saat" geçiyorsa saati söyle. Bu yöntem demo videolarında iyi görünür, gerçek kullanımda kırılır.
   "Dışarı çıksam üşür müyüm?" cümlesinde "hava" kelimesi geçmez.</p>
@@ -331,12 +377,17 @@
   veriliyor. Fonksiyonun açıklaması ve parametre tipleri, modelin o aracı ne zaman ve nasıl
   çağıracağını belirleyen tek kaynak. Yani burada <strong>dokümantasyon süs değil, çalışan
   koddur</strong>; açıklamayı zayıf yazarsanız model aracı yanlış zamanda çağırır.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 06 SES ============ -->
-<section id="ses"><div class="wrap">
-  <div class="sec-no" data-en="06 — Voice">06 — Ses</div>
-  <h2 data-en="Making a natural voice sound like AI">Doğal bir sesi yapay zekaya benzetmek</h2>
+  <details id="ses">
+    <summary>
+      <span class="ak-no">06</span>
+      <span class="ak-bas" data-en="Voice">Ses</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="Making a natural voice sound like AI">Doğal bir sesi yapay zekaya benzetmek</h2>
   <p data-en="The assistant's voice was the project's personality; a crackly robot voice would have cheapened everything. I started with a free, natural Turkish male voice, then ran it through an effect chain:">Asistanın sesi projenin karakteriydi; robot gibi cızırtılı bir ses her şeyi ucuzlatırdı.
   Ücretsiz doğal Türkçe bir erkek sesiyle başladım, sonra o sesi bir efekt zincirinden
   geçirdim:</p>
@@ -350,12 +401,17 @@
   <p data-en="The result is the voice heard in the video at the top: the clarity of natural speech, the tone of a machine. The advantage isn't just aesthetic — it's fully controllable. Deepening the voice, dialing back the reverb, or turning off the buzz is a one-line setting.">Sonuç, kapaktaki videoda duyulan ses: doğal bir konuşmanın anlaşılırlığı, makinenin tonu.
   Bunun avantajı sadece estetik değil — tamamen kontrol edilebilir. Sesi kalınlaştırmak,
   yankıyı azaltmak ya da vızıltıyı kapatmak tek satırlık bir ayar.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 07 KARARLAR ============ -->
-<section id="kararlar"><div class="wrap">
-  <div class="sec-no" data-en="07 — Decisions I made">07 — Verdiğim kararlar</div>
-  <h2 data-en="Forks in the road">Yol ayrımları</h2>
+  <details id="kararlar">
+    <summary>
+      <span class="ak-no">07</span>
+      <span class="ak-bas" data-en="Decisions I made">Verdiğim kararlar</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="Forks in the road">Yol ayrımları</h2>
 
   <div class="dec">
     <b data-en="I didn't write from scratch — I took over a mature base">Sıfırdan yazmadım, olgun bir tabanı devraldım</b>
@@ -384,12 +440,17 @@
     sonucu "olmuş sayıp" geçmek yerine yaklaşımı tamamen değiştirdim.</p>
     <p class="why" data-en="Why: as the user, this was a voice I'd hear every day; &quot;it'll do&quot; wasn't enough.">Neden: kullanıcı olarak her gün duyacağım bir sesti; "idare eder" yetmezdi.</p>
   </div>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 08 DAYANIKLILIK ============ -->
-<section id="dayaniklilik"><div class="wrap">
-  <div class="sec-no" data-en="08 — Resilience">08 — Dayanıklılık</div>
-  <h2 data-en="Five places this assistant can break">Bu asistanın bozulabileceği beş yer</h2>
+  <details id="dayaniklilik">
+    <summary>
+      <span class="ak-no">08</span>
+      <span class="ak-bas" data-en="Resilience">Dayanıklılık</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="Five places this assistant can break">Bu asistanın bozulabileceği beş yer</h2>
   <p data-en="The easiest thing to neglect in a personal project is error handling — because on your own computer, things usually go fine. In Ötüken, every external dependency has a fallback plan:">Kişisel bir projede en kolay ihmal edilen şey hata durumlarıdır — çünkü kendi
   bilgisayarınızda genelde her şey yolunda gider. Ötüken'de her dış bağımlılığın bir
   düşme planı var:</p>
@@ -403,12 +464,17 @@
   </table>
   <p data-en="The shared principle: <strong>the assistant never dies silently, under any condition.</strong> In a voice assistant, no response is worse than an error message — the user can't tell whether the system is working at all.">Ortak ilke şu: <strong>asistan hiçbir durumda sessizce ölmüyor.</strong> Sesli bir asistanda
   cevapsızlık, hata mesajından daha kötüdür — kullanıcı sistemin çalışıp çalışmadığını bilemez.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 09 BAŞARAMADIĞIM ============ -->
-<section id="basarisiz"><div class="wrap">
-  <div class="sec-no" data-en="09 — What I didn't pull off">09 — Başaramadığım şey</div>
-  <h2 data-en="Voice cloning, and a real ceiling">Ses klonlaması ve gerçek bir tavan</h2>
+  <details id="basarisiz">
+    <summary>
+      <span class="ak-no">09</span>
+      <span class="ak-bas" data-en="What I didn't pull off">Başaramadığım şey</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="Voice cloning, and a real ceiling">Ses klonlaması ve gerçek bir tavan</h2>
   <p data-en="I wanted the assistant to speak with the voice of the character that inspired it. For this I set up a locally-running voice cloning model, and even set up a separate music-separation model to strip the music out of the source recordings.">Asistanın, ilham aldığım karakterin sesiyle konuşmasını istiyordum. Bunun için yerel
   çalışan bir ses klonlama modeli kurdum, hatta kaynak kayıtlardaki müziği sesten ayırmak için
   ayrı bir müzik ayırma modeli daha kurdum.</p>
@@ -421,12 +487,17 @@
   doğruydu. Önceki bölümdeki efekt zinciri bu kararın sonucu.</p>
   <p class="caption" data-en="I kept this section in the write-up because it's where I learned the most on this project: recognizing when an approach needs to be abandoned.">Bu bölümü kitapçıkta tuttum, çünkü projenin en çok şey öğrendiğim kısmı
   burasıydı: bir yaklaşımın ne zaman terk edilmesi gerektiğini anlamak.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 10 SIRADAKİ ============ -->
-<section id="sirada"><div class="wrap">
-  <div class="sec-no" data-en="10 — Next steps">10 — Sıradaki adımlar</div>
-  <h2 data-en="From here on">Bundan sonra</h2>
+  <details id="sirada">
+    <summary>
+      <span class="ak-no">10</span>
+      <span class="ak-bas" data-en="Next steps">Sıradaki adımlar</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="From here on">Bundan sonra</h2>
   <ul>
     <li data-en="<strong>New tools:</strong> taking screenshots, volume and brightness control, setting reminders, playing music"><strong>Yeni araçlar:</strong> ekran görüntüsü alma, ses ve parlaklık kontrolü,
     hatırlatıcı kurma, müzik çalma</li>
@@ -437,7 +508,10 @@
     <li data-en="<strong>Voice cloning:</strong> worth retrying if a clean, music-free source recording turns up"><strong>Ses klonlaması:</strong> müziksiz ve temiz bir kaynak kayıt bulunursa yeniden
     denenebilir</li>
   </ul>
-</div></section>
+    </div>
+  </details>
+
+</div></div></section>
 
 <footer><div class="wrap">
   <p class="name">ÖMER GÜNEŞ</p>
@@ -500,6 +574,29 @@
 
   const savedLang = localStorage.getItem('site-lang') === 'en' ? 'en' : 'tr';
   setLanguage(savedLang);
+
+  // Menuden veya adres cubugundan bir bolume gidilince o bolum kapaliysa acilsin
+  function bolumuAc(hedef) {
+    try {
+      const el = document.querySelector(hedef);
+      if (el && el.tagName === 'DETAILS') el.open = true;
+    } catch (e) {}
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', () => bolumuAc(a.getAttribute('href')));
+  });
+  if (location.hash) bolumuAc(location.hash);
+
+  // Yazdirirken butun bolumler acik olsun, sonra eski haline donsun
+  let yazdirmadanOnce = [];
+  window.addEventListener('beforeprint', () => {
+    yazdirmadanOnce = [...document.querySelectorAll('.akordeon details')];
+    yazdirmadanOnce = yazdirmadanOnce.map(d => { const e = d.open; d.open = true; return [d, e]; });
+  });
+  window.addEventListener('afterprint', () => {
+    yazdirmadanOnce.forEach(([d, e]) => { d.open = e; });
+  });
+
 })();
 </script>
 

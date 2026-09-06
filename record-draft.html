@@ -186,6 +186,29 @@
     section{page-break-inside:avoid;border-bottom:none;padding:28px 0}
     a{color:var(--gold)}
   }
+
+  /* ---------- akordeon bolumler ---------- */
+  .akordeon details{border-bottom:1px solid var(--line)}
+  .akordeon details:first-of-type{border-top:1px solid var(--line)}
+  .akordeon summary{list-style:none;cursor:pointer;padding:30px 0;display:flex;
+                    align-items:center;gap:32px}
+  .akordeon summary::-webkit-details-marker{display:none}
+  .akordeon .ak-no{font-size:64px;font-weight:900;letter-spacing:-.05em;color:#1d4534;
+                   line-height:.8;flex:none;width:110px;transition:color .2s}
+  .akordeon details[open] .ak-no,.akordeon summary:hover .ak-no{color:#d7b45a}
+  .akordeon .ak-bas{font-size:26px;font-weight:800;letter-spacing:-.025em;color:var(--ink);
+                    line-height:1.2;max-width:56ch}
+  .akordeon .ak-pl{margin-left:auto;color:#d7b45a;font-size:26px;font-weight:300;
+                   line-height:1;transition:transform .2s;flex:none}
+  .akordeon details[open] .ak-pl{transform:rotate(45deg)}
+  .akordeon .ak-ic{padding:0 0 40px 142px}
+  .akordeon .ak-ic > *:first-child{margin-top:0}
+  @media(max-width:820px){
+    .akordeon summary{gap:18px;padding:22px 0}
+    .akordeon .ak-no{font-size:44px;width:62px}
+    .akordeon .ak-bas{font-size:21px}
+    .akordeon .ak-ic{padding-left:0;padding-bottom:30px}
+  }
 </style>
 </head>
 <body>
@@ -239,9 +262,17 @@
 </div></div>
 
 <!-- ============ 02 NEDEN ============ -->
-<section id="neden"><div class="wrap">
-  <div class="sec-no" data-en="02 — Why this game">02 — Neden bu oyun</div>
-  <h2 data-en="A player who loves building a squad, but doesn't want to give a simulation their whole evening">Kadro kurmayı seven, ama bir simülasyona akşamını vermek istemeyen oyuncu</h2>
+<!-- ============ BOLUMLER (akordeon) ============ -->
+<section id="bolumler"><div class="wrap"><div class="akordeon">
+
+  <details id="neden" open>
+    <summary>
+      <span class="ak-no">02</span>
+      <span class="ak-bas" data-en="Why this game">Neden bu oyun</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="A player who loves building a squad, but doesn't want to give a simulation their whole evening">Kadro kurmayı seven, ama bir simülasyona akşamını vermek istemeyen oyuncu</h2>
   <p data-en="One of the most-played modes in football games is squad building: picking the best eleven from a limited pool. But the games around this mode are either buried inside a massive management simulation, or free games that wedge an ad between every round.">Futbol oyunlarında en çok oynanan modlardan biri kadro kurma: sınırlı seçeneklerden en iyi
   on biri çıkarmak. Ama bu modun etrafındaki oyunlar ya devasa bir menajerlik simülasyonunun içine
   gömülü ya da her turun arasına reklam sıkıştıran ücretsiz oyunlar.</p>
@@ -254,12 +285,17 @@
     <li data-en="Players following the 2026 World Cup, curious about the 48-team tournament format">2026 Dünya Kupası'nı takip eden, 48 takımlık turnuva formatını merak eden oyuncu</li>
     <li data-en="The game is translated into 10 languages so the content is global; full Turkish translation makes Turkey the priority market">Oyun 10 dile çevrildiği için içerik küresel; Türkçe tam çeviri sayesinde öncelikli pazar Türkiye</li>
   </ul>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 03 ÜRÜN TURU ============ -->
-<section id="urun"><div class="wrap">
-  <div class="sec-no" data-en="03 — Product tour">03 — Ürün turu</div>
-  <h2 data-en="What a game round looks like">Bir oyun turu nasıl geçiyor</h2>
+  <details id="urun" open>
+    <summary>
+      <span class="ak-no">03</span>
+      <span class="ak-bas" data-en="Product tour">Ürün turu</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="What a game round looks like">Bir oyun turu nasıl geçiyor</h2>
 
   <div class="shots">
     <div class="shot"><img src="img/record-draft/01.png" alt="Record Draft ana menü"></div>
@@ -289,12 +325,17 @@
   <p data-en="I wrote a separate design document for every screen before touching code — the screen's purpose, the elements on it, where the user could go from there. Those documents are still in the repo, and I check them first whenever a screen needs to change.">Her ekranı koda geçmeden önce ayrı bir tasarım dokümanına yazdım — ekranın amacı, üzerindeki
   öğeler, kullanıcının oradan nereye gidebileceği. Bu dokümanlar hâlâ depoda duruyor ve bir ekranı
   değiştirmem gerektiğinde önce oraya bakıyorum.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 04 MİMARİ ============ -->
-<section id="mimari"><div class="wrap">
-  <div class="sec-no" data-en="04 — Architecture">04 — Mimari</div>
-  <h2 data-en="No server, fully offline, three packages">Sunucusuz, çevrimdışı, üç paketle</h2>
+  <details id="mimari">
+    <summary>
+      <span class="ak-no">04</span>
+      <span class="ak-bas" data-en="Architecture">Mimari</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="No server, fully offline, three packages">Sunucusuz, çevrimdışı, üç paketle</h2>
   <p data-en="The entire game runs on-device. No backend, no account system, no network calls. That's not a limitation — it was a deliberate choice: a server would have meant operating cost, privacy obligations, no offline play, and a surface that's hard to maintain alone.">Oyunun tamamı cihazda çalışıyor. Arka uç, hesap sistemi, ağ çağrısı yok. Bu bir kısıt değil,
   bilinçli bir seçimdi: sunucu demek işletme maliyeti, gizlilik yükümlülüğü, çevrimdışı çalışamama
   ve tek başına bakması zor bir yüzey demekti.</p>
@@ -315,12 +356,17 @@
     <div class="stat"><u>180</u><i data-en="Player portraits">Oyuncu portresi</i></div>
     <div class="stat"><u>10</u><i data-en="Languages supported">Desteklenen dil</i></div>
   </div>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 05 KİMYA MOTORU ============ -->
-<section id="kimya"><div class="wrap">
-  <div class="sec-no" data-en="05 — Chemistry engine">05 — Kimya motoru</div>
-  <h2 data-en="The heart of the game: three-dimensional chemistry">Oyunun kalbi: üç boyutlu kimya</h2>
+  <details id="kimya">
+    <summary>
+      <span class="ak-no">05</span>
+      <span class="ak-bas" data-en="Chemistry engine">Kimya motoru</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="The heart of the game: three-dimensional chemistry">Oyunun kalbi: üç boyutlu kimya</h2>
   <p data-en="The easiest trap in squad-building games is that picking the highest-rated player is always the right move. When that's true, the game stops being a choice and becomes reading a leaderboard.">Kadro kurma oyunlarında en kolay tuzak, en yüksek puanlı oyuncuyu almanın her zaman doğru
   hamle olmasıdır. Öyle olduğunda oyun bir seçim değil, sıralama okumaya dönüşür.</p>
   <p data-en="In Record Draft, a player's contribution to the squad isn't determined by their rating alone, but by <strong>three separate relationships with the players around them</strong>:">Record Draft'ta bir oyuncunun kadroya katkısı tek başına reytingiyle değil,
@@ -345,12 +391,17 @@
   havuzundan çok daha farklı kadrolar çıkmaya başladı.</p>
   <p class="caption" data-en="Formula and calculation details aren't shared in this document; the source code stays closed since this is the game's signature mechanic.">Formül ve hesaplama ayrıntıları bu belgede paylaşılmıyor; oyunun ayırt edici
   mekaniği olduğu için kaynak kodu kapalı tutuluyor.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 06 KARARLAR ============ -->
-<section id="kararlar"><div class="wrap">
-  <div class="sec-no" data-en="06 — Decisions I made">06 — Verdiğim kararlar</div>
-  <h2 data-en="Where I picked the right thing over the easy thing">Kolay olanı değil, doğru olanı seçtiğim yerler</h2>
+  <details id="kararlar">
+    <summary>
+      <span class="ak-no">06</span>
+      <span class="ak-bas" data-en="Decisions I made">Verdiğim kararlar</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="Where I picked the right thing over the easy thing">Kolay olanı değil, doğru olanı seçtiğim yerler</h2>
 
   <div class="dec">
     <b data-en="I completely removed ads and the spin-wheel economy">Reklam ve çark ekonomisini tamamen kaldırdım</b>
@@ -391,12 +442,17 @@
     ve reklamsız yayınlandı; kullanıcı tabanı oluşursa açılıp kapanabilir.</p>
     <p class="why" data-en="Why: there's no point breaking a game to monetize it when it has no users yet.">Neden: hiç kullanıcısı olmayan bir oyunu para kazanmak için bozmanın anlamı yok.</p>
   </div>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 07 TEST ============ -->
-<section id="test"><div class="wrap">
-  <div class="sec-no" data-en="07 — Testing approach">07 — Test yaklaşımı</div>
-  <h2 data-en="What I tested, and why I tested it">Neyi test ettim, neden onu test ettim</h2>
+  <details id="test">
+    <summary>
+      <span class="ak-no">07</span>
+      <span class="ak-bas" data-en="Testing approach">Test yaklaşımı</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="What I tested, and why I tested it">Neyi test ettim, neden onu test ettim</h2>
   <p data-en="Testing everything isn't possible on a solo project. So I concentrated tests on <strong>places that could break silently</strong>: rule engines and layout geometry. If a color is wrong, I see it with my eyes; if the chemistry score is calculated wrong, I don't.">Tek kişilik bir projede her şeyi test etmek mümkün değil. Bu yüzden testleri
   <strong>sessizce bozulabilecek yerlere</strong> yoğunlaştırdım: kural motorları ve yerleşim
   geometrisi. Bir renk yanlış olursa gözle görürüm; kimya puanı yanlış hesaplanırsa görmem.</p>
@@ -410,12 +466,17 @@
     <tr><td data-en="Saved squad">Kayıtlı kadro</td><td data-en="A saved squad is restored exactly as it was">Kaydedilen kadronun aynı şekilde geri yüklenmesi</td></tr>
   </table>
   <p class="caption" data-en="Six test files, roughly 570 lines of test code.">Altı test dosyası, yaklaşık 570 satır test kodu.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 08 KAPALI TEST ============ -->
-<section id="kapali-test"><div class="wrap">
-  <div class="sec-no" data-en="08 — Closed testing cycle">08 — Kapalı test döngüsü</div>
-  <h2 data-en="I processed feedback in four batches">Geri bildirimi dört öbekte işledim</h2>
+  <details id="kapali-test">
+    <summary>
+      <span class="ak-no">08</span>
+      <span class="ak-bas" data-en="Closed testing cycle">Kapalı test döngüsü</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="I processed feedback in four batches">Geri bildirimi dört öbekte işledim</h2>
   <p data-en="I picked test users who would genuinely care about the game's subject matter. Instead of patching feedback one item at a time, I grouped it into batches and closed each batch as its own round — so which change fixed what stayed traceable.">Test kullanıcılarını oyunun konusuyla gerçekten ilgilenecek kişilerden seçtim. Gelen geri
   bildirimi tek tek yamamak yerine öbeklere ayırdım ve her öbeği ayrı bir tur olarak kapattım —
   böylece hangi değişikliğin neyi düzelttiği izlenebilir kaldı.</p>
@@ -431,12 +492,17 @@
       <span data-en="The chemistry system moved to its three-dimensional form. Ads, the spin wheel, and the in-game currency were removed entirely.">Kimya sistemi üç boyutlu hâline taşındı. Reklam, çark ve oyun içi para birimi
       tamamen kaldırıldı.</span></div>
   </div>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 09 YAYIN ============ -->
-<section id="yayin"><div class="wrap">
-  <div class="sec-no" data-en="09 — Release process">09 — Yayın süreci</div>
-  <h2 data-en="The job doesn't end where the code ends">Kodun bittiği yerde biten bir iş değil</h2>
+  <details id="yayin">
+    <summary>
+      <span class="ak-no">09</span>
+      <span class="ak-bas" data-en="Release process">Yayın süreci</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="The job doesn't end where the code ends">Kodun bittiği yerde biten bir iş değil</h2>
   <p data-en="Getting the app into release turned out to be a learning curve separate from development. The steps I went through, in order:">Uygulamayı yayına taşımak, geliştirmeden ayrı bir öğrenme alanı oldu. Sırasıyla geçtiğim
   adımlar:</p>
   <ul>
@@ -450,12 +516,17 @@
   </ul>
   <p data-en="None of these steps are writing code, but if even one is missing, the app never reaches a user. This is where I saw the difference between &quot;finishing&quot; a product and &quot;releasing&quot; it.">Bu adımların hiçbiri kod yazmak değil, ama biri eksik kaldığında uygulama kullanıcıya
   ulaşmıyor. Bir ürünü "bitirmek" ile "yayınlamak" arasındaki farkı burada gördüm.</p>
-</div></section>
+    </div>
+  </details>
 
-<!-- ============ 10 SIRADAKİ ============ -->
-<section id="sirada"><div class="wrap">
-  <div class="sec-no" data-en="10 — Next steps">10 — Sıradaki adımlar</div>
-  <h2 data-en="From here on">Bundan sonra</h2>
+  <details id="sirada">
+    <summary>
+      <span class="ak-no">10</span>
+      <span class="ak-bas" data-en="Next steps">Sıradaki adımlar</span>
+      <span class="ak-pl">+</span>
+    </summary>
+    <div class="ak-ic">
+<h2 data-en="From here on">Bundan sonra</h2>
   <ul>
     <li data-en="<strong>User feedback:</strong> build a priority list from post-release store reviews and crash reports"><strong>Kullanıcı geri bildirimi:</strong> yayın sonrası mağaza yorumları ve çökme
     raporlarına göre öncelik listesi kurmak</li>
@@ -465,7 +536,10 @@
     <li data-en="<strong>Next project:</strong> a more ambitious game in the same space — this time with design decisions documented from day one"><strong>Sıradaki proje:</strong> aynı alanda daha kapsamlı bir oyun — bu kez tasarım
     kararları en baştan belgeleniyor</li>
   </ul>
-</div></section>
+    </div>
+  </details>
+
+</div></div></section>
 
 <footer><div class="wrap">
   <p class="name">Ömer Güneş</p>
@@ -525,6 +599,29 @@
 
   const savedLang = localStorage.getItem('site-lang') === 'en' ? 'en' : 'tr';
   setLanguage(savedLang);
+
+  // Menuden veya adres cubugundan bir bolume gidilince o bolum kapaliysa acilsin
+  function bolumuAc(hedef) {
+    try {
+      const el = document.querySelector(hedef);
+      if (el && el.tagName === 'DETAILS') el.open = true;
+    } catch (e) {}
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', () => bolumuAc(a.getAttribute('href')));
+  });
+  if (location.hash) bolumuAc(location.hash);
+
+  // Yazdirirken butun bolumler acik olsun, sonra eski haline donsun
+  let yazdirmadanOnce = [];
+  window.addEventListener('beforeprint', () => {
+    yazdirmadanOnce = [...document.querySelectorAll('.akordeon details')];
+    yazdirmadanOnce = yazdirmadanOnce.map(d => { const e = d.open; d.open = true; return [d, e]; });
+  });
+  window.addEventListener('afterprint', () => {
+    yazdirmadanOnce.forEach(([d, e]) => { d.open = e; });
+  });
+
 })();
 </script>
 
