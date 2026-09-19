@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="page-title" data-en="Text Scanner — Part 04 · Weekly Flutter Apps">Metin Tarayıcı — Part 04 · Her Hafta 1 Uygulama</title>
+<meta name="description" content="Part 04 vaka incelemesi: kamera + cihazda çalışan metin tanıma (Google ML Kit), birleşmiş manifest denetimiyle tek izin, R8 ve gizlilik iddiasını doğrulama. Flutter, camera, ML Kit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-900:#ffffff;--bg-800:#ffffff;--bg-700:#fafafa;--line:#e6e6e6;
+    --accent:#0047d6;--accent-soft:#0047d6;--ink:#111111;--muted:#4a4a4a;--muted-2:#8a8a8a;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg-900);color:var(--ink);
+    font-family:Inter,system-ui,-apple-system,sans-serif;
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent-soft);text-decoration:none}
+  a:hover{color:var(--accent)}
+  .wrap{max-width:940px;margin:0 auto;padding:0 32px}
+
+  .topbar{border-bottom:1px solid var(--line);background:rgba(255,255,255,.93);
+    backdrop-filter:blur(10px);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;
+    padding-top:14px;padding-bottom:14px;gap:16px;flex-wrap:wrap}
+  .topbar .home{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2)}
+  .topbar .home:hover{color:var(--accent)}
+  .topbar nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .topbar nav a{font-size:12.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+  .topbar nav a:hover{color:var(--accent)}
+
+  .hidden{display:none!important}
+  .lang-switch{position:relative}
+  .lang-btn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);font-family:Inter,sans-serif;
+    font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;
+    border-radius:6px;cursor:pointer}
+  .lang-btn:hover{color:var(--accent);border-color:rgba(0,71,214,.45)}
+  .lang-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:130px;
+    background:var(--bg-800);border:1px solid var(--line);border-radius:8px;
+    overflow:hidden;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,.10)}
+  .lang-option{display:block;width:100%;text-align:left;background:transparent;border:none;
+    color:var(--muted);font-family:Inter,sans-serif;font-size:13.5px;padding:11px 16px;
+    cursor:pointer;text-transform:none;letter-spacing:0}
+  .lang-option:hover{background:var(--bg-700);color:var(--ink)}
+  .lang-option.active{color:var(--accent);font-weight:700}
+
+  .hero{padding:64px 0 56px;background:#fff;
+    background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.038) 0 1px,transparent 1px 96px);
+    border-bottom:1px solid var(--line)}
+  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
+  h1{font-weight:900;font-size:clamp(38px,6.4vw,62px);line-height:.98;letter-spacing:-.04em;
+     margin:16px 0 18px;color:#000}
+  .lede{max-width:60ch;color:var(--muted);font-size:18px;line-height:1.65;margin:0}
+  .hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+  .chip{border:1px solid rgba(0,71,214,.30);background:rgba(0,71,214,.06);
+        color:var(--accent-soft);font-size:12.5px;padding:7px 14px;font-weight:500}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;align-items:center}
+  .cta{background:var(--accent);color:#fff;font-weight:700;padding:13px 26px;font-size:14.5px}
+  .cta:hover{background:#0036a8;color:#fff}
+  .cta.ghost{background:transparent;color:var(--accent);border:1px solid rgba(0,71,214,.45)}
+  .cta.ghost:hover{background:rgba(0,71,214,.08)}
+
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .fact{background:var(--bg-900);padding:22px 24px}
+  .fact u{display:block;text-decoration:none;font-size:13px;color:var(--muted-2);
+    letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+  .fact b{font-size:16px;color:#000;font-weight:600}
+
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  .sec-no{color:var(--accent);font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    font-weight:700;margin-bottom:12px}
+  h2{font-size:clamp(25px,3.6vw,33px);font-weight:800;letter-spacing:-.025em;line-height:1.15;
+    margin:0 0 20px;color:#000}
+  h3{font-size:19px;font-weight:700;color:#000;margin:32px 0 10px}
+  p{max-width:70ch;color:var(--muted);margin:0 0 16px}
+  strong{color:var(--ink);font-weight:600}
+  ul{max-width:70ch;color:var(--muted);padding-left:0;list-style:none;margin:0 0 16px}
+  ul li{position:relative;padding-left:22px;margin-bottom:10px}
+  ul li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;
+    background:var(--accent);border-radius:2px;transform:rotate(45deg)}
+
+  .dec{border-left:3px solid var(--accent);padding:2px 0 2px 22px;margin:0 0 26px}
+  .dec b{display:block;font-size:20px;color:#000;font-weight:800;margin-bottom:8px;line-height:1.25}
+  .dec .why{color:var(--accent-soft);font-size:14px;font-weight:600;letter-spacing:.04em}
+
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px;max-width:70ch}
+  td,th{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--bg-700);color:var(--accent);font-weight:700;font-size:12.5px;
+    letter-spacing:.1em;text-transform:uppercase}
+  td{color:var(--muted)}
+  td:first-child{color:var(--ink);font-weight:600;width:38%}
+  code{font-family:ui-monospace,Consolas,monospace;font-size:13.5px;
+    background:var(--bg-700);border:1px solid var(--line);padding:1px 6px}
+  pre.kod{font-family:ui-monospace,Consolas,monospace;font-size:13px;line-height:1.7;
+    background:var(--bg-700);border:1px solid var(--line);padding:20px 22px;overflow-x:auto;
+    color:var(--ink);max-width:70ch;margin:20px 0}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 6px}
+  .stat{border-top:3px solid #000;padding:13px 0 0}
+  .stat u{display:block;text-decoration:none;font-size:32px;font-weight:900;color:#000;line-height:1}
+  .stat i{font-style:normal;display:block;font-size:12px;color:var(--muted-2);
+    letter-spacing:.08em;text-transform:uppercase;margin-top:8px}
+
+  .pull{border:1px solid rgba(0,71,214,.25);background:rgba(0,71,214,.05);
+    padding:24px 26px;margin:26px 0;color:var(--accent-soft);font-size:18px;line-height:1.55;
+    font-weight:600;max-width:64ch}
+
+  .galeri{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .galeri figure{margin:0}
+  .galeri .im{background:var(--bg-700);border:1px solid var(--line);
+    aspect-ratio:1080/1920;overflow:hidden}
+  .galeri img{width:100%;height:100%;object-fit:cover;display:block}
+  .galeri figcaption{font-size:13px;color:var(--muted-2);margin-top:8px}
+
+  .baglantilar{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+  .baglantilar a{border:1px solid var(--line);background:var(--bg-700);
+    padding:11px 18px;font-size:13.5px;font-weight:600;color:var(--ink)}
+  .baglantilar a:hover{border-color:rgba(0,71,214,.45);color:var(--accent)}
+
+  .gezinme{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .gez{border:1px solid var(--line);padding:22px 24px;display:block;color:inherit;
+    transition:border-color .18s}
+  .gez:hover{border-color:var(--accent);color:inherit}
+  .gez .yon{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);
+    font-weight:700}
+  .gez .ad{font-size:20px;font-weight:800;letter-spacing:-.02em;color:#000;margin-top:6px}
+  .gez.pasif{opacity:.5;pointer-events:none;border-style:dashed}
+  .gez.pasif .ad{color:#b6b6b6}
+  .gez.sag{text-align:right}
+
+  footer{padding:52px 0 64px;background:var(--bg-800);border-top:1px solid var(--line)}
+  footer p{color:var(--muted-2);font-size:14px}
+  footer .name{color:#000;font-weight:800;font-size:20px;margin-bottom:6px}
+
+  @media(max-width:820px){
+    .facts,.stats{grid-template-columns:repeat(2,1fr)}
+    .galeri{grid-template-columns:repeat(2,1fr)}
+    .gezinme{grid-template-columns:1fr}
+    .gez.sag{text-align:left}
+    .wrap{padding:0 22px}
+    section{padding:42px 0}
+    .hero{padding:48px 0 42px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <a class="home" href="herhafta1.html" data-en="← The series">← Seriye dön</a>
+  <nav>
+    <a href="index.html" data-en="Portfolio">Portföy</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part04-metin-tarayici" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <div class="lang-switch">
+      <button id="lang-btn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+        <span id="lang-btn-label">TR</span> ▾
+      </button>
+      <div id="lang-menu" class="lang-menu hidden">
+        <button type="button" class="lang-option" data-lang="tr">Türkçe</button>
+        <button type="button" class="lang-option" data-lang="en">English</button>
+      </div>
+    </div>
+  </nav>
+</div></div>
+
+<!-- ============ KAPAK ============ -->
+<header class="hero"><div class="wrap">
+  <div class="eyebrow" data-en="Part 04 · Weekly Flutter Apps">Part 04 · Her Hafta 1 Uygulama</div>
+  <h1 data-en="Text Scanner">Metin Tarayıcı</h1>
+  <p class="lede" data-en="Hold the camera up to a page, tap the shutter, and the text on paper turns into text you can edit. Recognition runs on the device: the release build asks for one permission, CAMERA, and has no internet access at all.">
+    Kameranı kâğıda tutuyorsun, deklanşöre basıyorsun, kâğıttaki yazı düzenlenebilir bir
+    metne dönüyor. Tanıma cihazda çalışıyor: release derlemesinin tek izni
+    <code>CAMERA</code>, internet izni hiç yok.
+  </p>
+  <div class="hero-meta">
+    <span class="chip">Flutter · Dart</span>
+    <span class="chip">camera · ML Kit</span>
+    <span class="chip">Android</span>
+    <span class="chip" data-en="On-device AI">Cihazda AI</span>
+    <span class="chip" data-en="No internet">İnternet yok</span>
+  </div>
+  <div class="cta-row">
+    <a class="cta" href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part04-metin-tarayici" target="_blank" rel="noopener noreferrer" data-en="Browse the code →">Kodu incele →</a>
+    <a class="cta ghost" href="herhafta1.html" data-en="All apps in the series">Serideki tüm uygulamalar</a>
+  </div>
+</div></header>
+
+<div class="wrap"><div class="facts">
+  <div class="fact"><u data-en="Tests">Test</u><b>36</b></div>
+  <div class="fact"><u data-en="Packages">Paket</u><b>5</b></div>
+  <div class="fact"><u data-en="Permissions (release)">İzin (release)</u><b>1</b></div>
+  <div class="fact"><u data-en="License">Lisans</u><b>MIT</b></div>
+</div></div>
+
+<!-- ============ 01 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="01 — What I built">01 — Ne yaptım</p>
+  <h2 data-en="Retyping a page by hand, removed">Kâğıttaki yazıyı elle yeniden yazmak, ortadan kalktı</h2>
+
+  <p data-en="You hold the camera up to some text, a viewfinder frames it, you tap the shutter. On the next screen the frame you captured sits on top and the recognised text underneath: how many words came out, and the text itself in an editable field. Copy, or Share.">
+    Kamerayı yazıya tutuyorsun, nişangah kadrajı gösteriyor, deklanşöre basıyorsun. Bir
+    sonraki ekranda çektiğin kare üstte duruyor, altında okunan metin var: kaç kelime
+    okunduğu yazıyor, metnin kendisi düzenlenebilir bir alanda. Kopyala veya Paylaş.
+  </p>
+
+  <p data-en="You can hand it a photo from the gallery instead of using the camera; for ML Kit both are just a file path.">
+    Kamera yerine galerideki bir fotoğrafı da verebiliyorsun; ML Kit için ikisi de sadece
+    bir dosya yolu.
+  </p>
+
+  <div class="galeri" style="grid-template-columns:repeat(2,1fr);max-width:600px">
+    <figure>
+      <div class="im"><img src="img/herhafta1/part04-sonuc.png" alt="Okunan metin ekranı" loading="lazy"></div>
+      <figcaption data-en="Recognised text">Okunan metin</figcaption>
+    </figure>
+    <figure>
+      <div class="im"><img src="img/herhafta1/part04-izin.png" alt="Kamera izni ekranı" loading="lazy"></div>
+      <figcaption data-en="Permission screen">İzin ekranı</figcaption>
+    </figure>
+  </div>
+</div></section>
+
+<!-- ============ 02 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="02 — What I deliberately left out">02 — Neyi bilerek yapmadım</p>
+  <h2 data-en="The live viewfinder was the tempting one">En cazip olan canlı akıştı</h2>
+
+  <ul>
+    <li data-en="Live recognition in the viewfinder, without capturing">Canlı akışta anlık tanıma (çekmeden, kamera görüntüsü üstünde)</li>
+    <li data-en="Drawing boxes around the text blocks">Metin bloklarının üstüne çerçeve çizme</li>
+    <li data-en="History, saving, a database">Geçmiş, kayıt, veritabanı</li>
+    <li data-en="Translation, language detection, handwriting">Çeviri, dil algılama, el yazısı</li>
+    <li data-en="Document edge detection, perspective correction, PDF">Belge kenarı bulma, perspektif düzeltme, PDF</li>
+    <li>iOS</li>
+  </ul>
+
+  <p data-en="Converting a CameraImage frame into the format ML Kit expects — YUV planes, device rotation, the front/back camera difference — is the known swamp of this job. Capturing a single frame, on the other hand, is takePicture() plus InputImage.fromFilePath(): two lines. Spending the week on frame conversion would have meant finishing it without ever demonstrating the skill I was there to demonstrate.">
+    <code>CameraImage</code> karesini ML Kit'in beklediği biçime çevirmek — YUV düzlemleri,
+    cihaz yönü, ön/arka kamera farkı — bu işin bilinen batağı. Tek kare çekmek ise
+    <code>takePicture()</code> + <code>InputImage.fromFilePath()</code>, iki satır. Haftayı
+    kare dönüşümüne harcayıp gösterilecek yeteneği hiç göstermeden bitirmek olurdu.
+  </p>
+</div></section>
+
+<!-- ============ 03 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="03 — The skill this week demonstrates">03 — Bu hafta gösterdiğim teknik yetenek</p>
+  <h2 data-en="Camera, plus a model running on the device">Kamera ve cihazda çalışan makine öğrenmesi</h2>
+
+  <p data-en="For the first time in the series I am touching hardware, and for the first time I am running a model.">
+    Seride ilk kez donanıma dokunuyorum ve ilk kez bir model çalıştırıyorum.
+  </p>
+
+  <p data-en="On the camera side the real work is the lifecycle: when the app goes to the background the controller is released (so another app can use the camera, and so a frozen frame is not waiting on return), and when it comes back the permission is read again and the camera reopened.">
+    Kamera tarafında asıl iş yaşam döngüsü: uygulama arka plana atılınca kontrolcü
+    bırakılıyor (başka uygulama kamerayı kullanabilsin, geri dönünce donuk kare
+    kalmasın), öne gelince izin yeniden okunup kamera tekrar açılıyor.
+  </p>
+
+  <p data-en="On the permission side there are two distinct states: &quot;not now&quot; and &quot;don't ask again&quot;. In the second one the system dialog never opens again; if the app asks once more, nothing happens and the user is left staring at a black screen. That distinction is reduced to a three-valued enum, and a permanent refusal gets exactly one way out: an &quot;Open settings&quot; button.">
+    İzin tarafında iki ayrı hâl var: "şimdi olmaz" ve "bir daha sorma". İkincisinde sistem
+    diyaloğu artık hiç açılmıyor; uygulama tekrar sorarsa hiçbir şey olmaz ve kullanıcı
+    siyah ekrana bakar. Ayrım üç değerli bir enum'a indiriliyor, kalıcı redde tek çıkış
+    olarak "Ayarları aç" düğmesi çıkıyor.
+  </p>
+
+  <div class="pull" data-en="The ML Kit call itself is three lines. The actual code starts after the model.">
+    ML Kit çağrısının kendisi üç satır. Asıl kod modelden sonra başlıyor.
+  </div>
+
+  <p data-en="Raw output cannot be shown as it comes. Blocks do not arrive in the order they appear on the page, paragraphs are broken line by line, and a hyphen at the end of a line splits a word in two. One layer fixes all three.">
+    Ham çıktı doğrudan gösterilemez. Bloklar sayfadaki sıraya göre gelmez, paragraflar
+    satır satır kırıktır, satır sonundaki tire kelimeyi ikiye böler. Üçünü de düzelten
+    tek bir katman var.
+  </p>
+
+  <div class="baglantilar">
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part04-metin-tarayici/lib/ocr/okunan_metin.dart" target="_blank" rel="noopener noreferrer">lib/ocr/okunan_metin.dart</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part04-metin-tarayici/lib/camera/camera_permission.dart" target="_blank" rel="noopener noreferrer">lib/camera/camera_permission.dart</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part04-metin-tarayici/lib/ui/screens/camera_screen.dart" target="_blank" rel="noopener noreferrer">lib/ui/screens/camera_screen.dart</a>
+  </div>
+</div></section>
+
+<!-- ============ 04 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="04 — The decision">04 — Aldığım karar</p>
+
+  <div class="dec">
+    <b data-en="Why on-device OCR rather than cloud OCR?">Neden bulut OCR değil, cihazda OCR?</b>
+    <p data-en="Last week (Part 03) I wrote about keeping an API key out of the repository, and it ended like this: I can hide the key from the repo, not from the compiled APK. This week I used no key at all.">
+      Geçen hafta (Part 03) API anahtarını depodan nasıl uzak tuttuğumu yazmıştım ve şöyle
+      bitmişti: anahtarı depodan gizleyebiliyorum, derlenmiş APK'dan gizleyemiyorum. Bu
+      hafta hiç anahtar kullanmadım.
+    </p>
+    <p class="why" data-en="Google Cloud Vision reads better. It also reads on a server.">
+      Google Cloud Vision daha iyi okur. Bir sunucuda okur.
+    </p>
+  </div>
+
+  <p data-en="Cloud Vision or AWS Textract would read better — I accept that. In exchange three things would arrive: a key to keep safe, a quota and billing relationship, and the user's photo travelling to a server. The third one would be strange for this app; people will point it at an invoice, a prescription, an ID card.">
+    Google Cloud Vision veya AWS Textract daha iyi okur — bunu kabul ediyorum.
+    Karşılığında üç şey gelirdi: saklanması gereken bir anahtar, bir kota/faturalama
+    ilişkisi, ve <strong>kullanıcının fotoğrafının bir sunucuya gitmesi.</strong>
+    Üçüncüsü bu uygulama için tuhaf olurdu; insanlar bu uygulamaya faturasını, reçetesini,
+    kimliğini tutacak.
+  </p>
+
+  <p data-en="ML Kit's Latin text model runs inside the APK. I measured the price: +27 MB. Not an estimate — I built a debug APK before adding the package and after, and took the difference (147 → 174 MB). 27 MB is the cost of the sentence &quot;that photo never left the phone&quot;.">
+    ML Kit'in Latin metin modeli APK'nın içinde çalışıyor. Bedelini ölçtüm:
+    <strong>+27 MB.</strong> Tahmin değil — paketi eklemeden önce ve ekledikten sonra debug
+    APK alıp farkı aldım (147 → 174 MB). 27 MB, "şu fotoğraf telefondan hiç çıkmadı"
+    cümlesinin fiyatı.
+  </p>
+
+  <h3 data-en="Then I tried to prove that sentence">Sonra bu cümleyi kanıtlamaya çalıştım</h3>
+
+  <p data-en="I had written one permission line into my own manifest: CAMERA. But the permissions an app actually asks for are not in that file, they are in the merged manifest. Looking there, five more showed up. Four were the camera and made sense: because the camera plugin can record video too, it brings RECORD_AUDIO and storage permissions — we take a single frame with enableAudio: false, and need none of them.">
+    Kendi manifest'ime tek satır izin yazmıştım: <code>CAMERA</code>. Ama uygulamanın
+    gerçekten istediği izinler o dosyada değil, <strong>birleşmiş</strong> manifest'te. Ona
+    bakınca beş izin daha çıktı. Dördü kameraydı ve anlaşılırdı: <code>camera</code>
+    eklentisi video da kaydedebildiği için <code>RECORD_AUDIO</code> ve depolama izinleri
+    getiriyor — biz <code>enableAudio: false</code> ile tek kare alıyoruz, hiçbiri
+    gerekmiyor.
+  </p>
+
+  <p data-en="The fifth was INTERNET. Its source was not ML Kit but ML Kit's own dependency, com.google.android.datatransport: Google's telemetry library. So the model really was running on the device, but the package came with a network permission alongside it, so that usage data could be sent back. A small copy of exactly the thing I was avoiding.">
+    Beşincisi <code>INTERNET</code>'ti. Kaynağı ML Kit değil, ML Kit'in bağımlısı olan
+    <code>com.google.android.datatransport</code>: Google'ın telemetri kütüphanesi. Yani
+    model gerçekten cihazda çalışıyordu, ama paket yanında "kullanım verisini bize
+    gönderebileyim" diye bir ağ izni getiriyordu. Tam da kaçındığım şeyin küçük bir
+    kopyası.
+  </p>
+
+  <p data-en="All five were taken out with tools:node=&quot;remove&quot;. The merged manifest of the release build now contains CAMERA only; the command is in the README, so a reader can check it themselves.">
+    Beşini de <code>tools:node="remove"</code> ile çıkardım. Release derlemesinin birleşmiş
+    manifest'inde artık sadece <code>CAMERA</code> var; komut README'de yazıyor, okuyan
+    kendi kontrol edebilir.
+  </p>
+
+  <p data-en="I looked at the disk with the same eye and a second hole turned up: takePicture() writes the photo into the app's cache, and image_picker copies the selected one there too. I had written &quot;nothing is saved anywhere&quot;, while every capture was piling up on disk. The frame is deleted now when the result screen closes. Deleting has exactly one boundary: the app only touches the file in its own folder, so what gets deleted for a gallery pick is the copy, not the user's photo.">
+    Aynı gözle diske de baktım ve ikinci bir açık çıktı: <code>takePicture()</code>
+    fotoğrafı uygulamanın önbelleğine yazıyor, <code>image_picker</code> de seçileni oraya
+    kopyalıyor. "Hiçbir yere kaydedilmiyor" diye yazmıştım ama her çekim diskte
+    birikiyordu. Sonuç ekranı kapanınca kare siliniyor artık. Silmenin tek bir sınırı var:
+    uygulama yalnızca kendi klasöründeki dosyaya dokunuyor, yani galeriden seçilende
+    silinen şey kopya, kullanıcının fotoğrafı değil.
+  </p>
+
+  <div class="pull" data-en="Writing a privacy claim is easy; proving it is a separate job.">
+    Gizlilik iddiası yazmak kolay, doğrulamak ayrı bir iş.
+  </div>
+
+  <p data-en="&quot;It does not go online&quot; has to be readable from the merged manifest, and &quot;it does not stay on disk&quot; from code that genuinely deletes the files. When I first wrote both sentences, both were wrong. That is the part of this week that will outlast the OCR.">
+    "Ağa çıkmıyor" birleşmiş manifest'ten, "diskte kalmıyor" da dosyaları gerçekten silen
+    bir koddan okunabiliyor olmalı. İkisini de ilk yazdığımda iddiam yanlıştı. Haftanın
+    OCR'dan daha kalıcı parçası bu.
+  </p>
+
+  <div class="baglantilar">
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part04-metin-tarayici/android/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener noreferrer">AndroidManifest.xml</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part04-metin-tarayici/lib/camera/gecici_kare.dart" target="_blank" rel="noopener noreferrer">lib/camera/gecici_kare.dart</a>
+  </div>
+</div></section>
+
+<!-- ============ 05 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="05 — How I verified it">05 — Nasıl doğruladım</p>
+  <h2 data-en="36 tests, and one line from the phone itself">36 test ve telefonun kendi kaydından tek satır</h2>
+
+  <div class="stats">
+    <div class="stat"><u>36</u><i data-en="Tests">Test</i></div>
+    <div class="stat"><u>0</u><i data-en="Analyzer warnings">Analiz uyarısı</i></div>
+    <div class="stat"><u>1</u><i data-en="Permission in release">Release'de izin</i></div>
+    <div class="stat"><u>27<small style="font-size:16px"> MB</small></u><i data-en="Cost of the model">Modelin bedeli</i></div>
+  </div>
+
+  <p data-en="I did not test the camera or the model — both belong to the device, and there is no code of mine in either. What is tested is the conversion between them: do the lines join in the right order, is a two-column page read left to right, does &quot;eko-&quot; + &quot;nomi&quot; merge while &quot;Ankara-&quot; + &quot;İstanbul&quot; and &quot;2024-&quot; + &quot;2025&quot; stay intact.">
+    Kamerayı ve modeli test etmedim — ikisi de cihaza bağlı, orada benim kodum yok. Test
+    edilen yer ikisinin arasındaki dönüşüm: satırlar doğru sırayla mı birleşiyor, yan yana
+    iki sütun soldan sağa mı okunuyor, <code>eko-</code> + <code>nomi</code> birleşirken
+    <code>Ankara-</code> + <code>İstanbul</code> ve <code>2024-</code> + <code>2025</code>
+    bozulmadan duruyor mu.
+  </p>
+
+  <p data-en="File deletion is tested the other way round: the thing worth holding onto is not that deleting works, it is that the app can never delete a photo from the user's gallery.">
+    Dosya silme de test edildi, ama tersinden: asıl tutulması gereken şey silmenin
+    <strong>çalışması</strong> değil, kullanıcının galerisindeki fotoğrafı asla
+    silememesi.
+  </p>
+
+  <p data-en="In block ordering a test changed the design. The comparison &quot;if they overlap vertically sort by left edge, otherwise by top edge&quot; is not transitive, so the result depended on the order the blocks arrived in. I moved to splitting into bands first and sorting within each band; the test &quot;ordering does not depend on arrival order&quot; holds that in place.">
+    Blok sıralamasında bir testin kendisi tasarımı değiştirdi: "dikey örtüşüyorsa sola
+    göre, yoksa yukarıya göre sırala" karşılaştırması geçişli değil, yani sonuç blokların
+    geliş sırasına göre değişiyordu. Önce bantlara ayırıp sonra her bandı kendi içinde
+    sıralamaya geçtim; "sıralama geliş sırasına göre değişmez" testi bunu tutuyor.
+  </p>
+
+  <h3 data-en="What the tests could not catch">Testlerin yakalayamadığı taraf</h3>
+
+  <p data-en="The real verification happened on the device, and four things the tests could never see came out of it: R8 breaking text recognition, the layout falling apart in landscape, the 720p preview looking pixelated, and the preview's aspect ratio being miscalculated so the image was squeezed horizontally. None of the four was about the code being correct — they were about the reality outside the code.">
+    Asıl doğrulama cihazda oldu ve testlerin göremeyeceği dört şey oradan çıktı: R8'in
+    metin tanımayı bozması, telefon yan çevrilince düzenin dağılması, 720p önizlemenin
+    pikselli görünmesi, ve önizlemenin oranının yanlış hesaplanıp görüntüyü yatay ezmesi.
+    Dördü de "kodun doğru olması" ile ilgili değildi — kodun dışındaki gerçekle ilgiliydi.
+  </p>
+
+  <p data-en="The permission claim was verified on the device too, not by reading the manifest but by reading the phone's own record:">
+    İzin iddiası da cihazda doğrulandı, manifest'e bakarak değil, telefonun kendi kaydına
+    bakarak:
+  </p>
+
+<pre class="kod">adb shell dumpsys package com.omergunes.metin_tarayici
+  → requested permissions: android.permission.CAMERA</pre>
+
+  <p data-en="One line. No INTERNET, and the app works fine — the telemetry library losing its way to the network broke nothing.">
+    Tek satır. <code>INTERNET</code> yok, ve uygulama sorunsuz çalışıyor — telemetri
+    kütüphanesinin ağa çıkamaması bir şeyi bozmadı.
+  </p>
+</div></section>
+
+<!-- ============ 06 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="06 — What I learned">06 — Ne öğrendim</p>
+
+  <h3 data-en="A green build does not mean a working app">Yeşil derleme, çalışan uygulama demek değil</h3>
+  <p data-en="Debug passing is not enough either. R8 stopped the release build: the ML Kit plugin can call all five scripts (Latin, Chinese, Devanagari, Japanese, Korean) and I had only taken the Latin model, so the classes of the other four are not in the APK. Adding the other models meant another 27 MB each; I silenced it with -dontwarn. Debug never shows this, because R8 does not run there.">
+    Debug derlemesinin geçmesi de yetmiyormuş. Release'de R8 durdu: ML Kit eklentisi beş
+    betiği de (Latin, Çince, Devanagari, Japonca, Korece) çağırabiliyor, ben yalnızca Latin
+    modelini almıştım, kalan dördünün sınıfları APK'da yok. Diğer modelleri eklemek her
+    biri için bir 27 MB daha demekti; <code>-dontwarn</code> ile susturdum. Debug bunu
+    göstermiyor çünkü R8 orada çalışmıyor.
+  </p>
+  <p data-en="The actual lesson arrived one step later. After -dontwarn the release build compiled and I said &quot;fine&quot;. Installed on the phone, text recognition did not work at all:">
+    <strong>Asıl ders bir adım sonra geldi.</strong> <code>-dontwarn</code> sonrası release
+    derlendi, "tamam" dedim. Telefona kurunca metin tanıma hiç çalışmadı:
+  </p>
+
+<pre class="kod">MethodChannel#google_mlkit_text_recognizer: Failed to handle method call
+java.lang.NullPointerException: Attempt to invoke virtual method
+'java.lang.Class java.lang.Object.getClass()' on a null object reference</pre>
+
+  <p data-en="-dontwarn had silenced the warning, not solved the cause. ML Kit resolves those classes by reflection; R8 assumes a class reached only by reflection is unused and strips it, leaving null behind. Because the build turned green the failure was deferred to runtime, and for two days I had been noting &quot;release ✅&quot;. The fix is -keep rules. Silencing a warning is not solving it.">
+    <code>-dontwarn</code> <strong>uyarıyı</strong> susturmuş, <strong>sebebi</strong>
+    çözmemişti. ML Kit sınıfları yansımayla çözülüyor; R8 yansımayla ulaşılan sınıfı
+    kullanılmıyor sanıp atıyor, geriye null kalıyor. Derleme yeşile döndüğü için hata
+    çalışma anına ertelendi ve ben iki gün boyunca "release ✅" diye not almıştım. Çözüm
+    <code>-keep</code> kuralları. Bir uyarıyı susturmak onu çözmek değil.
+  </p>
+
+  <h3 data-en="A package's Dart side resolving says nothing about its Android side">Paketin Dart tarafının çözülmesi Android tarafı için bir şey söylemiyor</h3>
+  <p data-en="permission_handler 13.x wants compile SDK 37 on Android and my install has 36 — pinned to 12.0.0. Exactly the same thing happened to me in Part 03 with cached_network_image. From now on the first thing I do when adding a package is flutter build apk in an empty project.">
+    <code>permission_handler</code>'ın 13.x'i Android tarafında derleme SDK 37 istiyor,
+    kurulumumda 36 var — <code>12.0.0</code>'a sabitledim. Part 03'te
+    <code>cached_network_image</code> ile birebir aynı şey başıma gelmişti. Artık yeni paket
+    eklerken ilk iş boş bir projede <code>flutter build apk</code> denemek.
+  </p>
+
+  <h3 data-en="I do not correct the model's mistakes">Modelin okuma hatalarını düzeltmiyorum</h3>
+  <p data-en="Fixing them with a dictionary was tempting, but a wrong correction is worse than a wrong reading: the user can see a misreading, and cannot see a miscorrection. I left the text editable instead.">
+    Sözlükle düzeltme denemek cazipti ama yanlış düzeltme, yanlış okumadan beterdir:
+    kullanıcı yanlış okumayı görür, yanlış düzeltmeyi göremez. Onun yerine metni
+    düzenlenebilir bıraktım.
+  </p>
+  <p data-en="The device test showed how right that call was. On a clean printed page the model read Turkish almost perfectly — Kâğıdın Yolculuğu, Şehirlerde, yaygınlaştıkça; â ğ ı ş ç ö ü all in place. But when I pointed it at the same text on a computer screen, ş came out as $.">
+    Bu kararın ne kadar doğru olduğunu cihaz testi gösterdi. Temiz basılı bir sayfada model
+    Türkçe'yi neredeyse kusursuz okudu — <em>Kâğıdın Yolculuğu</em>, <em>Şehirlerde</em>,
+    <em>yaygınlaştıkça</em>; <code>â ğ ı ş ç ö ü</code> hepsi yerinde. Ama aynı metni bir
+    bilgisayar ekranından okuttuğumda <code>ş</code> harfi <code>$</code> çıktı.
+  </p>
+  <p data-en="So the error is not a fixed flaw in the model, it depends on input quality. Had I written &quot;if I see $, make it ş&quot;, I would have wrecked the dollar signs in a real price list — and the user would not have noticed. Leaving the text editable beats guessing.">
+    Yani hata modelde sabit bir kusur değil, <strong>girdi kalitesine bağlı.</strong>
+    Sözlükle "<code>$</code> görürsem <code>ş</code> yaparım" deseydim, gerçek bir fiyat
+    listesindeki dolar işaretlerini bozardım — üstelik kullanıcı bunu fark edemezdi. Okunan
+    metni düzenlenebilir bırakmak, tahmin etmekten iyi.
+  </p>
+
+  <h3 data-en="Turkish tripped me up again">Türkçe yine ayak kaydırdı</h3>
+  <p data-en="Hyphenated word joining checks whether the next line starts with a lowercase letter; had I written that with toLowerCase(), I and İ would have fallen on the wrong side (Part 02 gave me the same thing with toUpperCase()). I wrote the letter list by hand.">
+    Tireli kelime birleştirme "sonraki satır küçük harfle başlıyorsa" şartına bakıyor;
+    <code>toLowerCase()</code> ile yazsaydım <code>I</code> ve <code>İ</code> yanlış tarafa
+    düşerdi (Part 02'de aynısını <code>toUpperCase()</code> ile yaşamıştım). Harf listesini
+    elle yazdım.
+  </p>
+</div></section>
+
+<!-- ============ İNCELE ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="Inspect it">İncele</p>
+  <h2 data-en="The code is the point">Asıl mesele kodun kendisi</h2>
+  <div class="baglantilar">
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part04-metin-tarayici" target="_blank" rel="noopener noreferrer" data-en="Source code">Kaynak kod</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part04-metin-tarayici/VAKA.md" target="_blank" rel="noopener noreferrer" data-en="Case study (Turkish)">Vaka incelemesi (Türkçe)</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part04-metin-tarayici/README.md" target="_blank" rel="noopener noreferrer" data-en="How to run it">Nasıl çalıştırılır</a>
+  </div>
+
+  <div class="gezinme" style="margin-top:34px">
+    <a class="gez" href="herhafta1-part03.html">
+      <div class="yon" data-en="← Previous app">← Önceki uygulama</div>
+      <div class="ad" data-en="Part 03 · Movie Search">Part 03 · Film Arama</div>
+    </a>
+    <span class="gez pasif sag">
+      <div class="yon" data-en="Next app →">Sonraki uygulama →</div>
+      <div class="ad" data-en="Part 05 · On the way">Part 05 · Yolda</div>
+    </span>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p class="name">Ömer Güneş</p>
+  <p data-en="Flutter Developer · Every app in this series was designed, built, and documented solo.">Flutter Developer · Bu serideki her uygulama tek kişilik tasarlandı, geliştirildi ve belgelendi.</p>
+  <p style="margin-top:14px">
+    <a href="index.html" data-en="Portfolio">Portföy</a> &nbsp;·&nbsp;
+    <a href="herhafta1.html" data-en="The series">Seri</a> &nbsp;·&nbsp;
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </p>
+</div></footer>
+
+<script>
+(function () {
+  const i18nEls   = document.querySelectorAll('[data-en]');
+  const pageTitle = document.getElementById('page-title');
+  const langBtn      = document.getElementById('lang-btn');
+  const langBtnLabel = document.getElementById('lang-btn-label');
+  const langMenu     = document.getElementById('lang-menu');
+
+  i18nEls.forEach(el => { el.dataset.tr = el.innerHTML; });
+
+  function setLanguage(lang) {
+    window.currentLang = lang;
+    i18nEls.forEach(el => {
+      el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.tr;
+    });
+    if (pageTitle) document.title = lang === 'en' ? pageTitle.dataset.en : pageTitle.dataset.tr;
+    document.documentElement.lang = lang;
+    if (langBtnLabel) langBtnLabel.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lang-option').forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.lang === lang);
+    });
+    localStorage.setItem('site-lang', lang);
+  }
+
+  if (langBtn && langMenu) {
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !langMenu.classList.contains('hidden');
+      langMenu.classList.toggle('hidden', isOpen);
+      langBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  }
+
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      setLanguage(opt.dataset.lang);
+      langMenu.classList.add('hidden');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', () => {
+    if (langMenu) langMenu.classList.add('hidden');
+    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  const savedLang = localStorage.getItem('site-lang') === 'en' ? 'en' : 'tr';
+  setLanguage(savedLang);
+})();
+</script>
+
+</body>
+</html>

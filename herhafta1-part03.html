@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="page-title" data-en="Movie Search — Part 03 · Weekly Flutter Apps">Film Arama — Part 03 · Her Hafta 1 Uygulama</title>
+<meta name="description" content="Part 03 vaka incelemesi: debounce'lu arama, istek iptali ve sayfalama içeren bir ağ katmanı; public depoda API anahtarı yönetimi. Flutter, dio, Riverpod.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-900:#ffffff;--bg-800:#ffffff;--bg-700:#fafafa;--line:#e6e6e6;
+    --accent:#0047d6;--accent-soft:#0047d6;--ink:#111111;--muted:#4a4a4a;--muted-2:#8a8a8a;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg-900);color:var(--ink);
+    font-family:Inter,system-ui,-apple-system,sans-serif;
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent-soft);text-decoration:none}
+  a:hover{color:var(--accent)}
+  .wrap{max-width:940px;margin:0 auto;padding:0 32px}
+
+  .topbar{border-bottom:1px solid var(--line);background:rgba(255,255,255,.93);
+    backdrop-filter:blur(10px);position:sticky;top:0;z-index:50}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;
+    padding-top:14px;padding-bottom:14px;gap:16px;flex-wrap:wrap}
+  .topbar .home{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2)}
+  .topbar .home:hover{color:var(--accent)}
+  .topbar nav{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .topbar nav a{font-size:12.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+  .topbar nav a:hover{color:var(--accent)}
+
+  .hidden{display:none!important}
+  .lang-switch{position:relative}
+  .lang-btn{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);font-family:Inter,sans-serif;
+    font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;
+    border-radius:6px;cursor:pointer}
+  .lang-btn:hover{color:var(--accent);border-color:rgba(0,71,214,.45)}
+  .lang-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:130px;
+    background:var(--bg-800);border:1px solid var(--line);border-radius:8px;
+    overflow:hidden;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,.10)}
+  .lang-option{display:block;width:100%;text-align:left;background:transparent;border:none;
+    color:var(--muted);font-family:Inter,sans-serif;font-size:13.5px;padding:11px 16px;
+    cursor:pointer;text-transform:none;letter-spacing:0}
+  .lang-option:hover{background:var(--bg-700);color:var(--ink)}
+  .lang-option.active{color:var(--accent);font-weight:700}
+
+  .hero{padding:64px 0 56px;background:#fff;
+    background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.038) 0 1px,transparent 1px 96px);
+    border-bottom:1px solid var(--line)}
+  .eyebrow{color:var(--accent);font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
+  h1{font-weight:900;font-size:clamp(38px,6.4vw,62px);line-height:.98;letter-spacing:-.04em;
+     margin:16px 0 18px;color:#000}
+  .lede{max-width:60ch;color:var(--muted);font-size:18px;line-height:1.65;margin:0}
+  .hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+  .chip{border:1px solid rgba(0,71,214,.30);background:rgba(0,71,214,.06);
+        color:var(--accent-soft);font-size:12.5px;padding:7px 14px;font-weight:500}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;align-items:center}
+  .cta{background:var(--accent);color:#fff;font-weight:700;padding:13px 26px;font-size:14.5px}
+  .cta:hover{background:#0036a8;color:#fff}
+  .cta.ghost{background:transparent;color:var(--accent);border:1px solid rgba(0,71,214,.45)}
+  .cta.ghost:hover{background:rgba(0,71,214,.08)}
+
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .fact{background:var(--bg-900);padding:22px 24px}
+  .fact u{display:block;text-decoration:none;font-size:13px;color:var(--muted-2);
+    letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+  .fact b{font-size:16px;color:#000;font-weight:600}
+
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  .sec-no{color:var(--accent);font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    font-weight:700;margin-bottom:12px}
+  h2{font-size:clamp(25px,3.6vw,33px);font-weight:800;letter-spacing:-.025em;line-height:1.15;
+    margin:0 0 20px;color:#000}
+  h3{font-size:19px;font-weight:700;color:#000;margin:32px 0 10px}
+  p{max-width:70ch;color:var(--muted);margin:0 0 16px}
+  strong{color:var(--ink);font-weight:600}
+  ul{max-width:70ch;color:var(--muted);padding-left:0;list-style:none;margin:0 0 16px}
+  ul li{position:relative;padding-left:22px;margin-bottom:10px}
+  ul li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;
+    background:var(--accent);border-radius:2px;transform:rotate(45deg)}
+
+  .dec{border-left:3px solid var(--accent);padding:2px 0 2px 22px;margin:0 0 26px}
+  .dec b{display:block;font-size:20px;color:#000;font-weight:800;margin-bottom:8px;line-height:1.25}
+  .dec .why{color:var(--accent-soft);font-size:14px;font-weight:600;letter-spacing:.04em}
+
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px;max-width:70ch}
+  td,th{border:1px solid var(--line);padding:12px 14px;text-align:left;vertical-align:top}
+  th{background:var(--bg-700);color:var(--accent);font-weight:700;font-size:12.5px;
+    letter-spacing:.1em;text-transform:uppercase}
+  td{color:var(--muted)}
+  td:first-child{color:var(--ink);font-weight:600;width:38%}
+  code{font-family:ui-monospace,Consolas,monospace;font-size:13.5px;
+    background:var(--bg-700);border:1px solid var(--line);padding:1px 6px}
+  pre.kod{font-family:ui-monospace,Consolas,monospace;font-size:13px;line-height:1.7;
+    background:var(--bg-700);border:1px solid var(--line);padding:20px 22px;overflow-x:auto;
+    color:var(--ink);max-width:70ch;margin:20px 0}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 6px}
+  .stat{border-top:3px solid #000;padding:13px 0 0}
+  .stat u{display:block;text-decoration:none;font-size:32px;font-weight:900;color:#000;line-height:1}
+  .stat i{font-style:normal;display:block;font-size:12px;color:var(--muted-2);
+    letter-spacing:.08em;text-transform:uppercase;margin-top:8px}
+
+  .pull{border:1px solid rgba(0,71,214,.25);background:rgba(0,71,214,.05);
+    padding:24px 26px;margin:26px 0;color:var(--accent-soft);font-size:18px;line-height:1.55;
+    font-weight:600;max-width:64ch}
+
+  .galeri{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .galeri figure{margin:0}
+  .galeri .im{background:var(--bg-700);border:1px solid var(--line);
+    aspect-ratio:1080/1920;overflow:hidden}
+  .galeri img{width:100%;height:100%;object-fit:cover;display:block}
+  .galeri figcaption{font-size:13px;color:var(--muted-2);margin-top:8px}
+
+  .baglantilar{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+  .baglantilar a{border:1px solid var(--line);background:var(--bg-700);
+    padding:11px 18px;font-size:13.5px;font-weight:600;color:var(--ink)}
+  .baglantilar a:hover{border-color:rgba(0,71,214,.45);color:var(--accent)}
+
+  .gezinme{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .gez{border:1px solid var(--line);padding:22px 24px;display:block;color:inherit;
+    transition:border-color .18s}
+  .gez:hover{border-color:var(--accent);color:inherit}
+  .gez .yon{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);
+    font-weight:700}
+  .gez .ad{font-size:20px;font-weight:800;letter-spacing:-.02em;color:#000;margin-top:6px}
+  .gez.pasif{opacity:.5;pointer-events:none;border-style:dashed}
+  .gez.pasif .ad{color:#b6b6b6}
+  .gez.sag{text-align:right}
+
+  footer{padding:52px 0 64px;background:var(--bg-800);border-top:1px solid var(--line)}
+  footer p{color:var(--muted-2);font-size:14px}
+  footer .name{color:#000;font-weight:800;font-size:20px;margin-bottom:6px}
+
+  @media(max-width:820px){
+    .facts,.stats{grid-template-columns:repeat(2,1fr)}
+    .galeri{grid-template-columns:repeat(2,1fr)}
+    .gezinme{grid-template-columns:1fr}
+    .gez.sag{text-align:left}
+    .wrap{padding:0 22px}
+    section{padding:42px 0}
+    .hero{padding:48px 0 42px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <a class="home" href="herhafta1.html" data-en="← The series">← Seriye dön</a>
+  <nav>
+    <a href="index.html" data-en="Portfolio">Portföy</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part03-film-arama" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <div class="lang-switch">
+      <button id="lang-btn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
+        <span id="lang-btn-label">TR</span> ▾
+      </button>
+      <div id="lang-menu" class="lang-menu hidden">
+        <button type="button" class="lang-option" data-lang="tr">Türkçe</button>
+        <button type="button" class="lang-option" data-lang="en">English</button>
+      </div>
+    </div>
+  </nav>
+</div></div>
+
+<!-- ============ KAPAK ============ -->
+<header class="hero"><div class="wrap">
+  <div class="eyebrow" data-en="Part 03 · Weekly Flutter Apps">Part 03 · Her Hafta 1 Uygulama</div>
+  <h1 data-en="Movie Search">Film Arama</h1>
+  <p class="lede" data-en="You type, posters stream in. Tap one and the details open. An Android app built on the TMDB API — this week the subject was the network layer, not the interface.">
+    Yazıyorsun, posterler akıyor; dokununca künye açılıyor. TMDB API'si üzerine kurulu bir
+    Android uygulaması — bu haftanın konusu arayüz değil, ağ katmanıydı.
+  </p>
+  <div class="hero-meta">
+    <span class="chip">Flutter · Dart</span>
+    <span class="chip">dio · Riverpod</span>
+    <span class="chip">Android</span>
+    <span class="chip">REST API</span>
+    <span class="chip" data-en="No account">Hesap yok</span>
+  </div>
+  <div class="cta-row">
+    <a class="cta" href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part03-film-arama" target="_blank" rel="noopener noreferrer" data-en="Browse the code →">Kodu incele →</a>
+    <a class="cta ghost" href="herhafta1.html" data-en="All apps in the series">Serideki tüm uygulamalar</a>
+  </div>
+</div></header>
+
+<div class="wrap"><div class="facts">
+  <div class="fact"><u data-en="Tests">Test</u><b>37</b></div>
+  <div class="fact"><u data-en="Packages">Paket</u><b>4</b></div>
+  <div class="fact"><u data-en="Screens">Ekran</u><b>3</b></div>
+  <div class="fact"><u data-en="License">Lisans</u><b>MIT</b></div>
+</div></div>
+
+<!-- ============ 01 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="01 — What I built">01 — Ne yaptım</p>
+  <h2 data-en="Type, and the posters arrive on their own">Yaz, posterler kendiliğinden gelsin</h2>
+
+  <p data-en="You type into the search box and shortly after you stop typing the poster grid fills up. Tap a poster and the details open: year, runtime, genre, rating, synopsis. Tap the heart and the film stays on the device — something I only made genuinely true later, by turning off the cloud backup; that story is in section 06.">
+    Arama kutusuna yazıyorsun, yazmayı bırakmandan kısa süre sonra poster ızgarası doluyor.
+    Bir postere dokununca künye açılıyor: yıl, süre, tür, puan, özet. Kalbe dokununca film
+    telefonda kalıyor — bunu sonradan cihaz yedeğini kapatarak gerçekten doğru hâle
+    getirdim, hikâyesi 06'da.
+  </p>
+
+  <p data-en="When the box is empty the screen shows popular films, so it is never blank. Scrolling down appends the next page.">
+    Kutu boşken ekranda popüler filmler duruyor, yani hiçbir zaman bomboş değil. Aşağı
+    kaydırdıkça sonraki sayfa ekleniyor.
+  </p>
+
+  <div class="galeri">
+    <figure>
+      <div class="im"><img src="img/herhafta1/part03-arama.png" alt="Arama ekranı" loading="lazy"></div>
+      <figcaption data-en="Search results">Arama ekranı</figcaption>
+    </figure>
+    <figure>
+      <div class="im"><img src="img/herhafta1/part03-detay.png" alt="Film künyesi" loading="lazy"></div>
+      <figcaption data-en="Film details">Film künyesi</figcaption>
+    </figure>
+    <figure>
+      <div class="im"><img src="img/herhafta1/part03-favoriler.png" alt="Favoriler ekranı" loading="lazy"></div>
+      <figcaption data-en="Favourites">Favoriler</figcaption>
+    </figure>
+  </div>
+</div></section>
+
+<!-- ============ 02 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="02 — What I deliberately left out">02 — Neyi bilerek yapmadım</p>
+  <h2 data-en="One skill per week, not one more screen">Haftada bir yetenek, bir ekran daha değil</h2>
+
+  <ul>
+    <li data-en="Filtering and sorting (genre, year, rating)">Filtre ve sıralama (tür, yıl, puan)</li>
+    <li data-en="Cast, trailers, similar films">Oyuncu kadrosu, fragman, benzer filmler</li>
+    <li data-en="Offline database">Çevrimdışı veritabanı</li>
+    <li data-en="Sign-in, TMDB account, voting">Kullanıcı girişi, TMDB hesabı, oy verme</li>
+    <li>iOS</li>
+  </ul>
+
+  <p data-en="This week was about the network layer. Every item above means &quot;one more screen&quot; and none of them would have added anything to that skill. I dropped the offline database on purpose: Part 01 and Part 02 already demonstrate local storage.">
+    Bu haftanın konusu ağ katmanıydı. Yukarıdakilerin hepsi "bir ekran daha" demek; hiçbiri
+    bu haftaki yeteneğe yeni bir şey katmıyordu. Çevrimdışı veritabanını özellikle eledim,
+    çünkü Part 01 ve Part 02 zaten yerel depolamayı gösteriyor.
+  </p>
+</div></section>
+
+<!-- ============ 03 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="03 — The skill this week demonstrates">03 — Bu hafta gösterdiğim teknik yetenek</p>
+  <h2 data-en="A network layer that behaves under pressure">Baskı altında düzgün davranan bir ağ katmanı</h2>
+
+  <p data-en="Search over a network is not &quot;call the API and show the list&quot;. The user types faster than the network answers, and answers do not come back in the order they were asked for. Four pieces handle that:">
+    Ağ üzerinden arama, "API'yi çağır ve listeyi göster" değil. Kullanıcı ağın cevap
+    verdiğinden hızlı yazar ve cevaplar sorulma sırasına göre dönmez. Bunu dört parça
+    çözüyor:
+  </p>
+
+  <table>
+    <thead><tr>
+      <th data-en="Piece">Parça</th><th data-en="Problem it solves">Çözdüğü sorun</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td data-en="400 ms debounce">400 ms debounce</td>
+        <td data-en="One request per word instead of one per keystroke.">Her tuş vuruşuna değil, yazılan kelimeye tek istek.</td>
+      </tr>
+      <tr>
+        <td data-en="CancelToken">CancelToken</td>
+        <td data-en="A late answer to an old query cannot overwrite the new results.">Eski sorgunun geç gelen cevabı yeni sonuçların üstüne yazamaz.</td>
+      </tr>
+      <tr>
+        <td data-en="Pagination">Sayfalama</td>
+        <td data-en="The next page is requested two screens before the end; repeated films are filtered out by id.">Sonraki sayfa liste bitmeden iki ekran önce isteniyor; tekrar eden filmler id'ye göre eleniyor.</td>
+      </tr>
+      <tr>
+        <td data-en="Four separate states">Dört ayrı durum</td>
+        <td data-en="Loading, error, empty result and &quot;page failed&quot; are not the same screen.">Yükleniyor, hata, boş sonuç ve "sayfa hatası" aynı ekran değil.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p data-en="The last one is the detail that is easiest to skip. If the next page fails while fifty films are already on screen, wiping the list and showing an error page would be wrong — the list stays, a small warning appears underneath.">
+    Sonuncusu en kolay atlanan ayrıntı. Ekranda zaten elli film varken sonraki sayfa hata
+    verirse listeyi silip hata ekranı göstermek yanlış olur — liste kalıyor, altta küçük bir
+    uyarı çıkıyor.
+  </p>
+
+  <p data-en="Network errors never reach the interface as a DioException. All of them are mapped to nine kinds and nine plain sentences in one file.">
+    Ağ hataları arayüze <code>DioException</code> olarak hiç ulaşmıyor. Hepsi tek bir dosyada
+    dokuz türe ve dokuz sade cümleye çevriliyor.
+  </p>
+
+  <div class="baglantilar">
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part03-film-arama/lib/state/movie_feed.dart" target="_blank" rel="noopener noreferrer">lib/state/movie_feed.dart</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part03-film-arama/lib/core/tmdb_exception.dart" target="_blank" rel="noopener noreferrer">lib/core/tmdb_exception.dart</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part03-film-arama/test/state/movie_feed_test.dart" target="_blank" rel="noopener noreferrer">test/state/movie_feed_test.dart</a>
+  </div>
+</div></section>
+
+<!-- ============ 04 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="04 — The decision">04 — Aldığım karar</p>
+
+  <div class="dec">
+    <b data-en="How does an API key stay out of a public repository?">API anahtarı public bir depoda nasıl durmaz?</b>
+    <p data-en="The standard answer in Flutter is flutter_dotenv: put the key in a .env file. That file is one wrong git add away from being public, and it ships inside the APK as an asset anyway.">
+      Flutter'daki standart cevap <code>flutter_dotenv</code>: anahtarı bir <code>.env</code>
+      dosyasına koy. O dosya yanlış bir <code>git add</code> kadar uzakta public olur, üstelik
+      APK'nın içine varlık olarak zaten gömülür.
+    </p>
+    <p class="why" data-en="So I passed the key at build time instead — no file is created at all.">
+      Bunun yerine anahtarı derleme zamanında verdim — hiç dosya oluşmuyor.
+    </p>
+  </div>
+
+<pre class="kod" data-en="flutter run --dart-define=TMDB_KEY=&lt;key&gt;
+
+lib/core/tmdb_config.dart
+  static const apiKey = String.fromEnvironment('TMDB_KEY');">flutter run --dart-define=TMDB_KEY=&lt;anahtar&gt;
+
+lib/core/tmdb_config.dart
+  static const apiKey = String.fromEnvironment('TMDB_KEY');</pre>
+
+  <p data-en="The gap opens at the moment of the mistake: with a .env file, leaking the key only takes one careless commit. With --dart-define there is no file to leak. One fewer package, too.">
+    Fark hata anında açılıyor: <code>.env</code> yaklaşımında anahtarı sızdırmak için dikkatsiz
+    tek bir commit yetiyor. <code>--dart-define</code>'da sızdıracak dosya yok. Bir paket de
+    eksiliyor.
+  </p>
+
+  <p data-en="But the honest limit belongs in the same paragraph: this hides the key from the repository, not from the compiled APK — it sits there as a plain string. The only thing that would hide it is a server of my own standing between the app and TMDB. This app is not distributed as an APK, so I stopped at that line and wrote the line down in the README.">
+    Ama dürüst sınır da aynı paragrafa ait: bu yöntem anahtarı <strong>depodan</strong> gizler,
+    <strong>derlenmiş APK'dan</strong> gizlemez — orada düz metin olarak durur. Onu gizleyecek
+    tek şey, uygulamayla TMDB arasına girecek kendi sunucum olurdu. Bu uygulama APK olarak
+    dağıtılmıyor; sınırda durdum ve sınırı README'ye yazdım.
+  </p>
+
+  <h3 data-en="Three smaller decisions">Üç küçük karar daha</h3>
+
+  <p data-en="&lt;strong&gt;Why Riverpod this week?&lt;/strong&gt; Part 01 and Part 02 got by with InheritedWidget. Here a single object owns a timer, a cancel token and a paged list, and two screens read it. That is the point where a state management library starts paying for itself.">
+    <strong>Neden bu hafta Riverpod?</strong> Part 01 ve Part 02'de <code>InheritedWidget</code>
+    yetiyordu. Burada tek bir nesne bir zamanlayıcı, bir iptal jetonu ve sayfalanmış bir liste
+    tutuyor; iki ekran onu okuyor. Durum yönetimi kütüphanesinin kendini ödemeye başladığı yer
+    tam burası.
+  </p>
+
+  <p data-en="&lt;strong&gt;Why is an http:// request rejected before it leaves?&lt;/strong&gt; TMDB serves HTTPS anyway, but if a plain http:// URL ever slipped into the code the key would travel in the clear. An interceptor rejects it at the door instead of trusting that nobody makes that mistake.">
+    <strong><code>http://</code> isteği neden yola çıkmadan reddediliyor?</strong> TMDB zaten
+    HTTPS veriyor, ama koda bir gün <code>http://</code> yazılırsa anahtar ağda açık gider.
+    Kimsenin o hatayı yapmayacağına güvenmek yerine bir araya girici isteği kapıda kesiyor.
+  </p>
+
+  <p data-en="&lt;strong&gt;Why are the logs masked?&lt;/strong&gt; Dio's built-in log interceptor prints the full URL, and the key is in the query string. A screenshot of a console or a pasted error log would leak it, so the logger replaces the key before printing.">
+    <strong>Günlükler neden maskeleniyor?</strong> Dio'nun hazır günlük araya giricisi tam
+    adresi basıyor ve anahtar adresin içinde. Konsol ekran görüntüsü ya da paylaşılan bir hata
+    kaydı anahtarı sızdırabilir; bu yüzden günlükçü anahtarı basmadan önce değiştiriyor.
+  </p>
+</div></section>
+
+<!-- ============ 05 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="05 — How I verified it">05 — Nasıl doğruladım</p>
+  <h2 data-en="37 tests, and not a single network request">37 test, tek bir ağ isteği bile yok</h2>
+
+  <div class="stats">
+    <div class="stat"><u>37</u><i data-en="Tests">Test</i></div>
+    <div class="stat"><u>0</u><i data-en="Analyzer warnings">Analiz uyarısı</i></div>
+    <div class="stat"><u>3</u><i data-en="Widget tests">Widget testi</i></div>
+    <div class="stat"><u>0</u><i data-en="Network calls in tests">Testte ağ isteği</i></div>
+  </div>
+
+  <p data-en="Timing behaviour cannot be verified by looking at the screen. A fake repository stands in for TMDB: it counts the calls it receives and can produce delays and errors on demand.">
+    Zamanlama davranışı ekrana bakarak doğrulanamaz. TMDB'nin yerine sahte bir depo geçiyor:
+    aldığı çağrıları sayıyor, istenince gecikme ve hata üretiyor.
+  </p>
+
+  <ul>
+    <li data-en="Three keystrokes in quick succession leave exactly one request behind.">Peş peşe üç tuş vuruşu geriye tam olarak tek bir istek bırakıyor.</li>
+    <li data-en="A cancelled request's late answer does not overwrite the newer results.">İptal edilen isteğin geç gelen cevabı yeni sonuçların üstüne yazmıyor.</li>
+    <li data-en="A failing next page leaves the existing list untouched.">Hata veren sonraki sayfa mevcut listeye dokunmuyor.</li>
+    <li data-en="Three widget tests cover the loading, error and empty screens.">Üç widget testi yükleniyor, hata ve boş ekranları doğruluyor.</li>
+  </ul>
+
+  <p data-en="I did not test image downloading: there is no code of mine there, only cached_network_image. The risk this week was in timing and state, and that is where the tests are.">
+    Poster indirmeyi test etmedim: orada benim kodum yok, <code>cached_network_image</code> var.
+    Bu haftaki risk zamanlamada ve durum yönetimindeydi; testler de orada.
+  </p>
+</div></section>
+
+<!-- ============ 06 ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="06 — What I learned">06 — Ne öğrendim</p>
+
+  <h3 data-en="Cancelling is not an error">İptal etmek bir hata değil</h3>
+  <p data-en="A cancelled request arrives as an exception, and treating it like one puts an error screen in front of a user who simply kept typing. Cancellation had to become its own kind, separate from the eight real failures.">
+    İptal edilen istek bir istisna olarak geliyor ve onu hata gibi ele alırsan, sadece yazmaya
+    devam eden kullanıcının önüne hata ekranı koyuyorsun. İptalin, sekiz gerçek hatadan ayrı
+    kendi türü olması gerekti.
+  </p>
+
+  <h3 data-en="Read the release notes before the API docs">API belgelerinden önce sürüm notu</h3>
+  <p data-en="Riverpod 3 dropped valueOrNull because value already returns null. Ten minutes went into a getter that no longer exists. A separate one: Uri percent-encodes an asterisk, so masking a key with stars made the log unreadable — the mask became a plain word.">
+    Riverpod 3'te <code>valueOrNull</code> kaldırılmış, <code>value</code> zaten null dönüyor.
+    Artık var olmayan bir getter'a on dakika gitti. Bir diğeri: <code>Uri</code> yıldızı
+    yüzdeyle kodluyor, anahtarı yıldızla maskeleyince günlük okunmaz hâle geldi — maske düz
+    sözcüğe döndü.
+  </p>
+
+  <h3 data-en="Added later, coming back from Part 04: writing a privacy sentence is easy, proving it is a separate job">Sonradan eklendi, Part 04'ten geri dönüp: gizlilik cümlesi yazmak kolay, doğrulamak ayrı iş</h3>
+  <p data-en="Above I had written &quot;favourites stay on the device&quot;, and it was not true. Android backs app data up to the user's Google account by default: if you write nothing, the backup is on. My code was right — the platform default outside my code was different. Three lines of manifest turned it off.">
+    Yukarıda "favoriler telefonda kalıyor" yazmıştım ve bu doğru değildi. Android varsayılan
+    olarak uygulama verisini kullanıcının Google hesabına yedekler; hiçbir şey yazmazsan yedek
+    açıktır. Kod doğruydu — kodun dışındaki platform varsayılanı farklıydı. Üç satırlık
+    manifest değişikliğiyle kapatıldı.
+  </p>
+  <p data-en="The lesson is not a technical one. Every claim now travels with the command that proves it, so a reader can run it and see for themselves.">
+    Buradan öğrendiğim şey teknik değil: artık her iddianın yanına onu kanıtlayan komutu
+    koyuyorum; okuyan kendi çalıştırıp görebilsin.
+  </p>
+</div></section>
+
+<!-- ============ İNCELE ============ -->
+<section><div class="wrap">
+  <p class="sec-no" data-en="Inspect it">İncele</p>
+  <h2 data-en="The code is the point">Asıl mesele kodun kendisi</h2>
+  <div class="baglantilar">
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part03-film-arama" target="_blank" rel="noopener noreferrer" data-en="Source code">Kaynak kod</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part03-film-arama/VAKA.md" target="_blank" rel="noopener noreferrer" data-en="Case study (Turkish)">Vaka incelemesi (Türkçe)</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part03-film-arama/README.md" target="_blank" rel="noopener noreferrer" data-en="How to run it">Nasıl çalıştırılır</a>
+  </div>
+
+  <div class="gezinme" style="margin-top:34px">
+    <a class="gez" href="herhafta1-part02.html">
+      <div class="yon" data-en="← Previous app">← Önceki uygulama</div>
+      <div class="ad" data-en="Part 02 · Recipe Book">Part 02 · Tarif Defteri</div>
+    </a>
+    <a class="gez sag" href="herhafta1-part04.html">
+      <div class="yon" data-en="Next app →">Sonraki uygulama →</div>
+      <div class="ad" data-en="Part 04 · Text Scanner">Part 04 · Metin Tarayıcı</div>
+    </a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p class="name">Ömer Güneş</p>
+  <p data-en="Flutter Developer · Every app in this series was designed, built, and documented solo.">Flutter Developer · Bu serideki her uygulama tek kişilik tasarlandı, geliştirildi ve belgelendi.</p>
+  <p style="margin-top:14px">
+    <a href="index.html" data-en="Portfolio">Portföy</a> &nbsp;·&nbsp;
+    <a href="herhafta1.html" data-en="The series">Seri</a> &nbsp;·&nbsp;
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </p>
+</div></footer>
+
+<script>
+(function () {
+  const i18nEls   = document.querySelectorAll('[data-en]');
+  const pageTitle = document.getElementById('page-title');
+  const langBtn      = document.getElementById('lang-btn');
+  const langBtnLabel = document.getElementById('lang-btn-label');
+  const langMenu     = document.getElementById('lang-menu');
+
+  i18nEls.forEach(el => { el.dataset.tr = el.innerHTML; });
+
+  function setLanguage(lang) {
+    window.currentLang = lang;
+    i18nEls.forEach(el => {
+      el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.tr;
+    });
+    if (pageTitle) document.title = lang === 'en' ? pageTitle.dataset.en : pageTitle.dataset.tr;
+    document.documentElement.lang = lang;
+    if (langBtnLabel) langBtnLabel.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lang-option').forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.lang === lang);
+    });
+    localStorage.setItem('site-lang', lang);
+  }
+
+  if (langBtn && langMenu) {
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !langMenu.classList.contains('hidden');
+      langMenu.classList.toggle('hidden', isOpen);
+      langBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  }
+
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      setLanguage(opt.dataset.lang);
+      langMenu.classList.add('hidden');
+      langBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', () => {
+    if (langMenu) langMenu.classList.add('hidden');
+    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  const savedLang = localStorage.getItem('site-lang') === 'en' ? 'en' : 'tr';
+  setLanguage(savedLang);
+})();
+</script>
+
+</body>
+</html>
