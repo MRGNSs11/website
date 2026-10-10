@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title id="page-title" data-en="Shared List — Part 06 · Weekly Flutter Apps">Ortak Liste — Part 06 · Her Hafta 1 Uygulama</title>
-<meta name="description" content="Part 06 vaka incelemesi: iki telefonda anlık güncellenen ortak alışveriş listesi. Firebase anonim giriş, Cloud Firestore ile gerçek zamanlı veri, emülatörde 21 testle denenen kurallar.">
+<title id="page-title" data-en="Earthquake Map — Part 07 · Weekly Flutter Apps">Deprem Haritası — Part 07 · Her Hafta 1 Uygulama</title>
+<meta name="description" content="Part 07 vaka incelemesi: AFAD açık verisindeki bir haftalık depremi sürüklenebilir bir sismograf şeridine çeviren uygulama. flutter_map + OpenStreetMap, CustomPainter ile veriden çizilen dalga.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -155,7 +155,7 @@
   <a class="home" href="herhafta1.html" data-en="← The series">← Seriye dön</a>
   <nav>
     <a href="index.html" data-en="Portfolio">Portföy</a>
-    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part06-ortak-liste" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part07-deprem-haritasi" target="_blank" rel="noopener noreferrer">GitHub</a>
     <div class="lang-switch">
       <button id="lang-btn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false">
         <span id="lang-btn-label">TR</span> ▾
@@ -170,58 +170,58 @@
 
 <!-- ============ KAPAK ============ -->
 <header class="hero"><div class="wrap">
-  <div class="eyebrow" data-en="Part 06 · Weekly Flutter Apps">Part 06 · Her Hafta 1 Uygulama</div>
-  <h1 data-en="Shared List">Ortak Liste</h1>
-  <p class="lede" data-en="One shopping list on two phones. One person types &quot;milk&quot; and it drops onto the other person's screen as a note. No sign-up: whoever opens the list sees a 6-character code, the other types it in and joins.">
-    İki telefonda aynı alışveriş listesi. Biri "süt" yazıyor, öbürünün ekranına not
-    olarak düşüyor. Hesap yok: listeyi açan 6 haneli bir kod görüyor, öbürü o kodu
-    yazıp katılıyor.
+  <div class="eyebrow" data-en="Part 07 · Weekly Flutter Apps">Part 07 · Her Hafta 1 Uygulama</div>
+  <h1 data-en="Earthquake Map">Deprem Haritası</h1>
+  <p class="lede" data-en="A week of earthquakes turned into a seismograph strip. Every quake is a peak sized by its magnitude. Drag the paper back and the map returns to that hour. The data comes from AFAD, Turkey's disaster agency, through its open earthquake service.">
+    Bir haftalık depremleri sismograf kâğıdına çeviren uygulama. Her deprem,
+    büyüklüğüyle orantılı bir tepe. Kâğıdı geri çekince harita o saate dönüyor.
+    Veri AFAD'ın açık deprem servisinden geliyor.
   </p>
   <div class="hero-meta">
     <span class="chip">Flutter · Dart</span>
-    <span class="chip">Firebase</span>
-    <span class="chip">Cloud Firestore</span>
-    <span class="chip">Android</span>
-    <span class="chip" data-en="No sign-up">Hesap yok</span>
+    <span class="chip">flutter_map</span>
+    <span class="chip">OpenStreetMap</span>
+    <span class="chip">CustomPainter</span>
+    <span class="chip" data-en="No API key">Anahtar yok</span>
   </div>
   <div class="cta-row">
-    <a class="cta" href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part06-ortak-liste" target="_blank" rel="noopener noreferrer" data-en="Browse the code →">Kodu incele →</a>
+    <a class="cta" href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part07-deprem-haritasi" target="_blank" rel="noopener noreferrer" data-en="Browse the code →">Kodu incele →</a>
     <a class="cta ghost" href="herhafta1.html" data-en="All apps in the series">Serideki tüm uygulamalar</a>
   </div>
 </div></header>
 
 <div class="wrap"><div class="facts">
-  <div class="fact"><u data-en="Tests">Test</u><b>40</b></div>
+  <div class="fact"><u data-en="Tests">Test</u><b>42</b></div>
   <div class="fact"><u data-en="Packages">Paket</u><b>3</b></div>
-  <div class="fact"><u data-en="Permissions (release)">İzin (release)</u><b>2</b></div>
+  <div class="fact"><u data-en="Permissions (release)">İzin (release)</u><b>1</b></div>
   <div class="fact"><u data-en="License">Lisans</u><b>MIT</b></div>
 </div></div>
 
 <!-- ============ 01 ============ -->
 <section><div class="wrap">
   <p class="sec-no" data-en="01 — What I built">01 — Ne yaptım</p>
-  <h2 data-en="A fridge door on two phones">İki telefonda bir buzdolabı kapısı</h2>
+  <h2 data-en="One screen, one week, one strip of paper">Tek ekran, bir hafta, bir şerit kâğıt</h2>
 
-  <p data-en="The list is a fridge door. Every item is a cream note, held up by a cherry-red tile magnet with the item's first letter. A note added on one phone drops onto the other from above. A bought item fades, gets crossed out and moves to the bottom.">
-    Liste bir buzdolabı kapısı. Her ürün krem bir not, tepesinde ürünün baş harfi
-    kiraz renkli bir karo mıknatıs. Bir telefonda eklenen not öbüründe yukarıdan
-    düşüyor. Alınan not soluyor, üstü çiziliyor, alta iniyor.
+  <p data-en="At the top, a ticker of the latest quakes. In the middle, a map. At the bottom, the seismograph paper. The red line in the middle of the paper marks a moment, and the map draws the 24 hours before it: older quakes fade, magnitude 3 and above are red. The biggest quake near the line is written in large type.">
+    Üstte son depremlerin kayan bandı, ortada harita, altta sismograf kâğıdı.
+    Kâğıdın ortasındaki kırmızı çizgi bir anı gösteriyor; harita o anın son 24
+    saatini çiziyor. Eski depremler soluyor, 3 ve üstü kırmızı. Çizginin
+    yakınındaki en büyük deprem büyük puntoyla yazıyor.
   </p>
 
-  <p data-en="The mark in each note's corner shows who added it: a filled dot is you, an empty ring is the other person. A shape, not a colour — the app stores no names. Items can be added with no internet; once the connection is back, both phones sync on their own.">
-    Notun köşesindeki işaret ekleyeni gösteriyor: dolu nokta sen, boş halka öbür kişi.
-    Renk değil şekil, çünkü uygulama isim tutmuyor. İnternet yokken de ürün ekleniyor;
-    bağlantı gelince iki telefon kendiliğinden eşitleniyor.
+  <p data-en="Drag the paper with a finger to go back up to 7 days. Tap a dot on the map and the paper jumps to that quake's moment.">
+    Kâğıdı parmakla sürükleyip 7 gün geriye gidilebiliyor. Haritadaki bir noktaya
+    dokununca kâğıt o depremin anına atlıyor.
   </p>
 
   <div class="galeri" style="grid-template-columns:repeat(2,1fr);max-width:560px">
     <figure>
-      <div class="im"><img src="img/herhafta1/part06-basla.png" alt="Ortak Liste başlangıç ekranı" loading="lazy"></div>
-      <figcaption data-en="Start: create or join with a code">Başla: oluştur ya da kodla katıl</figcaption>
+      <div class="im" style="aspect-ratio:1080/2340"><img src="img/herhafta1/part07-simdi.png" alt="Deprem Haritası açılış ekranı" loading="lazy"></div>
+      <figcaption data-en="On launch the line flows to &quot;now&quot;">Açılışta çizgi "şimdi"ye akıyor</figcaption>
     </figure>
     <figure>
-      <div class="im"><img src="img/herhafta1/part06-liste.png" alt="Ortak Liste notları" loading="lazy"></div>
-      <figcaption data-en="The list">Liste</figcaption>
+      <div class="im" style="aspect-ratio:1080/2340"><img src="img/herhafta1/part07-secim.png" alt="Haritada seçilen 3.8 büyüklüğündeki deprem" loading="lazy"></div>
+      <figcaption data-en="A tapped quake: ring, number and peak point to the same event">Dokunulan deprem: halka, sayı ve tepe aynı olayı gösteriyor</figcaption>
     </figure>
   </div>
 </div></section>
@@ -229,49 +229,49 @@
 <!-- ============ 02 ============ -->
 <section><div class="wrap">
   <p class="sec-no" data-en="02 — What I deliberately left out">02 — Neyi bilerek yapmadım</p>
-  <h2 data-en="One job: keep two phones on the same list">Tek iş: iki telefonu aynı listede tutmak</h2>
+  <h2 data-en="Not a table — a picture people already know">Tablo değil, herkesin tanıdığı bir görüntü</h2>
   <ul>
-    <li data-en="Sign in with Google (anonymous sign-in is enough)">Google ile giriş (anonim giriş yetiyor)</li>
-    <li data-en="More than one list">Birden çok liste</li>
-    <li data-en="Joining through a share link or a QR code">Paylaşım linki ya da QR ile katılma</li>
-    <li data-en="Notifications">Bildirim</li>
+    <li data-en="Filters and a separate list screen">Filtre ve ayrı liste ekranı</li>
+    <li data-en="Location permission, &quot;quakes near me&quot;">Konum izni, "yakınımdaki depremler"</li>
+    <li data-en="Notifications and background tracking">Bildirim, arka planda takip</li>
+    <li data-en="A second data source (Kandilli, USGS)">İkinci veri kaynağı (Kandilli, USGS)</li>
     <li data-en="An iOS build (this series is built on Windows)">iOS derlemesi (seri Windows'ta geliştiriliyor)</li>
   </ul>
-  <p data-en="Each of these is a reasonable next step. None of them makes two phones share one list any better.">
-    Her biri makul bir sonraki adım. Hiçbiri iki telefonun aynı listeyi görmesini daha
-    iyi yapmıyor.
+  <p data-en="The app has one idea: turn the data into a picture people already recognise instead of a table. A list screen would water that idea down.">
+    Uygulamanın tek fikri veriyi tabloya değil, insanların zaten tanıdığı bir
+    görüntüye çevirmek. Liste ekranı bu fikri sulandırırdı.
   </p>
 </div></section>
 
 <!-- ============ 03 ============ -->
 <section><div class="wrap">
   <p class="sec-no" data-en="03 — The skill this week demonstrates">03 — Bu hafta gösterdiğim teknik yetenek</p>
-  <h2 data-en="Firebase: anonymous sign-in and real-time data">Firebase: anonim giriş ve anlık veri</h2>
+  <h2 data-en="A map, live data and a signal drawn from the data">Harita, canlı veri ve veriden çizilen sinyal</h2>
 
-  <p data-en="For the first time in the series there is a cloud and more than one user. Every phone gets an identity silently on first launch (Firebase anonymous auth). The list lives in Cloud Firestore, and both phones listen to it: a change on one appears on the other within a second or two.">
-    Seride ilk kez bulut ve ilk kez birden çok kullanıcı var. Her telefon ilk açılışta
-    sessizce bir kimlik alıyor (Firebase anonim giriş). Liste Cloud Firestore'da
-    duruyor ve iki telefon da onu dinliyor: birinde yapılan değişiklik öbüründe bir iki
-    saniye içinde görünüyor.
+  <p data-en="The first map and the first time travel in the series. The wave is drawn by hand with CustomPainter; the maths behind it is plain Dart. Every pixel is a moment (7 dp = 1 hour), and its height is the sum of the nearby quakes:">
+    Seride ilk kez harita ve ilk kez zamanda gezinme var. Dalga
+    <code>CustomPainter</code> ile elle çiziliyor, arkasındaki hesap saf Dart. Her
+    piksel bir an (7 dp = 1 saat); yüksekliği yakındaki depremlerin toplamı:
   </p>
 
-  <p data-en="Who may read and write what is decided on the server, in a rules file. I tested those rules on the Firestore emulator — a fake Firestore running on my computer — with 21 tests.">
-    Kimin neyi okuyup yazabileceğine sunucudaki bir kural dosyası karar veriyor. Bu
-    kuralları Firestore emülatöründe (bilgisayarımda çalışan sahte Firestore) 21 testle
-    denedim.
-  </p>
+  <pre class="kod">genlik(t) = 1,6 + Σ m^2,15 × 2,1 × e^−((t − tₑ) / 17 dk)²</pre>
 
-  <div class="galeri" style="grid-template-columns:1fr;max-width:720px">
-    <figure>
-      <div class="im" style="aspect-ratio:auto"><img src="img/herhafta1/part06-iki-cihaz.png" alt="Aynı liste iki cihazda" loading="lazy"></div>
-      <figcaption data-en="Same list on a phone and an emulator. The dots flip: what is &quot;you&quot; on one is &quot;the other person&quot; on the other.">Aynı liste telefonda ve emülatörde. Noktalar ters: birinde "sen" olan, öbüründe "öbür kişi".</figcaption>
-    </figure>
-  </div>
+  <ul>
+    <li data-en="&lt;strong&gt;m^2.15&lt;/strong&gt; — magnitude is logarithmic: a 4 draws a much taller peak than a 2, yet stays on screen.">
+      <strong>m^2,15</strong> — büyüklük logaritmik: 4'lük deprem 2'likten çok daha
+      yüksek bir tepe çiziyor, ama ekrandan taşmıyor.</li>
+    <li data-en="&lt;strong&gt;e^−(…)²&lt;/strong&gt; — the peak is highest at the moment of the quake and fades within 17 minutes. Quakes more than 1.2 hours away are skipped.">
+      <strong>e^−(…)²</strong> — tepe deprem anında en yüksek, 17 dakikada sönüyor.
+      1,2 saatten uzak depremler hesaba katılmıyor.</li>
+    <li data-en="&lt;strong&gt;Direction&lt;/strong&gt; — whether the wave goes up or down is derived from the pixel's time, so the wave does not flicker while the paper scrolls.">
+      <strong>Yön</strong> — dalganın yukarı mı aşağı mı gideceği piksel zamanından
+      türetiliyor, böylece kâğıt kayınca dalga titremiyor.</li>
+  </ul>
 
   <div class="baglantilar">
-    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part06-ortak-liste/lib/liste/liste_deposu.dart" target="_blank" rel="noopener noreferrer">lib/liste/liste_deposu.dart</a>
-    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part06-ortak-liste/firestore.rules" target="_blank" rel="noopener noreferrer">firestore.rules</a>
-    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part06-ortak-liste/lib/ui/parcalar/not_karti.dart" target="_blank" rel="noopener noreferrer">lib/ui/parcalar/not_karti.dart</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part07-deprem-haritasi/lib/deprem/sismogram.dart" target="_blank" rel="noopener noreferrer">lib/deprem/sismogram.dart</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part07-deprem-haritasi/lib/ui/parcalar/sismogram_seridi.dart" target="_blank" rel="noopener noreferrer">lib/ui/parcalar/sismogram_seridi.dart</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part07-deprem-haritasi/lib/deprem/afad_istemcisi.dart" target="_blank" rel="noopener noreferrer">lib/deprem/afad_istemcisi.dart</a>
   </div>
 </div></section>
 
@@ -280,65 +280,56 @@
   <p class="sec-no" data-en="04 — The decision">04 — Aldığım karar</p>
 
   <div class="dec">
-    <b data-en="Why anonymous sign-in and a code, not Sign in with Google?">Neden Google ile giriş değil de anonim giriş ve kod?</b>
-    <p data-en="Sign in with Google looked more &quot;real&quot;. The account survives a new phone, and you know who is who. But it needed a fourth package, a signing fingerprint and Google Cloud setup — half a day of configuration on its own.">
-      Google ile giriş daha "gerçek" görünüyordu. Telefon değişince hesap kalır, kimin
-      kim olduğu bellidir. Ama dördüncü bir paket, imza parmak izi ve Google Cloud ayarı
-      gerekiyordu — kurulum tek başına yarım gün.
+    <b data-en="Why flutter_map + OpenStreetMap, not Google Maps?">Neden Google Maps değil, flutter_map + OpenStreetMap?</b>
+    <p data-en="Google Maps is the best-known option in Flutter. But it needs an API key and a billing account — a lot of overhead for a one-screen map in an open-source repo.">
+      Google Maps Flutter'da en bilinen yol. Ama anahtar ve faturalandırma hesabı
+      istiyor. Açık kaynak bir depoda, tek ekranlık bir harita için fazla yük.
     </p>
-    <p class="why" data-en="The real question: does this app need to know who is who?">
-      Asıl soru: bu uygulamanın kimin kim olduğunu bilmesi gerekiyor mu?
+    <p class="why" data-en="The real question: does this map need anything only Google has?">
+      Asıl soru: bu haritanın yalnız Google'da olan bir şeye ihtiyacı var mı?
     </p>
   </div>
 
-  <p data-en="It does not. Two people seeing the same list is enough. Anonymous sign-in gives every phone an identity without asking anything; a 6-character code is enough to join.">
-    Gerekmiyor. İki kişinin aynı listeyi görmesi yetiyor. Anonim giriş her telefona
-    hiçbir şey sormadan bir kimlik veriyor; katılmak için 6 haneli kod yetiyor.
+  <p data-en="It does not: it needs a grey base and dots. flutter_map is open source and loads map tiles without a key. I tried two other tile providers: CARTO now requires a key, and Esri's licence does not clearly cover use without an account. OpenStreetMap's rule is clear — the app identifies itself, the credit stays visible, tiles are cached. I followed all three.">
+    Yok: gri bir altlık ve noktalar yetiyor. flutter_map açık kaynak ve harita
+    parçalarını (karo) anahtarsız alıyor. İki sağlayıcıyı daha denedim: CARTO artık
+    anahtar istiyor, Esri'nin lisansı hesapsız kullanımı açıkça kapsamıyor.
+    OpenStreetMap'in kuralı açık: uygulama kendini tanıtacak, atıf görünecek, karolar
+    önbelleğe alınacak. Üçünü de uyguladım.
   </p>
 
-  <p data-en="The price: if the app is deleted, the identity goes with it, and you rejoin with the code. In return the app works on first launch without a single question, and stores no name or e-mail.">
-    Bedeli: uygulama silinince kimlik de gidiyor, listeye kodla yeniden katılmak
-    gerekiyor. Karşılığında uygulama ilk açılışta tek soru sormadan çalışıyor ve isim,
-    e-posta tutmuyor.
+  <p data-en="The price: map labels are in the local language, so Russian and Arabic place names show up in neighbouring countries. Under the grey tone it does not stand out.">
+    Bedeli: harita etiketleri yerel dilde, komşu ülkelerde Rusça ve Arapça yer adları
+    görünüyor. Gri tonun altında göze batmıyor.
   </p>
 
-  <div class="pull" data-en="The app did not need to know who is who. Two people seeing the same list was enough.">
-    Uygulamanın kimin kim olduğunu bilmesi gerekmiyordu. İki kişinin aynı listeyi görmesi yetiyordu.
+  <div class="pull" data-en="The map needed a grey base and dots. Nothing only Google has.">
+    Haritanın ihtiyacı gri bir altlık ve noktalardı. Yalnız Google'da olan bir şey değil.
   </div>
 </div></section>
 
 <!-- ============ 05 ============ -->
 <section><div class="wrap">
   <p class="sec-no" data-en="05 — How I verified it">05 — Nasıl doğruladım</p>
-  <h2 data-en="40 tests and two devices side by side">40 test ve yan yana iki cihaz</h2>
+  <h2 data-en="42 tests, a second source and a real phone">42 test, ikinci bir kaynak ve gerçek telefon</h2>
 
   <div class="stats">
-    <div class="stat"><u>19</u><i data-en="Unit tests">Birim testi</i></div>
-    <div class="stat"><u>21</u><i data-en="Rules tests (emulator)">Kural testi (emülatör)</i></div>
+    <div class="stat"><u>42</u><i data-en="Unit tests">Birim testi</i></div>
     <div class="stat"><u>0</u><i data-en="Analyzer warnings">Analiz uyarısı</i></div>
-    <div class="stat"><u>2</u><i data-en="Devices tested together">Birlikte denenen cihaz</i></div>
+    <div class="stat"><u data-en="3.8 ms">3,8 ms</u><i data-en="Frame time while dragging">Sürüklerken kare süresi</i></div>
+    <div class="stat"><u>~700</u><i data-en="Quakes in 7 days">7 günde deprem</i></div>
   </div>
 
-  <p data-en="The unit tests cover pure logic: generating the code and its alphabet (no 0/O or 1/I/L to mix up), the Turkish first letter on the tile (&quot;incir&quot; → &quot;İ&quot;, which Dart's toUpperCase gets wrong), sorting and cleaning item names.">
-    Birim testleri saf mantıkta: kodun üretilmesi ve alfabesi (karışan 0/O, 1/I/L yok),
-    karodaki Türkçe baş harf ("incir" → "İ"; Dart'ın <code>toUpperCase()</code>'i bunu
-    yanlış yapıyor), sıralama ve ürün adının temizlenmesi.
+  <p data-en="The tests cover the seismogram maths, the AFAD client (against a fake server), time conversion and shortening place names. I checked that AFAD's times are UTC by comparing the same quakes with USGS records.">
+    Testler sismogram hesabında, AFAD istemcisinde (sahte sunucuyla), saat
+    çevirisinde ve yer adı kısaltmada. AFAD'ın saatlerinin UTC olduğunu aynı depremleri
+    USGS kayıtlarıyla karşılaştırarak doğruladım.
   </p>
 
-  <p data-en="Then a phone and an emulator on the same list: create, join with the code, add / tick / delete in both directions, and add an item in airplane mode, then watch both sync once the connection is back.">
-    Sonra telefon ve emülatör aynı listede: oluştur, kodla katıl, iki yönlü ekle /
-    işaretle / sil, uçak modunda ürün ekleyip bağlantı gelince ikisinin eşitlendiğini gör.
-  </p>
-
-  <h3 data-en="What only the phone could show">Yalnız telefonun gösterebildiği</h3>
-  <p data-en="I removed a network permission I thought was unnecessary. The app crashed on launch: Firestore watches the connection coming and going through that permission. It went back in, with the reason written next to it.">
-    Gereksiz sandığım bir ağ iznini kaldırdım. Uygulama açılışta çöktü: Firestore
-    internetin gelip gittiğini o izinle izliyor. İzin geri geldi, gerekçesi yanına yazıldı.
-  </p>
-  <p data-en="The second one: a freshly created list showed &quot;could not load&quot;. Firestore shows a new record before the server has confirmed it; the screen started listening to that list's items while the list did not yet exist on the server. Now a list counts as existing only once the server has it.">
-    İkincisi: yeni açılan liste "yüklenemedi" diyordu. Firestore yeni kaydı sunucu
-    onaylamadan ekranda gösteriyor; ekran, sunucuda henüz olmayan listenin ürünlerini
-    dinlemeye başlıyordu. Artık liste, ancak sunucu onaylayınca "var" sayılıyor.
+  <p data-en="Then I measured on a real phone. On the emulator a frame took 20 ms, above the 16.7 ms smoothness limit. On the phone it was 3.8 ms on average while dragging; only 2 of 394 frames went slightly over.">
+    Sonra gerçek telefonda ölçtüm. Emülatörde bir kare 20 ms sürüyordu, akıcılık
+    sınırının (16,7 ms) üstünde. Telefonda sürüklerken ortalama 3,8 ms çıktı; 394
+    karenin yalnız 2'si sınırı az aştı.
   </p>
 </div></section>
 
@@ -346,16 +337,11 @@
 <section><div class="wrap">
   <p class="sec-no" data-en="06 — What I learned">06 — Ne öğrendim</p>
 
-  <h3 data-en="Remove it, then try it">Kaldır, sonra dene</h3>
-  <p data-en="Saying &quot;I removed an unnecessary permission&quot; takes removing it and running the app on a real phone. The one I removed turned out to be the one the database needed.">
-    "Gereksiz izni kaldırdım" diyebilmek için önce kaldırıp gerçek telefonda denemek
-    gerekiyor. Kaldırdığım izin, veritabanının ihtiyaç duyduğu izin çıktı.
-  </p>
-
-  <h3 data-en="Fast on screen, not yet on the server">Ekranda hızlı, sunucuda henüz yok</h3>
-  <p data-en="Showing a record before the server confirms it makes an app feel instant. But anything that depends on that record has to wait for the confirmation.">
-    Kaydı sunucu onaylamadan göstermek uygulamayı anında hissettiriyor. Ama o kayda
-    bağlı her şeyin onayı beklemesi gerekiyor.
+  <h3 data-en="Look at how the API behaves, not just its docs">API'nin belgesine değil davranışına bak</h3>
+  <p data-en="AFAD's &lt;code&gt;limit&lt;/code&gt; parameter cuts the results before sorting them. When I asked for the &quot;last 100 quakes&quot;, the newest ones were not there. Fetching the whole 7 days and sorting in the app fixed it — it is only 220 KB anyway.">
+    AFAD servisinde <code>limit</code> parametresi sonuçları sıralamadan önce
+    kesiyor. "Son 100 deprem" istediğimde en yeniler gelmiyordu. 7 günün tamamını
+    çekip sıralamayı uygulamada yapmak çözdü; zaten yalnız 220 KB.
   </p>
 </div></section>
 
@@ -364,20 +350,20 @@
   <p class="sec-no" data-en="Inspect it">İncele</p>
   <h2 data-en="The code is the point">Asıl mesele kodun kendisi</h2>
   <div class="baglantilar">
-    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part06-ortak-liste" target="_blank" rel="noopener noreferrer" data-en="Source code">Kaynak kod</a>
-    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part06-ortak-liste/VAKA.md" target="_blank" rel="noopener noreferrer" data-en="Case study (Turkish)">Vaka incelemesi (Türkçe)</a>
-    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part06-ortak-liste/README.md" target="_blank" rel="noopener noreferrer" data-en="How to run it">Nasıl çalıştırılır</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/tree/main/part07-deprem-haritasi" target="_blank" rel="noopener noreferrer" data-en="Source code">Kaynak kod</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part07-deprem-haritasi/VAKA.md" target="_blank" rel="noopener noreferrer" data-en="Case study (Turkish)">Vaka incelemesi (Türkçe)</a>
+    <a href="https://github.com/MRGNSs11/weekly-flutter-apps-1/blob/main/part07-deprem-haritasi/README.md" target="_blank" rel="noopener noreferrer" data-en="How to run it">Nasıl çalıştırılır</a>
   </div>
 
   <div class="gezinme" style="margin-top:34px">
-    <a class="gez" href="herhafta1-part05.html">
+    <a class="gez" href="herhafta1-part06.html">
       <div class="yon" data-en="← Previous app">← Önceki uygulama</div>
-      <div class="ad" data-en="Part 05 · Water Tracker">Part 05 · Su Takipçisi</div>
+      <div class="ad" data-en="Part 06 · Shared List">Part 06 · Ortak Liste</div>
     </a>
-    <a class="gez sag" href="herhafta1-part07.html">
+    <span class="gez pasif sag">
       <div class="yon" data-en="Next app →">Sonraki uygulama →</div>
-      <div class="ad" data-en="Part 07 · Earthquake Map">Part 07 · Deprem Haritası</div>
-    </a>
+      <div class="ad" data-en="Part 08 · On the way">Part 08 · Yolda</div>
+    </span>
   </div>
 </div></section>
 
